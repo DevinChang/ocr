@@ -1,0 +1,360 @@
+{
+    "log_id": 6977695290107608716,
+    "direction": 0,
+    "words_result_num": 44,
+    "words_result": [
+        {
+            "words": "除",
+            "probability": {
+                "variance": 0.037579,
+                "average": 0.570687,
+                "min": 0.376833
+            }
+        },
+        {
+            "words": "堂",
+            "probability": {
+                "variance": 0,
+                "average": 0.998357,
+                "min": 0.998357
+            }
+        },
+        {
+            "words": "★",
+            "probability": {
+                "variance": 0,
+                "average": 0.991999,
+                "min": 0.991999
+            }
+        },
+        {
+            "words": "核准日期:20",
+            "probability": {
+                "variance": 5.2e-05,
+                "average": 0.995243,
+                "min": 0.978129
+            }
+        },
+        {
+            "words": "年月生",
+            "probability": {
+                "variance": 0.007482,
+                "average": 0.782079,
+                "min": 0.660711
+            }
+        },
+        {
+            "words": "华堂",
+            "probability": {
+                "variance": 0.046577,
+                "average": 0.782523,
+                "min": 0.566705
+            }
+        },
+        {
+            "words": "修改日期",
+            "probability": {
+                "variance": 0,
+                "average": 0.999475,
+                "min": 0.999005
+            }
+        },
+        {
+            "words": "祛风止痒口服液说明书",
+            "probability": {
+                "variance": 0.000787,
+                "average": 0.98842,
+                "min": 0.904868
+            }
+        },
+        {
+            "words": "请仔细阅读说明书并在医师指导下使用",
+            "probability": {
+                "variance": 0.010114,
+                "average": 0.957694,
+                "min": 0.64458
+            }
+        },
+        {
+            "words": "【药品名称】",
+            "probability": {
+                "variance": 5.8e-05,
+                "average": 0.995575,
+                "min": 0.978763
+            }
+        },
+        {
+            "words": "通用名称:祛风止痒口服液",
+            "probability": {
+                "variance": 1.9e-05,
+                "average": 0.996267,
+                "min": 0.984803
+            }
+        },
+        {
+            "words": "汉语拼",
+            "probability": {
+                "variance": 1e-06,
+                "average": 0.998139,
+                "min": 0.997054
+            }
+        },
+        {
+            "words": " feng Zh",
+            "probability": {
+                "variance": 0.001392,
+                "average": 0.94376,
+                "min": 0.906451
+            }
+        },
+        {
+            "words": "【成份】赤芍、地龙、白芍、甘草、地脉子、防风、青蒿、耳子炒)。辅料为",
+            "probability": {
+                "variance": 0.018195,
+                "average": 0.923238,
+                "min": 0.554399
+            }
+        },
+        {
+            "words": "聚山梨酯80",
+            "probability": {
+                "variance": 0.000203,
+                "average": 0.990014,
+                "min": 0.961752
+            }
+        },
+        {
+            "words": "【性",
+            "probability": {
+                "variance": 1e-06,
+                "average": 0.998905,
+                "min": 0.998089
+            }
+        },
+        {
+            "words": "状】本品为深棕色的液体,久置产生少量沉淀;味苦微甜",
+            "probability": {
+                "variance": 0.000125,
+                "average": 0.993341,
+                "min": 0.958384
+            }
+        },
+        {
+            "words": "【功能主治】养血活血,清热利湿,祛风止痒。用于风热外袭所致尊麻疹、丘疹性尊",
+            "probability": {
+                "variance": 0.010432,
+                "average": 0.963652,
+                "min": 0.488814
+            }
+        },
+        {
+            "words": "疹出现的皮肤瘙痒及过敏性鼻炎出现的鼻痒、鼻塞,喷嚏等症状的缓",
+            "probability": {
+                "variance": 0.008767,
+                "average": 0.968936,
+                "min": 0.512925
+            }
+        },
+        {
+            "words": "【规格】每瓶装200m",
+            "probability": {
+                "variance": 0.004213,
+                "average": 0.966982,
+                "min": 0.766428
+            }
+        },
+        {
+            "words": "【用法用量】口服,一次10ml,一日3次,用时摇匀。儿童酌减或",
+            "probability": {
+                "variance": 0.003208,
+                "average": 0.970902,
+                "min": 0.727335
+            }
+        },
+        {
+            "words": "【不良反应】尚不明确",
+            "probability": {
+                "variance": 1.4e-05,
+                "average": 0.99686,
+                "min": 0.989572
+            }
+        },
+        {
+            "words": "【禁忌】尚不明确",
+            "probability": {
+                "variance": 1.1e-05,
+                "average": 0.996509,
+                "min": 0.990608
+            }
+        },
+        {
+            "words": "【注意事项】1、当药品性状发生改变时禁止使用",
+            "probability": {
+                "variance": 7.1e-05,
+                "average": 0.995564,
+                "min": 0.965018
+            }
+        },
+        {
+            "words": "2、儿童在成人监护下使用",
+            "probability": {
+                "variance": 9.5e-05,
+                "average": 0.992707,
+                "min": 0.968005
+            }
+        },
+        {
+            "words": "3、如正在服用其他药品,使用本品前咨询医生或药师",
+            "probability": {
+                "variance": 0.000307,
+                "average": 0.993454,
+                "min": 0.917388
+            }
+        },
+        {
+            "words": "老人、孕妇、哺乳期妇女及体弱者应在医生指导下服用。",
+            "probability": {
+                "variance": 5e-06,
+                "average": 0.998329,
+                "min": 0.989676
+            }
+        },
+        {
+            "words": "【贮藏】密封,置阴凉处",
+            "probability": {
+                "variance": 0.003886,
+                "average": 0.964918,
+                "min": 0.814658
+            }
+        },
+        {
+            "words": "【包装】塑料瓶包装,每盒装1瓶",
+            "probability": {
+                "variance": 0.001464,
+                "average": 0.987089,
+                "min": 0.846714
+            }
+        },
+        {
+            "words": "【有效期】24个月",
+            "probability": {
+                "variance": 9e-06,
+                "average": 0.997121,
+                "min": 0.989417
+            }
+        },
+        {
+            "words": "执行际准】国家药品监督管理局标准(试行)WS-53",
+            "probability": {
+                "variance": 0.006012,
+                "average": 0.967966,
+                "min": 0.64155
+            }
+        },
+        {
+            "words": "批准文号】国药准字",
+            "probability": {
+                "variance": 3.2e-05,
+                "average": 0.995907,
+                "min": 0.982387
+            }
+        },
+        {
+            "words": "【生产企业】",
+            "probability": {
+                "variance": 6e-06,
+                "average": 0.997943,
+                "min": 0.992901
+            }
+        },
+        {
+            "words": "企业名称:四川泰华堂制药有限公司",
+            "probability": {
+                "variance": 5e-06,
+                "average": 0.998842,
+                "min": 0.992642
+            }
+        },
+        {
+            "words": "生产地址:四川省广汉市南昌",
+            "probability": {
+                "variance": 8.7e-05,
+                "average": 0.995809,
+                "min": 0.964121
+            }
+        },
+        {
+            "words": "邮政编码:618300",
+            "probability": {
+                "variance": 3.8e-05,
+                "average": 0.993126,
+                "min": 0.979958
+            }
+        },
+        {
+            "words": "电话号码",
+            "probability": {
+                "variance": 0,
+                "average": 0.999803,
+                "min": 0.999529
+            }
+        },
+        {
+            "words": "699-6969",
+            "probability": {
+                "variance": 0.012883,
+                "average": 0.941932,
+                "min": 0.648287
+            }
+        },
+        {
+            "words": "传真号码:0838-5103259",
+            "probability": {
+                "variance": 0.000674,
+                "average": 0.989662,
+                "min": 0.88838
+            }
+        },
+        {
+            "words": "注册地址:四川省广汉市南昌路",
+            "probability": {
+                "variance": 0.000217,
+                "average": 0.991943,
+                "min": 0.943804
+            }
+        },
+        {
+            "words": "网址",
+            "probability": {
+                "variance": 0,
+                "average": 0.999975,
+                "min": 0.999965
+            }
+        },
+        {
+            "words": " ng",
+            "probability": {
+                "variance": 0,
+                "average": 0.969415,
+                "min": 0.969415
+            }
+        },
+        {
+            "words": "四川泰华堂制药有限公司",
+            "probability": {
+                "variance": 0.000168,
+                "average": 0.995254,
+                "min": 0.954451
+            }
+        },
+        {
+            "words": "95*133",
+            "probability": {
+                "variance": 9.4e-05,
+                "average": 0.995232,
+                "min": 0.973572
+            }
+        }
+    ],
+    "language": 3
+}

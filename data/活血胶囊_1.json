@@ -1,0 +1,358 @@
+{
+	"log_id": 3243960696457948159,
+	"direction": 0,
+	"words_result_num": 44,
+	"words_result": [{
+		"words": "核准日期:xx年x月xx日",
+		"probability": {
+			"variance": 0.014489,
+			"average": 0.921651,
+			"min": 0.545661
+		}
+	},
+	{
+		"words": "大",
+		"probability": {
+			"variance": 0,
+			"average": 0.999698,
+			"min": 0.999698
+		}
+	},
+	{
+		"words": "活血胶囊说明书",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.999283,
+			"min": 0.996912
+		}
+	},
+	{
+		"words": "请仔细阅读说明书并在医师指导下使用",
+		"probability": {
+			"variance": 0.00049,
+			"average": 0.983157,
+			"min": 0.925798
+		}
+	},
+	{
+		"words": "警示语",
+		"probability": {
+			"variance": 0.016602,
+			"average": 0.816203,
+			"min": 0.721819
+		}
+	},
+	{
+		"words": "【药品名称】",
+		"probability": {
+			"variance": 0.006952,
+			"average": 0.947117,
+			"min": 0.77112
+		}
+	},
+	{
+		"words": "通用名称:活血胶囊",
+		"probability": {
+			"variance": 0.001745,
+			"average": 0.976635,
+			"min": 0.861385
+		}
+	},
+	{
+		"words": "汉语拼音: Huoxue Jison.",
+		"probability": {
+			"variance": 0.004576,
+			"average": 0.939572,
+			"min": 0.833025
+		}
+	},
+	{
+		"words": "【成份】黄、桃仁、红花、牛膝、仁、川、赤芍、壳、地黄、桔梗",
+		"probability": {
+			"variance": 0.042288,
+			"average": 0.870093,
+			"min": 0.358357
+		}
+	},
+	{
+		"words": "当归、甘草",
+		"probability": {
+			"variance": 0.000835,
+			"average": 0.979945,
+			"min": 0.925249
+		}
+	},
+	{
+		"words": "【性状】本品为胶囊剂,内容物为棕红色至棕褐色的粉末;气微香,味甜、微苦",
+		"probability": {
+			"variance": 0.037661,
+			"average": 0.872371,
+			"min": 0.450968
+		}
+	},
+	{
+		"words": "【功能主治】补气养血,活血化,理气安神。用于气血虚弱,血阻滞,神疲乏力",
+		"probability": {
+			"variance": 0.015896,
+			"average": 0.941353,
+			"min": 0.370971
+		}
+	},
+	{
+		"words": "少气懒言,心悸证。失眠多梦肢体麻木,头痛,健忘等症",
+		"probability": {
+			"variance": 0.034107,
+			"average": 0.877785,
+			"min": 0.361331
+		}
+	},
+	{
+		"words": "【规格】每粒装0.3g",
+		"probability": {
+			"variance": 0.019759,
+			"average": 0.933299,
+			"min": 0.507945
+		}
+	},
+	{
+		"words": "【用法用量】口服。一次3粒,一日3次",
+		"probability": {
+			"variance": 0.001102,
+			"average": 0.97701,
+			"min": 0.871552
+		}
+	},
+	{
+		"words": "【不良反应】尚不确",
+		"probability": {
+			"variance": 0.000133,
+			"average": 0.992964,
+			"min": 0.961257
+		}
+	},
+	{
+		"words": "【禁】孕妇、经期妇女禁用",
+		"probability": {
+			"variance": 0.008838,
+			"average": 0.927606,
+			"min": 0.745722
+		}
+	},
+	{
+		"words": "【注意事项】1.辛辣、生冷、油食物",
+		"probability": {
+			"variance": 0.01845,
+			"average": 0.913571,
+			"min": 0.438848
+		}
+	},
+	{
+		"words": "2感冒发热人不宜服用",
+		"probability": {
+			"variance": 0.009226,
+			"average": 0.962848,
+			"min": 0.675065
+		}
+	},
+	{
+		"words": "3品宣饭后用",
+		"probability": {
+			"variance": 0.030298,
+			"average": 0.882636,
+			"min": 0.530128
+		}
+	},
+	{
+		"words": "4高血压、心脏病、肝病、糖尿病、肾等慢性病息者应在医师指导下服用",
+		"probability": {
+			"variance": 0.031759,
+			"average": 0.868766,
+			"min": 0.36682
+		}
+	},
+	{
+		"words": "5康药2周病症无经解,应去医院就诊",
+		"probability": {
+			"variance": 0.02251,
+			"average": 0.902788,
+			"min": 0.483173
+		}
+	},
+	{
+		"words": "西省母监督警",
+		"probability": {
+			"variance": 0.029906,
+			"average": 0.692522,
+			"min": 0.449173
+		}
+	},
+	{
+		"words": "6对本过敏者用,过敏体质者食用。(药补充申请",
+		"probability": {
+			"variance": 0.035395,
+			"average": 0.852518,
+			"min": 0.391041
+		}
+	},
+	{
+		"words": "7本品性状发生改变时禁止使用",
+		"probability": {
+			"variance": 0.000491,
+			"average": 0.981122,
+			"min": 0.921151
+		}
+	},
+	{
+		"words": "8.儿宜必在成人监护下使用",
+		"probability": {
+			"variance": 0.006542,
+			"average": 0.946718,
+			"min": 0.770723
+		}
+	},
+	{
+		"words": "9.将本晶放在儿童不能接触的地方",
+		"probability": {
+			"variance": 0.03454,
+			"average": 0.898409,
+			"min": 0.440603
+		}
+	},
+	{
+		"words": "备案专章",
+		"probability": {
+			"variance": 0.045212,
+			"average": 0.860499,
+			"min": 0.492708
+		}
+	},
+	{
+		"words": "10.正在使用其他药品,使本品前咨询或",
+		"probability": {
+			"variance": 0.052758,
+			"average": 0.800013,
+			"min": 0.355685
+		}
+	},
+	{
+		"words": "【贮藏】密封,置阴凉干燥处",
+		"probability": {
+			"variance": 0.001139,
+			"average": 0.964278,
+			"min": 0.904002
+		}
+	},
+	{
+		"words": "【包装】铝塑板,3×16粒/板/盒",
+		"probability": {
+			"variance": 0.001165,
+			"average": 0.971755,
+			"min": 0.872359
+		}
+	},
+	{
+		"words": "【有效期】24个月",
+		"probability": {
+			"variance": 0.021683,
+			"average": 0.922956,
+			"min": 0.544602
+		}
+	},
+	{
+		"words": "执行标准】国家食品药品监备管理局标试行)-53431-20",
+		"probability": {
+			"variance": 0.03564,
+			"average": 0.84777,
+			"min": 0.384966
+		}
+	},
+	{
+		"words": "2",
+		"probability": {
+			"variance": 0,
+			"average": 0.763088,
+			"min": 0.763088
+		}
+	},
+	{
+		"words": "【批准文号】国药准字B2",
+		"probability": {
+			"variance": 0.00581,
+			"average": 0.957319,
+			"min": 0.74569
+		}
+	},
+	{
+		"words": "36",
+		"probability": {
+			"variance": 1.3e-05,
+			"average": 0.995535,
+			"min": 0.991921
+		}
+	},
+	{
+		"words": "【生产企业】",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.998791,
+			"min": 0.996351
+		}
+	},
+	{
+		"words": "企业名称:西安大唐制药集团有限公司",
+		"probability": {
+			"variance": 0.012441,
+			"average": 0.969482,
+			"min": 0.523989
+		}
+	},
+	{
+		"words": "生产地址:西安高新技术产业开发区高新三路16号",
+		"probability": {
+			"variance": 0.00042,
+			"average": 0.98972,
+			"min": 0.931623
+		}
+	},
+	{
+		"words": "邮编码:710075",
+		"probability": {
+			"variance": 0.03162,
+			"average": 0.91156,
+			"min": 0.372686
+		}
+	},
+	{
+		"words": "电话号码:(0298831777888335461(医学部",
+		"probability": {
+			"variance": 0.015482,
+			"average": 0.937215,
+			"min": 0.419501
+		}
+	},
+	{
+		"words": "传真号码:(029)88317775",
+		"probability": {
+			"variance": 0.003011,
+			"average": 0.963731,
+			"min": 0.791216
+		}
+	},
+	{
+		"words": "注册地址:西安高新技术产业开发区高新三路16号",
+		"probability": {
+			"variance": 0.003845,
+			"average": 0.967153,
+			"min": 0.715453
+		}
+	},
+	{
+		"words": "网址",
+		"probability": {
+			"variance": 0,
+			"average": 0.999659,
+			"min": 0.999397
+		}
+	}],
+	"language": 3
+}

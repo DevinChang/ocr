@@ -1,0 +1,158 @@
+{
+	"log_id": 929718008067133972,
+	"direction": 0,
+	"words_result_num": 19,
+	"words_result": [{
+		"words": "核准日期:207年02月25日",
+		"probability": {
+			"variance": 0.016467,
+			"average": 0.942511,
+			"min": 0.610156
+		}
+	},
+	{
+		"words": "修改日期:2009年05月14日",
+		"probability": {
+			"variance": 0.001756,
+			"average": 0.984251,
+			"min": 0.829039
+		}
+	},
+	{
+		"words": "修改日期:2010年07月29日",
+		"probability": {
+			"variance": 0.002991,
+			"average": 0.983307,
+			"min": 0.771897
+		}
+	},
+	{
+		"words": "修改日期:2014年12月23日",
+		"probability": {
+			"variance": 0.005101,
+			"average": 0.97999,
+			"min": 0.703464
+		}
+	},
+	{
+		"words": "外",
+		"probability": {
+			"variance": 0,
+			"average": 0.999945,
+			"min": 0.999945
+		}
+	},
+	{
+		"words": "复方苦参洗剂说明书",
+		"probability": {
+			"variance": 0,
+			"average": 0.999599,
+			"min": 0.998726
+		}
+	},
+	{
+		"words": "请仔细阅读说明书并在医师指导下使用",
+		"probability": {
+			"variance": 2e-06,
+			"average": 0.999073,
+			"min": 0.994872
+		}
+	},
+	{
+		"words": "语拼",
+		"probability": {
+			"variance": 0,
+			"average": 0.999643,
+			"min": 0.999385
+		}
+	},
+	{
+		"words": "苍术、防",
+		"probability": {
+			"variance": 0,
+			"average": 0.999158,
+			"min": 0.99822
+		}
+	},
+	{
+		"words": "损者及",
+		"probability": {
+			"variance": 0,
+			"average": 0.999896,
+			"min": 0.999771
+		}
+	},
+	{
+		"words": "【贮",
+		"probability": {
+			"variance": 0.000342,
+			"average": 0.939572,
+			"min": 0.921085
+		}
+	},
+	{
+		"words": "效期",
+		"probability": {
+			"variance": 0,
+			"average": 0.999749,
+			"min": 0.99952
+		}
+	},
+	{
+		"words": "执行标",
+		"probability": {
+			"variance": 0,
+			"average": 0.999627,
+			"min": 0.998945
+		}
+	},
+	{
+		"words": "海用",
+		"probability": {
+			"variance": 0.007745,
+			"average": 0.562699,
+			"min": 0.474694
+		}
+	},
+	{
+		"words": " zfz",
+		"probability": {
+			"variance": 0,
+			"average": 0.786973,
+			"min": 0.786973
+		}
+	},
+	{
+		"words": "浙江中法制药有限公司",
+		"probability": {
+			"variance": 0.000291,
+			"average": 0.983229,
+			"min": 0.946559
+		}
+	},
+	{
+		"words": "雅",
+		"probability": {
+			"variance": 0,
+			"average": 0.969494,
+			"min": 0.969494
+		}
+	},
+	{
+		"words": "复方苦参洗剂",
+		"probability": {
+			"variance": 0.000436,
+			"average": 0.981933,
+			"min": 0.93825
+		}
+	},
+	{
+		"words": "复方苦参洗剂",
+		"probability": {
+			"variance": 0.00043,
+			"average": 0.988816,
+			"min": 0.942847
+		}
+	}],
+	"language": 3
+}

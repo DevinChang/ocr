@@ -1,0 +1,32 @@
+{
+    "log_id": 1956122695700340146,
+    "direction": 3,
+    "words_result_num": 3,
+    "words_result": [
+        {
+            "words": "正",
+            "probability": {
+                "variance": 0,
+                "average": 0.835112,
+                "min": 0.835112
+            }
+        },
+        {
+            "words": "器",
+            "probability": {
+                "variance": 0,
+                "average": 0.877885,
+                "min": 0.877885
+            }
+        },
+        {
+            "words": "盈",
+            "probability": {
+                "variance": 0,
+                "average": 0.822558,
+                "min": 0.822558
+            }
+        }
+    ],
+    "language": -1
+}

@@ -1,0 +1,310 @@
+{
+	"log_id": 4108891822713667625,
+	"direction": 0,
+	"words_result_num": 38,
+	"words_result": [{
+		"words": "复方银杏通脉口服液",
+		"probability": {
+			"variance": 0.001141,
+			"average": 0.976346,
+			"min": 0.905818
+		}
+	},
+	{
+		"words": "【产品批号】",
+		"probability": {
+			"variance": 2.2e-05,
+			"average": 0.994105,
+			"min": 0.984209
+		}
+	},
+	{
+		"words": "有效期】至",
+		"probability": {
+			"variance": 0.000235,
+			"average": 0.988364,
+			"min": 0.960189
+		}
+	},
+	{
+		"words": "桶天回生",
+		"probability": {
+			"variance": 0.004631,
+			"average": 0.950538,
+			"min": 0.833139
+		}
+	},
+	{
+		"words": "复方银杏通脉口服液说明书",
+		"probability": {
+			"variance": 0.003027,
+			"average": 0.976617,
+			"min": 0.798778
+		}
+	},
+	{
+		"words": "请仔细阅读说明书并在医师指导下使用",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.999386,
+			"min": 0.995964
+		}
+	},
+	{
+		"words": "【药品名称】",
+		"probability": {
+			"variance": 2e-06,
+			"average": 0.999313,
+			"min": 0.996527
+		}
+	},
+	{
+		"words": "通用名称:复方银杏通脉口服液",
+		"probability": {
+			"variance": 2.5e-05,
+			"average": 0.997269,
+			"min": 0.984717
+		}
+	},
+	{
+		"words": "汉语拼音: Fufang Yinxing Tongmai Koufu",
+		"probability": {
+			"variance": 0.000248,
+			"average": 0.987117,
+			"min": 0.964263
+		}
+	},
+	{
+		"words": "【成份】银杏叶、制何首乌、女贞子、丹参、杜仲、川牛膝",
+		"probability": {
+			"variance": 2e-05,
+			"average": 0.998284,
+			"min": 0.977118
+		}
+	},
+	{
+		"words": "钩藤",
+		"probability": {
+			"variance": 0,
+			"average": 0.999644,
+			"min": 0.999382
+		}
+	},
+	{
+		"words": "【性状】本品为棕红色的液体;味苦、甜",
+		"probability": {
+			"variance": 4e-05,
+			"average": 0.997241,
+			"min": 0.976032
+		}
+	},
+	{
+		"words": "【功能主治】滋阴补肾,舒肝通脉。用于中老年人轻度脑动脉硬",
+		"probability": {
+			"variance": 1.3e-05,
+			"average": 0.998089,
+			"min": 0.982736
+		}
+	},
+	{
+		"words": "化所致的头晕头痛,耳鸣耳聋,视物模糊,记忆力",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.999432,
+			"min": 0.996707
+		}
+	},
+	{
+		"words": "减退,腰膝酸软,肢体麻木等证属肝肾阴虚者",
+		"probability": {
+			"variance": 8.5e-05,
+			"average": 0.995098,
+			"min": 0.961967
+		}
+	},
+	{
+		"words": "【规格】每支装10m",
+		"probability": {
+			"variance": 0.004847,
+			"average": 0.972152,
+			"min": 0.763745
+		}
+	},
+	{
+		"words": "【用法用量】口服。一次10ml,一日3次",
+		"probability": {
+			"variance": 0.009385,
+			"average": 0.970402,
+			"min": 0.5536
+		}
+	},
+	{
+		"words": "【不良反应】尚不明确",
+		"probability": {
+			"variance": 0,
+			"average": 0.999747,
+			"min": 0.99889
+		}
+	},
+	{
+		"words": "【禁忌】尚不明确",
+		"probability": {
+			"variance": 3e-06,
+			"average": 0.999107,
+			"min": 0.994904
+		}
+	},
+	{
+		"words": "【注意事项】1、建议在医生指导下用药",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.999483,
+			"min": 0.996048
+		}
+	},
+	{
+		"words": "2、本品久置后有少量沉淀,摇匀后服用",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.999195,
+			"min": 0.99511
+		}
+	},
+	{
+		"words": "【贮藏】密封,置阴凉处(不超过20℃)",
+		"probability": {
+			"variance": 3.1e-05,
+			"average": 0.996414,
+			"min": 0.980546
+		}
+	},
+	{
+		"words": "【包装】玻璃管制口服液瓶,10ml×10支/盒",
+		"probability": {
+			"variance": 0.006418,
+			"average": 0.978344,
+			"min": 0.610871
+		}
+	},
+	{
+		"words": "【有效期】24个月",
+		"probability": {
+			"variance": 6e-06,
+			"average": 0.998382,
+			"min": 0.991812
+		}
+	},
+	{
+		"words": "【执行标准】国家药品监督管理局标准(试行)",
+		"probability": {
+			"variance": 2e-06,
+			"average": 0.999028,
+			"min": 0.993858
+		}
+	},
+	{
+		"words": "WS-5903(B-0903)-2002",
+		"probability": {
+			"variance": 0.000373,
+			"average": 0.988849,
+			"min": 0.919757
+		}
+	},
+	{
+		"words": "【批准文号】国药准字B20020924",
+		"probability": {
+			"variance": 0.00057,
+			"average": 0.991858,
+			"min": 0.892666
+		}
+	},
+	{
+		"words": "【生产企业】",
+		"probability": {
+			"variance": 0,
+			"average": 0.999674,
+			"min": 0.998928
+		}
+	},
+	{
+		"words": "企业名称:湖南补天药业有限公司",
+		"probability": {
+			"variance": 0,
+			"average": 0.999696,
+			"min": 0.998247
+		}
+	},
+	{
+		"words": "生产地址:湖南省靖州县环城南路二凉亭",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.999187,
+			"min": 0.995915
+		}
+	},
+	{
+		"words": "邮政编码:418400",
+		"probability": {
+			"variance": 2e-06,
+			"average": 0.997744,
+			"min": 0.995135
+		}
+	},
+	{
+		"words": "有限",
+		"probability": {
+			"variance": 0.067061,
+			"average": 0.736965,
+			"min": 0.478004
+		}
+	},
+	{
+		"words": "电话号码:0745-8224437",
+		"probability": {
+			"variance": 0.000292,
+			"average": 0.994233,
+			"min": 0.926008
+		}
+	},
+	{
+		"words": "传真号码:0745-8255555",
+		"probability": {
+			"variance": 0.000708,
+			"average": 0.989621,
+			"min": 0.88498
+		}
+	},
+	{
+		"words": "注册地址:靖州县环城南路二凉亭",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.999295,
+			"min": 0.995382
+		}
+	},
+	{
+		"words": "网址:http:/ ww. busky.com.cn",
+		"probability": {
+			"variance": 0.006456,
+			"average": 0.951318,
+			"min": 0.660422
+		}
+	},
+	{
+		"words": "咨询热线:800-878-9576",
+		"probability": {
+			"variance": 0.00307,
+			"average": 0.981909,
+			"min": 0.765893
+		}
+	},
+	{
+		"words": "湖南补天药业有限公司",
+		"probability": {
+			"variance": 0,
+			"average": 0.999854,
+			"min": 0.999527
+		}
+	}],
+	"language": 3
+}

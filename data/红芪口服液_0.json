@@ -1,0 +1,382 @@
+{
+	"log_id": 4380868535553113706,
+	"direction": 0,
+	"words_result_num": 47,
+	"words_result": [{
+		"words": "成品尺寸:130*90mm",
+		"probability": {
+			"variance": 4.9e-05,
+			"average": 0.995275,
+			"min": 0.979294
+		}
+	},
+	{
+		"words": "拖此稿尿印刷民162",
+		"probability": {
+			"variance": 0.030107,
+			"average": 0.670902,
+			"min": 0.440553
+		}
+	},
+	{
+		"words": "中天泰科",
+		"probability": {
+			"variance": 4.3e-05,
+			"average": 0.993804,
+			"min": 0.98243
+		}
+	},
+	{
+		"words": " o'c",
+		"probability": {
+			"variance": 0,
+			"average": 1,
+			"min": 1
+		}
+	},
+	{
+		"words": "乙类",
+		"probability": {
+			"variance": 0,
+			"average": 0.999812,
+			"min": 0.999688
+		}
+	},
+	{
+		"words": "红芪口服液说明书",
+		"probability": {
+			"variance": 0.003593,
+			"average": 0.975861,
+			"min": 0.817376
+		}
+	},
+	{
+		"words": "请仔细阅读说明书并按说明使用或在药师指导下购买和使用",
+		"probability": {
+			"variance": 2e-06,
+			"average": 0.999044,
+			"min": 0.993566
+		}
+	},
+	{
+		"words": "4",
+		"probability": {
+			"variance": 0,
+			"average": 0.839418,
+			"min": 0.839418
+		}
+	},
+	{
+		"words": "【药品名称】通用名称:红芪口服液",
+		"probability": {
+			"variance": 0.000606,
+			"average": 0.985752,
+			"min": 0.923636
+		}
+	},
+	{
+		"words": "汉语拼音: Honggi Koufuye",
+		"probability": {
+			"variance": 0.000159,
+			"average": 0.990337,
+			"min": 0.962227
+		}
+	},
+	{
+		"words": "【成份】红芪;辅料为蔗糖、水溶性柠檬香精、山梨酸钾",
+		"probability": {
+			"variance": 1.8e-05,
+			"average": 0.996929,
+			"min": 0.985338
+		}
+	},
+	{
+		"words": "【性状】本品为棕红色的液体;气微,味甜",
+		"probability": {
+			"variance": 9.7e-05,
+			"average": 0.994109,
+			"min": 0.963823
+		}
+	},
+	{
+		"words": "【功能主治】补气固表。适用于气虚乏力,心悸失眠,食少便溏,面色无华,免疫功能下降等症",
+		"probability": {
+			"variance": 0.001248,
+			"average": 0.986591,
+			"min": 0.79098
+		}
+	},
+	{
+		"words": "【规格】每支装10毫升",
+		"probability": {
+			"variance": 0.000244,
+			"average": 0.989622,
+			"min": 0.955524
+		}
+	},
+	{
+		"words": "【用法用量】口服,一次10-20毫升,一日2次",
+		"probability": {
+			"variance": 0.00703,
+			"average": 0.968004,
+			"min": 0.663397
+		}
+	},
+	{
+		"words": "不良反应】尚不明确",
+		"probability": {
+			"variance": 2e-05,
+			"average": 0.997819,
+			"min": 0.985353
+		}
+	},
+	{
+		"words": "【禁急】尚不明确。",
+		"probability": {
+			"variance": 0.024015,
+			"average": 0.89189,
+			"min": 0.51926
+		}
+	},
+	{
+		"words": "【注意事项】",
+		"probability": {
+			"variance": 0.000146,
+			"average": 0.992479,
+			"min": 0.966032
+		}
+	},
+	{
+		"words": "1.忌辛辣、生冷、油腻食物",
+		"probability": {
+			"variance": 0.017812,
+			"average": 0.959048,
+			"min": 0.497001
+		}
+	},
+	{
+		"words": "2感冒发热病人不宜服用",
+		"probability": {
+			"variance": 0.000611,
+			"average": 0.98867,
+			"min": 0.912583
+		}
+	},
+	{
+		"words": "3本品宜饭前服用",
+		"probability": {
+			"variance": 4.7e-05,
+			"average": 0.995412,
+			"min": 0.978142
+		}
+	},
+	{
+		"words": "4.高血压、心脏病、肝病、糖尿病、肾病等慢性病患者应在医师指导下服用",
+		"probability": {
+			"variance": 0.003594,
+			"average": 0.986901,
+			"min": 0.643741
+		}
+	},
+	{
+		"words": "5.服用2周症状无缓解,应去医院就诊",
+		"probability": {
+			"variance": 0.008342,
+			"average": 0.976486,
+			"min": 0.600014
+		}
+	},
+	{
+		"words": "6儿童、孕妇应在医师指导下服用",
+		"probability": {
+			"variance": 7e-06,
+			"average": 0.998675,
+			"min": 0.989123
+		}
+	},
+	{
+		"words": "7对本品过敏者禁用,过敏体质者慎用",
+		"probability": {
+			"variance": 3.8e-05,
+			"average": 0.99647,
+			"min": 0.980253
+		}
+	},
+	{
+		"words": "8本品性状发生改变时禁止使用",
+		"probability": {
+			"variance": 0,
+			"average": 0.999619,
+			"min": 0.99773
+		}
+	},
+	{
+		"words": "9.儿童必须在成人监护下使用",
+		"probability": {
+			"variance": 0.030711,
+			"average": 0.930408,
+			"min": 0.362425
+		}
+	},
+	{
+		"words": "G10.请将本品放在儿童不能接触的地方",
+		"probability": {
+			"variance": 0.013305,
+			"average": 0.967677,
+			"min": 0.482453
+		}
+	},
+	{
+		"words": "1如正在使用其他药品,使用本品前请咨询医师或药师",
+		"probability": {
+			"variance": 0.000255,
+			"average": 0.994244,
+			"min": 0.921563
+		}
+	},
+	{
+		"words": "【药物相互作用】如与其他药物同时使用可能会发生药物相互作用,详情请咨询医师或药师",
+		"probability": {
+			"variance": 0.000154,
+			"average": 0.994197,
+			"min": 0.936604
+		}
+	},
+	{
+		"words": "【贮藏】密封,置阴凉处(不超过20℃)",
+		"probability": {
+			"variance": 8.8e-05,
+			"average": 0.993785,
+			"min": 0.971774
+		}
+	},
+	{
+		"words": "【包装】每支用药用口服液玻璃瓶装,药用丁基胶塞铝塑组合盖加封。10毫升×10支/盒、10毫",
+		"probability": {
+			"variance": 0.001135,
+			"average": 0.988175,
+			"min": 0.792036
+		}
+	},
+	{
+		"words": "升×12支/盒",
+		"probability": {
+			"variance": 0.00027,
+			"average": 0.987953,
+			"min": 0.950874
+		}
+	},
+	{
+		"words": "【有效期】36个月",
+		"probability": {
+			"variance": 0.00023,
+			"average": 0.992328,
+			"min": 0.950001
+		}
+	},
+	{
+		"words": "4【执行标准】《国家食品药品监督管理总局国家药品标准》WS-5746(B-0746)-2014Z",
+		"probability": {
+			"variance": 0.016222,
+			"average": 0.930033,
+			"min": 0.454882
+		}
+	},
+	{
+		"words": "【批准文号】国药准字B2802076",
+		"probability": {
+			"variance": 0.000232,
+			"average": 0.992844,
+			"min": 0.934509
+		}
+	},
+	{
+		"words": "【说明书修订日期】2016年02月05日",
+		"probability": {
+			"variance": 5.8e-05,
+			"average": 0.995369,
+			"min": 0.96738
+		}
+	},
+	{
+		"words": "【生产企业】",
+		"probability": {
+			"variance": 4e-06,
+			"average": 0.998132,
+			"min": 0.994386
+		}
+	},
+	{
+		"words": "企业名称:甘肃中天金丹药业有限公司",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.999486,
+			"min": 0.997299
+		}
+	},
+	{
+		"words": "生产地址:陇西县长安路北侧",
+		"probability": {
+			"variance": 1.5e-05,
+			"average": 0.99736,
+			"min": 0.985407
+		}
+	},
+	{
+		"words": "血",
+		"probability": {
+			"variance": 0.046287,
+			"average": 0.605847,
+			"min": 0.390702
+		}
+	},
+	{
+		"words": "政编码:748100",
+		"probability": {
+			"variance": 6e-06,
+			"average": 0.997659,
+			"min": 0.992671
+		}
+	},
+	{
+		"words": "电话号码:0935-8212385",
+		"probability": {
+			"variance": 0.000204,
+			"average": 0.995045,
+			"min": 0.938408
+		}
+	},
+	{
+		"words": "服务电话:400-007-6399",
+		"probability": {
+			"variance": 0.000895,
+			"average": 0.9884,
+			"min": 0.892677
+		}
+	},
+	{
+		"words": "传真号码:0935-8237799",
+		"probability": {
+			"variance": 0.001114,
+			"average": 0.986696,
+			"min": 0.857128
+		}
+	},
+	{
+		"words": "如有问题可与生产企业联系",
+		"probability": {
+			"variance": 2e-06,
+			"average": 0.999203,
+			"min": 0.994478
+		}
+	},
+	{
+		"words": "G",
+		"probability": {
+			"variance": 0,
+			"average": 0.848516,
+			"min": 0.848516
+		}
+	}],
+	"language": 3
+}

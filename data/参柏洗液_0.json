@@ -1,0 +1,334 @@
+{
+	"log_id": 7107142758335260402,
+	"direction": 0,
+	"words_result_num": 41,
+	"words_result": [{
+		"words": "技准日期",
+		"probability": {
+			"variance": 0.031667,
+			"average": 0.896474,
+			"min": 0.588254
+		}
+	},
+	{
+		"words": "潔司樂",
+		"probability": {
+			"variance": 0.005594,
+			"average": 0.778953,
+			"min": 0.713683
+		}
+	},
+	{
+		"words": "外",
+		"probability": {
+			"variance": 0,
+			"average": 0.999322,
+			"min": 0.999322
+		}
+	},
+	{
+		"words": "参柏洗液说明书",
+		"probability": {
+			"variance": 0,
+			"average": 0.999771,
+			"min": 0.999466
+		}
+	},
+	{
+		"words": "请仔细阅读说明书并在医师指导下使用",
+		"probability": {
+			"variance": 8e-06,
+			"average": 0.998241,
+			"min": 0.988413
+		}
+	},
+	{
+		"words": "【药品名称】",
+		"probability": {
+			"variance": 8.4e-05,
+			"average": 0.994519,
+			"min": 0.9745
+		}
+	},
+	{
+		"words": "通用名称:参柏洗液",
+		"probability": {
+			"variance": 0.000698,
+			"average": 0.986578,
+			"min": 0.914993
+		}
+	},
+	{
+		"words": "汉语拼音: slcr)",
+		"probability": {
+			"variance": 0.014306,
+			"average": 0.950544,
+			"min": 0.657568
+		}
+	},
+	{
+		"words": "药开",
+		"probability": {
+			"variance": 0.000913,
+			"average": 0.877578,
+			"min": 0.847365
+		}
+	},
+	{
+		"words": "【成份】苦、黄柏、丹参、大、硼砂、",
+		"probability": {
+			"variance": 0.022689,
+			"average": 0.917347,
+			"min": 0.397892
+		}
+	},
+	{
+		"words": "黄黄芩、黄连、甘",
+		"probability": {
+			"variance": 5.3e-05,
+			"average": 0.995738,
+			"min": 0.977148
+		}
+	},
+	{
+		"words": "草、蛇床子、土茯苓、轴料为脂肪醇聚氧乙烯醚硫酸铵、十",
+		"probability": {
+			"variance": 0.013917,
+			"average": 0.95717,
+			"min": 0.516147
+		}
+	},
+	{
+		"words": "烷基硫酸铵、高级脂肪醇、沙棘籽油、泊金甲酯、尼泊",
+		"probability": {
+			"variance": 0.010491,
+			"average": 0.962719,
+			"min": 0.5055
+		}
+	},
+	{
+		"words": "金乙酯、柠檬酸",
+		"probability": {
+			"variance": 5e-06,
+			"average": 0.997734,
+			"min": 0.993692
+		}
+	},
+	{
+		"words": "性状】本品为深褐色液体;气芳香,久置有少量沉淀",
+		"probability": {
+			"variance": 0.004725,
+			"average": 0.969911,
+			"min": 0.739312
+		}
+	},
+	{
+		"words": "功能主治】清热燥湿,杀虫止痒适用于慢性湿疹类皮炎,以及阴痒",
+		"probability": {
+			"variance": 0.001587,
+			"average": 0.988425,
+			"min": 0.77977
+		}
+	},
+	{
+		"words": "带下等症的辅助治疗",
+		"probability": {
+			"variance": 2.9e-05,
+			"average": 0.995398,
+			"min": 0.984232
+		}
+	},
+	{
+		"words": "规格】每瓶装100毫升",
+		"probability": {
+			"variance": 0.004675,
+			"average": 0.96711,
+			"min": 0.766401
+		}
+	},
+	{
+		"words": "章",
+		"probability": {
+			"variance": 0,
+			"average": 0.750732,
+			"min": 0.750732
+		}
+	},
+	{
+		"words": "用法用量】外用。以本品适量直接洗浴3-5分钟,或加水稀释后浸泡",
+		"probability": {
+			"variance": 0.004683,
+			"average": 0.983299,
+			"min": 0.612275
+		}
+	},
+	{
+		"words": "然后用清水冲洗即可",
+		"probability": {
+			"variance": 2e-06,
+			"average": 0.998423,
+			"min": 0.99611
+		}
+	},
+	{
+		"words": "不良反应】尚不明确",
+		"probability": {
+			"variance": 0.000304,
+			"average": 0.992586,
+			"min": 0.943437
+		}
+	},
+	{
+		"words": "禁忌】尚不明确",
+		"probability": {
+			"variance": 5e-06,
+			"average": 0.99718,
+			"min": 0.993616
+		}
+	},
+	{
+		"words": "注意事项】皮肤严重破溃者不宜使用",
+		"probability": {
+			"variance": 0.002809,
+			"average": 0.980741,
+			"min": 0.785027
+		}
+	},
+	{
+		"words": "贮藏】密封,置阴凉干燥处",
+		"probability": {
+			"variance": 2.4e-05,
+			"average": 0.994296,
+			"min": 0.984761
+		}
+	},
+	{
+		"words": "包装】PE-聚乙烯塑料瓶",
+		"probability": {
+			"variance": 0.002237,
+			"average": 0.972672,
+			"min": 0.839272
+		}
+	},
+	{
+		"words": "有效期】24个月",
+		"probability": {
+			"variance": 4e-06,
+			"average": 0.998403,
+			"min": 0.993893
+		}
+	},
+	{
+		"words": "执行标准",
+		"probability": {
+			"variance": 0,
+			"average": 0.999337,
+			"min": 0.998456
+		}
+	},
+	{
+		"words": "批准文号】国药准字",
+		"probability": {
+			"variance": 0.006087,
+			"average": 0.9633,
+			"min": 0.74932
+		}
+	},
+	{
+		"words": "590业0",
+		"probability": {
+			"variance": 0.00518,
+			"average": 0.853453,
+			"min": 0.748672
+		}
+	},
+	{
+		"words": "生产企业",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.999217,
+			"min": 0.998107
+		}
+	},
+	{
+		"words": "企业名称:山西康洁药业有限",
+		"probability": {
+			"variance": 0.001318,
+			"average": 0.981178,
+			"min": 0.878352
+		}
+	},
+	{
+		"words": "注册地址:太原市建泽南街鼎",
+		"probability": {
+			"variance": 0.007704,
+			"average": 0.959031,
+			"min": 0.664272
+		}
+	},
+	{
+		"words": "邮政编码:03",
+		"probability": {
+			"variance": 7e-05,
+			"average": 0.994057,
+			"min": 0.977595
+		}
+	},
+	{
+		"words": "电话号码:03",
+		"probability": {
+			"variance": 1.2e-05,
+			"average": 0.997898,
+			"min": 0.989558
+		}
+	},
+	{
+		"words": "传真号码:0351-839",
+		"probability": {
+			"variance": 0.000108,
+			"average": 0.993661,
+			"min": 0.968125
+		}
+	},
+	{
+		"words": "生产地址:山西省大同马",
+		"probability": {
+			"variance": 0.001255,
+			"average": 0.985181,
+			"min": 0.873732
+		}
+	},
+	{
+		"words": "邮政编码:03700",
+		"probability": {
+			"variance": 0.000249,
+			"average": 0.992202,
+			"min": 0.945212
+		}
+	},
+	{
+		"words": "电话号码:0352",
+		"probability": {
+			"variance": 1.3e-05,
+			"average": 0.997769,
+			"min": 0.987741
+		}
+	},
+	{
+		"words": "传真号码:0352",
+		"probability": {
+			"variance": 1e-06,
+			"average": 0.998958,
+			"min": 0.997145
+		}
+	},
+	{
+		"words": "如有问题可与生产企业联系",
+		"probability": {
+			"variance": 8e-06,
+			"average": 0.997011,
+			"min": 0.989998
+		}
+	}],
+	"language": 3
+}

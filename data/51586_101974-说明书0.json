@@ -1,0 +1,392 @@
+{
+    "log_id": 8274341967642223037,
+    "direction": 1,
+    "words_result_num": 48,
+    "words_result": [
+        {
+            "words": "名称1",
+            "probability": {
+                "variance": 0.035167,
+                "average": 0.634534,
+                "min": 0.423392
+            }
+        },
+        {
+            "words": "通甲名称:射用蚀",
+            "probability": {
+                "variance": 0.043912,
+                "average": 0.803535,
+                "min": 0.453241
+            }
+        },
+        {
+            "words": "英文名",
+            "probability": {
+                "variance": 0.035025,
+                "average": 0.616949,
+                "min": 0.36392
+            }
+        },
+        {
+            "words": "语拼音",
+            "probability": {
+                "variance": 0.063908,
+                "average": 0.820889,
+                "min": 0.384311
+            }
+        },
+        {
+            "words": "份】年元主要份为氟唑西林",
+            "probability": {
+                "variance": 0.032631,
+                "average": 0.725758,
+                "min": 0.405115
+            }
+        },
+        {
+            "words": "化学名称:3,5",
+            "probability": {
+                "variance": 0.049748,
+                "average": 0.801146,
+                "min": 0.356485
+            }
+        },
+        {
+            "words": "基}{一氧忙-4",
+            "probability": {
+                "variance": 0.050353,
+                "average": 0.74948,
+                "min": 0.400191
+            }
+        },
+        {
+            "words": "二甲基一6[5甲·-2苯:4-异巧星甲",
+            "probability": {
+                "variance": 0.042455,
+                "average": 0.80316,
+                "min": 0.396498
+            }
+        },
+        {
+            "words": "学结构式",
+            "probability": {
+                "variance": 0.006907,
+                "average": 0.904889,
+                "min": 0.778901
+            }
+        },
+        {
+            "words": "杂双环[3.2.01庚院-2甲钠盐",
+            "probability": {
+                "variance": 0.030488,
+                "average": 0.792224,
+                "min": 0.473199
+            }
+        },
+        {
+            "words": ":9",
+            "probability": {
+                "variance": 0.000739,
+                "average": 0.794303,
+                "min": 0.767115
+            }
+        },
+        {
+            "words": "分子:CHr2CN",
+            "probability": {
+                "variance": 0.057697,
+                "average": 0.804161,
+                "min": 0.397146
+            }
+        },
+        {
+            "words": "分子量:457.B7",
+            "probability": {
+                "variance": 0.028606,
+                "average": 0.85223,
+                "min": 0.472116
+            }
+        },
+        {
+            "words": "石",
+            "probability": {
+                "variance": 0.021159,
+                "average": 0.568377,
+                "min": 0.422915
+            }
+        },
+        {
+            "words": "性状】本为白色蜡末双品",
+            "probability": {
+                "variance": 0.045121,
+                "average": 0.810151,
+                "min": 0.421108
+            }
+        },
+        {
+            "words": "泛症1本岛仅适用于治疗产品系酶高盐函感包话败症、内膜炎",
+            "probability": {
+                "variance": 0.052626,
+                "average": 0.764093,
+                "min": 0.414038
+            }
+        },
+        {
+            "words": "师炎和皮肤、软组织符也可用于心脓性球菌式肺炎与",
+            "probability": {
+                "variance": 0.037499,
+                "average": 0.796597,
+                "min": 0.381229
+            }
+        },
+        {
+            "words": "球所弦的合感",
+            "probability": {
+                "variance": 0.010544,
+                "average": 0.914675,
+                "min": 0.711317
+            }
+        },
+        {
+            "words": "规格】0.5g〔按",
+            "probability": {
+                "variance": 0.032926,
+                "average": 0.88892,
+                "min": 0.49615
+            }
+        },
+        {
+            "words": "法",
+            "probability": {
+                "variance": 0.092338,
+                "average": 0.684753,
+                "min": 0.380881
+            }
+        },
+        {
+            "words": "肌为射成人拓",
+            "probability": {
+                "variance": 0.033075,
+                "average": 0.726484,
+                "min": 0.440193
+            }
+        },
+        {
+            "words": "月2,分1次小儿每日",
+            "probability": {
+                "variance": 0.023617,
+                "average": 0.841934,
+                "min": 0.514695
+            }
+        },
+        {
+            "words": "时.5%利卡因减少局",
+            "probability": {
+                "variance": 0.044473,
+                "average": 0.865051,
+                "min": 0.36217
+            }
+        },
+        {
+            "words": "速",
+            "probability": {
+                "variance": 0,
+                "average": 0.781493,
+                "min": 0.781493
+            }
+        },
+        {
+            "words": "分4,内",
+            "probability": {
+                "variance": 0.055884,
+                "average": 0.783442,
+                "min": 0.372907
+            }
+        },
+        {
+            "words": "注射",
+            "probability": {
+                "variance": 0.037156,
+                "average": 0.803815,
+                "min": 0.611056
+            }
+        },
+        {
+            "words": "2.脉滴注成人一日2~6,分2-;一日安体",
+            "probability": {
+                "variance": 0.031098,
+                "average": 0.841651,
+                "min": 0.373737
+            }
+        },
+        {
+            "words": "新牛儿体低于2k考,日特",
+            "probability": {
+                "variance": 0.011404,
+                "average": 0.93196,
+                "min": 0.670408
+            }
+        },
+        {
+            "words": "天时每12小5体2",
+            "probability": {
+                "variance": 0.034536,
+                "average": 0.878368,
+                "min": 0.511669
+            }
+        },
+        {
+            "words": "2次",
+            "probability": {
+                "variance": 0,
+                "average": 0.998899,
+                "min": 0.998336
+            }
+        },
+        {
+            "words": "0天每投体了25mk:体超过2kg,日“14天时投体",
+            "probability": {
+                "variance": 0.052446,
+                "average": 0.808287,
+                "min": 0.379615
+            }
+        },
+        {
+            "words": "子2",
+            "probability": {
+                "variance": 0.034244,
+                "average": 0.76027,
+                "min": 0.575218
+            }
+        },
+        {
+            "words": "白15-30天时每6小时",
+            "probability": {
+                "variance": 0.016284,
+                "average": 0.892635,
+                "min": 0.662519
+            }
+        },
+        {
+            "words": "退者不活整剂邑,严",
+            "probability": {
+                "variance": 0.010389,
+                "average": 0.893517,
+                "min": 0.696074
+            }
+        },
+        {
+            "words": "体20",
+            "probability": {
+                "variance": 0.001995,
+                "average": 0.950941,
+                "min": 0.888649
+            }
+        },
+        {
+            "words": "功近出者出免应用大剂以",
+            "probability": {
+                "variance": 0.061277,
+                "average": 0.716514,
+                "min": 0.365245
+            }
+        },
+        {
+            "words": "中望",
+            "probability": {
+                "variance": 0.000343,
+                "average": 0.969984,
+                "min": 0.951473
+            }
+        },
+        {
+            "words": "性反旺发",
+            "probability": {
+                "variance": 0.039843,
+                "average": 0.852275,
+                "min": 0.506569
+            }
+        },
+        {
+            "words": "中祇神痉系",
+            "probability": {
+                "variance": 0.033935,
+                "average": 0.729798,
+                "min": 0.476234
+            }
+        },
+        {
+            "words": "不白反",
+            "probability": {
+                "variance": 0.022127,
+                "average": 0.8821,
+                "min": 0.672191
+            }
+        },
+        {
+            "words": "反豆;以修等类皮疹为多见,白卵减少、间性网炎,出发",
+            "probability": {
+                "variance": 0.0479,
+                "average": 0.824895,
+                "min": 0.353695
+            }
+        },
+        {
+            "words": "华和血清型反应也可发生,严市名如过性休克伊见;过敏性体克一旦为",
+            "probability": {
+                "variance": 0.033126,
+                "average": 0.801614,
+                "min": 0.472491
+            }
+        },
+        {
+            "words": "必须就地,保持气道畅西,现氧井了以二,密紫得治疗搭推",
+            "probability": {
+                "variance": 0.033402,
+                "average": 0.831671,
+                "min": 0.440625
+            }
+        },
+        {
+            "words": "2.脉注射本后可产恶元口转移升元",
+            "probability": {
+                "variance": 0.046247,
+                "average": 0.79644,
+                "min": 0.36709
+            }
+        },
+        {
+            "words": "注射本可起抽摄等中神经系毒性应",
+            "probability": {
+                "variance": 0.050149,
+                "average": 0.820226,
+                "min": 0.363082
+            }
+        },
+        {
+            "words": "儿便大利本品后出现血成,白和尿",
+            "probability": {
+                "variance": 0.02083,
+                "average": 0.820227,
+                "min": 0.584441
+            }
+        },
+        {
+            "words": "刂病发生检总症派胆型女痘",
+            "probability": {
+                "variance": 0.04338,
+                "average": 0.721662,
+                "min": 0.35623
+            }
+        },
+        {
+            "words": "禁忌】毛甜系类物过法魔素法试旧性光考禁甩",
+            "probability": {
+                "variance": 0.050692,
+                "average": 0.65997,
+                "min": 0.357659
+            }
+        }
+    ],
+    "language": -1
+}

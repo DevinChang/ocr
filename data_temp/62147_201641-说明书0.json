@@ -1,0 +1,904 @@
+{
+    "log_id": 5436559419173966324,
+    "direction": 0,
+    "words_result_num": 112,
+    "words_result": [
+        {
+            "words": "阿莫西林胶囊0.5g说明书",
+            "probability": {
+                "variance": 0.000719,
+                "average": 0.979903,
+                "min": 0.920501
+            }
+        },
+        {
+            "words": "月",
+            "probability": {
+                "variance": 0,
+                "average": 0.914372,
+                "min": 0.914372
+            }
+        },
+        {
+            "words": "可",
+            "probability": {
+                "variance": 0,
+                "average": 0.991822,
+                "min": 0.991822
+            }
+        },
+        {
+            "words": "陶莫西杯胶流",
+            "probability": {
+                "variance": 0.047678,
+                "average": 0.66414,
+                "min": 0.391552
+            }
+        },
+        {
+            "words": "空妇期",
+            "probability": {
+                "variance": 0.041836,
+                "average": 0.607905,
+                "min": 0.391226
+            }
+        },
+        {
+            "words": "动兰",
+            "probability": {
+                "variance": 0.017928,
+                "average": 0.835852,
+                "min": 0.701955
+            }
+        },
+        {
+            "words": "二1",
+            "probability": {
+                "variance": 0.023212,
+                "average": 0.630498,
+                "min": 0.478143
+            }
+        },
+        {
+            "words": "生程人儿,右人英出二是",
+            "probability": {
+                "variance": 0.052905,
+                "average": 0.713208,
+                "min": 0.375433
+            }
+        },
+        {
+            "words": "竹生注验",
+            "probability": {
+                "variance": 0.058464,
+                "average": 0.572072,
+                "min": 0.359681
+            }
+        },
+        {
+            "words": "世警",
+            "probability": {
+                "variance": 0.011529,
+                "average": 0.503806,
+                "min": 0.403248
+            }
+        },
+        {
+            "words": "军:口乳洁可烫",
+            "probability": {
+                "variance": 0.044196,
+                "average": 0.715495,
+                "min": 0.372767
+            }
+        },
+        {
+            "words": "名",
+            "probability": {
+                "variance": 0,
+                "average": 0.973041,
+                "min": 0.973041
+            }
+        },
+        {
+            "words": "与儿示",
+            "probability": {
+                "variance": 0.028495,
+                "average": 0.742646,
+                "min": 0.62029
+            }
+        },
+        {
+            "words": "江活",
+            "probability": {
+                "variance": 0.003509,
+                "average": 0.598188,
+                "min": 0.53895
+            }
+        },
+        {
+            "words": "见用法用上:或",
+            "probability": {
+                "variance": 0.031894,
+                "average": 0.841971,
+                "min": 0.570635
+            }
+        },
+        {
+            "words": "污用药〕",
+            "probability": {
+                "variance": 0.007474,
+                "average": 0.920928,
+                "min": 0.779807
+            }
+        },
+        {
+            "words": "称25.6R",
+            "probability": {
+                "variance": 0.040334,
+                "average": 0.705049,
+                "min": 0.431593
+            }
+        },
+        {
+            "words": "基",
+            "probability": {
+                "variance": 0,
+                "average": 0.702105,
+                "min": 0.702105
+            }
+        },
+        {
+            "words": "人,法用",
+            "probability": {
+                "variance": 0.029066,
+                "average": 0.718051,
+                "min": 0.510984
+            }
+        },
+        {
+            "words": "3.201天完",
+            "probability": {
+                "variance": 0.012146,
+                "average": 0.815658,
+                "min": 0.684292
+            }
+        },
+        {
+            "words": "药物相",
+            "probability": {
+                "variance": 0.014516,
+                "average": 0.843855,
+                "min": 0.676331
+            }
+        },
+        {
+            "words": "江",
+            "probability": {
+                "variance": 0,
+                "average": 0.793007,
+                "min": 0.793007
+            }
+        },
+        {
+            "words": "汇会:地显",
+            "probability": {
+                "variance": 0.037992,
+                "average": 0.593213,
+                "min": 0.380568
+            }
+        },
+        {
+            "words": "工西环正升、态延长",
+            "probability": {
+                "variance": 0.031597,
+                "average": 0.641259,
+                "min": 0.366374
+            }
+        },
+        {
+            "words": "点霉,六内非类、",
+            "probability": {
+                "variance": 0.048568,
+                "average": 0.720172,
+                "min": 0.406478
+            }
+        },
+        {
+            "words": "作,宾怎行",
+            "probability": {
+                "variance": 0.051885,
+                "average": 0.754526,
+                "min": 0.405465
+            }
+        },
+        {
+            "words": "药消",
+            "probability": {
+                "variance": 0.015844,
+                "average": 0.587659,
+                "min": 0.421128
+            }
+        },
+        {
+            "words": "工",
+            "probability": {
+                "variance": 0,
+                "average": 0.82435,
+                "min": 0.82435
+            }
+        },
+        {
+            "words": "在一项江名儿六东与脑法",
+            "probability": {
+                "variance": 0.039929,
+                "average": 0.765377,
+                "min": 0.477524
+            }
+        },
+        {
+            "words": "引运回",
+            "probability": {
+                "variance": 0.046926,
+                "average": 0.693733,
+                "min": 0.36946
+            }
+        },
+        {
+            "words": "兰茹后",
+            "probability": {
+                "variance": 0.035502,
+                "average": 0.646869,
+                "min": 0.491241
+            }
+        },
+        {
+            "words": "江】二品为",
+            "probability": {
+                "variance": 0.053566,
+                "average": 0.732138,
+                "min": 0.392003
+            }
+        },
+        {
+            "words": "动为式白升不",
+            "probability": {
+                "variance": 0.047921,
+                "average": 0.608003,
+                "min": 0.361604
+            }
+        },
+        {
+            "words": "阿下过引运加不,少",
+            "probability": {
+                "variance": 0.052031,
+                "average": 0.663633,
+                "min": 0.40138
+            }
+        },
+        {
+            "words": "应症]",
+            "probability": {
+                "variance": 0.013897,
+                "average": 0.83801,
+                "min": 0.671295
+            }
+        },
+        {
+            "words": "莫西苏运韦",
+            "probability": {
+                "variance": 0.025941,
+                "average": 0.631916,
+                "min": 0.392115
+            }
+        },
+        {
+            "words": "东:所三下列染",
+            "probability": {
+                "variance": 0.017907,
+                "average": 0.7246,
+                "min": 0.586424
+            }
+        },
+        {
+            "words": "止杆所中",
+            "probability": {
+                "variance": 0.01199,
+                "average": 0.873143,
+                "min": 0.715917
+            }
+        },
+        {
+            "words": "西材",
+            "probability": {
+                "variance": 0.001568,
+                "average": 0.6496,
+                "min": 0.610003
+            }
+        },
+        {
+            "words": "大会,对柿",
+            "probability": {
+                "variance": 0.025603,
+                "average": 0.694658,
+                "min": 0.4277
+            }
+        },
+        {
+            "words": "耳、炎、炎,",
+            "probability": {
+                "variance": 0.062309,
+                "average": 0.784322,
+                "min": 0.369782
+            }
+        },
+        {
+            "words": "、不",
+            "probability": {
+                "variance": 0.003546,
+                "average": 0.915353,
+                "min": 0.855808
+            }
+        },
+        {
+            "words": "买球,句三兰",
+            "probability": {
+                "variance": 0.052822,
+                "average": 0.6163,
+                "min": 0.353717
+            }
+        },
+        {
+            "words": "临,大、异",
+            "probability": {
+                "variance": 0.040674,
+                "average": 0.618852,
+                "min": 0.367598
+            }
+        },
+        {
+            "words": "、河亡血",
+            "probability": {
+                "variance": 0.048576,
+                "average": 0.727304,
+                "min": 0.459509
+            }
+        },
+        {
+            "words": "类大彩的希的配学织",
+            "probability": {
+                "variance": 0.038452,
+                "average": 0.625093,
+                "min": 0.369174
+            }
+        },
+        {
+            "words": "士兰性E的不",
+            "probability": {
+                "variance": 0.031195,
+                "average": 0.871921,
+                "min": 0.480142
+            }
+        },
+        {
+            "words": "医上出",
+            "probability": {
+                "variance": 0.038082,
+                "average": 0.620691,
+                "min": 0.421816
+            }
+        },
+        {
+            "words": "工、三对,会医流生扦京",
+            "probability": {
+                "variance": 0.028684,
+                "average": 0.644238,
+                "min": 0.423544
+            }
+        },
+        {
+            "words": "支气炎,号",
+            "probability": {
+                "variance": 0.042418,
+                "average": 0.802323,
+                "min": 0.509431
+            }
+        },
+        {
+            "words": "代力1",
+            "probability": {
+                "variance": 0.077861,
+                "average": 0.639345,
+                "min": 0.368637
+            }
+        },
+        {
+            "words": "本品可用丁治疗",
+            "probability": {
+                "variance": 0.011685,
+                "average": 0.885848,
+                "min": 0.70386
+            }
+        },
+        {
+            "words": "左老沟病",
+            "probability": {
+                "variance": 0.040344,
+                "average": 0.76638,
+                "min": 0.449041
+            }
+        },
+        {
+            "words": "本治,约",
+            "probability": {
+                "variance": 0.028626,
+                "average": 0.566677,
+                "min": 0.381941
+            }
+        },
+        {
+            "words": "后",
+            "probability": {
+                "variance": 0,
+                "average": 0.748064,
+                "min": 0.748064
+            }
+        },
+        {
+            "words": "is",
+            "probability": {
+                "variance": 0.019217,
+                "average": 0.596505,
+                "min": 0.403893
+            }
+        },
+        {
+            "words": "修n分",
+            "probability": {
+                "variance": 0.050941,
+                "average": 0.676714,
+                "min": 0.506652
+            }
+        },
+        {
+            "words": "工可尔",
+            "probability": {
+                "variance": 0.059771,
+                "average": 0.655597,
+                "min": 0.377086
+            }
+        },
+        {
+            "words": "时:序品在",
+            "probability": {
+                "variance": 0.032278,
+                "average": 0.737936,
+                "min": 0.515374
+            }
+        },
+        {
+            "words": "汇复",
+            "probability": {
+                "variance": 0.007333,
+                "average": 0.690368,
+                "min": 0.604737
+            }
+        },
+        {
+            "words": ":6气管作点口服",
+            "probability": {
+                "variance": 0.042037,
+                "average": 0.694695,
+                "min": 0.405632
+            }
+        },
+        {
+            "words": "C.1",
+            "probability": {
+                "variance": 0.027952,
+                "average": 0.642446,
+                "min": 0.411725
+            }
+        },
+        {
+            "words": "二50.5后2~3小时6小时中平单分别为0.52m1",
+            "probability": {
+                "variance": 0.044374,
+                "average": 0.814016,
+                "min": 0.404975
+            }
+        },
+        {
+            "words": "药后11m=:1",
+            "probability": {
+                "variance": 0.05145,
+                "average": 0.771881,
+                "min": 0.421758
+            }
+        },
+        {
+            "words": "性中",
+            "probability": {
+                "variance": 0.035775,
+                "average": 0.789512,
+                "min": 0.600368
+            }
+        },
+        {
+            "words": "口。志人一的",
+            "probability": {
+                "variance": 0.038033,
+                "average": 0.773093,
+                "min": 0.435381
+            }
+        },
+        {
+            "words": "7小时",
+            "probability": {
+                "variance": 0.011318,
+                "average": 0.853955,
+                "min": 0.746895
+            }
+        },
+        {
+            "words": "老口本品11-2:一耳",
+            "probability": {
+                "variance": 0.036643,
+                "average": 0.758737,
+                "min": 0.380581
+            }
+        },
+        {
+            "words": "小儿日剂广体",
+            "probability": {
+                "variance": 0.028596,
+                "average": 0.784762,
+                "min": 0.478971
+            }
+        },
+        {
+            "words": ",功能严抗",
+            "probability": {
+                "variance": 0.043588,
+                "average": 0.821765,
+                "min": 0.467442
+            }
+        },
+        {
+            "words": "怡泵炎考口二p小平液中白知",
+            "probability": {
+                "variance": 0.034815,
+                "average": 0.738384,
+                "min": 0.433688
+            }
+        },
+        {
+            "words": "儿一量二",
+            "probability": {
+                "variance": 0.050287,
+                "average": 0.759731,
+                "min": 0.462755
+            }
+        },
+        {
+            "words": "当于前E",
+            "probability": {
+                "variance": 0.059519,
+                "average": 0.763114,
+                "min": 0.384234
+            }
+        },
+        {
+            "words": "正可过胎,左",
+            "probability": {
+                "variance": 0.05623,
+                "average": 0.674617,
+                "min": 0.363052
+            }
+        },
+        {
+            "words": "生需冶",
+            "probability": {
+                "variance": 0.024586,
+                "average": 0.635963,
+                "min": 0.499962
+            }
+        },
+        {
+            "words": "其牛内二",
+            "probability": {
+                "variance": 0.063438,
+                "average": 0.690818,
+                "min": 0.390927
+            }
+        },
+        {
+            "words": "为体汇药付",
+            "probability": {
+                "variance": 0.051079,
+                "average": 0.779164,
+                "min": 0.417286
+            }
+        },
+        {
+            "words": "石、汗一世",
+            "probability": {
+                "variance": 0.031826,
+                "average": 0.769972,
+                "min": 0.473014
+            }
+        },
+        {
+            "words": "E:4.汇",
+            "probability": {
+                "variance": 0.058382,
+                "average": 0.735483,
+                "min": 0.362189
+            }
+        },
+        {
+            "words": "量:同而的三结合率为",
+            "probability": {
+                "variance": 0.041359,
+                "average": 0.797115,
+                "min": 0.378256
+            }
+        },
+        {
+            "words": "5洁除",
+            "probability": {
+                "variance": 0.002636,
+                "average": 0.850499,
+                "min": 0.782919
+            }
+        },
+        {
+            "words": "小",
+            "probability": {
+                "variance": 0.087981,
+                "average": 0.694073,
+                "min": 0.397457
+            }
+        },
+        {
+            "words": "期13小时,药1药",
+            "probability": {
+                "variance": 0.025078,
+                "average": 0.844264,
+                "min": 0.423441
+            }
+        },
+        {
+            "words": "治肝气进",
+            "probability": {
+                "variance": 0.034646,
+                "average": 0.717629,
+                "min": 0.432218
+            }
+        },
+        {
+            "words": "应",
+            "probability": {
+                "variance": 0.080615,
+                "average": 0.710267,
+                "min": 0.42634
+            }
+        },
+        {
+            "words": "、呕吐,运污性式宁正空",
+            "probability": {
+                "variance": 0.050584,
+                "average": 0.711342,
+                "min": 0.350764
+            }
+        },
+        {
+            "words": "6小时与45一58酷以型标出",
+            "probability": {
+                "variance": 0.054562,
+                "average": 0.681023,
+                "min": 0.354594
+            }
+        },
+        {
+            "words": "+小",
+            "probability": {
+                "variance": 0.068271,
+                "average": 0.644051,
+                "min": 0.372189
+            }
+        },
+        {
+            "words": "东东药能每过每",
+            "probability": {
+                "variance": 0.041408,
+                "average": 0.688457,
+                "min": 0.426663
+            }
+        },
+        {
+            "words": "山、重小少、空坦家",
+            "probability": {
+                "variance": 0.042377,
+                "average": 0.69034,
+                "min": 0.360502
+            }
+        },
+        {
+            "words": "送卡5,联",
+            "probability": {
+                "variance": 0.034048,
+                "average": 0.627188,
+                "min": 0.394715
+            }
+        },
+        {
+            "words": "贮,你",
+            "probability": {
+                "variance": 0.070396,
+                "average": 0.690039,
+                "min": 0.362766
+            }
+        },
+        {
+            "words": "汇弧英漆可高",
+            "probability": {
+                "variance": 0.020457,
+                "average": 0.647947,
+                "min": 0.426399
+            }
+        },
+        {
+            "words": "包装",
+            "probability": {
+                "variance": 8e-06,
+                "average": 0.996239,
+                "min": 0.993442
+            }
+        },
+        {
+            "words": ":0",
+            "probability": {
+                "variance": 0.067906,
+                "average": 0.668759,
+                "min": 0.355514
+            }
+        },
+        {
+            "words": "医寸的引心到",
+            "probability": {
+                "variance": 0.02604,
+                "average": 0.717321,
+                "min": 0.473088
+            }
+        },
+        {
+            "words": "汕兰为异",
+            "probability": {
+                "variance": 0.031874,
+                "average": 0.806115,
+                "min": 0.566452
+            }
+        },
+        {
+            "words": "包装",
+            "probability": {
+                "variance": 0.063335,
+                "average": 0.785708,
+                "min": 0.431342
+            }
+        },
+        {
+            "words": "有效",
+            "probability": {
+                "variance": 0.012696,
+                "average": 0.826296,
+                "min": 0.713619
+            }
+        },
+        {
+            "words": "批准",
+            "probability": {
+                "variance": 5.1e-05,
+                "average": 0.698952,
+                "min": 0.691834
+            }
+        },
+        {
+            "words": "生产企",
+            "probability": {
+                "variance": 0.017929,
+                "average": 0.893145,
+                "min": 0.704219
+            }
+        },
+        {
+            "words": "美肛砖发汽可手芯,见子有",
+            "probability": {
+                "variance": 0.045171,
+                "average": 0.632387,
+                "min": 0.355536
+            }
+        },
+        {
+            "words": "企业尔:三明只支",
+            "probability": {
+                "variance": 0.048857,
+                "average": 0.684741,
+                "min": 0.372646
+            }
+        },
+        {
+            "words": "生产地址:明市七企",
+            "probability": {
+                "variance": 0.035022,
+                "average": 0.724954,
+                "min": 0.373846
+            }
+        },
+        {
+            "words": "孢素北的",
+            "probability": {
+                "variance": 0.05899,
+                "average": 0.622883,
+                "min": 0.350511
+            }
+        },
+        {
+            "words": "用",
+            "probability": {
+                "variance": 0,
+                "average": 0.868229,
+                "min": 0.868229
+            }
+        },
+        {
+            "words": "皮试:生辶",
+            "probability": {
+                "variance": 0.048999,
+                "average": 0.705066,
+                "min": 0.364428
+            }
+        },
+        {
+            "words": "车以",
+            "probability": {
+                "variance": 0.057954,
+                "average": 0.587377,
+                "min": 0.365138
+            }
+        },
+        {
+            "words": "网:Ei",
+            "probability": {
+                "variance": 0.038244,
+                "average": 0.707393,
+                "min": 0.441352
+            }
+        },
+        {
+            "words": "按塔症您录尾",
+            "probability": {
+                "variance": 0.058786,
+                "average": 0.693406,
+                "min": 0.374109
+            }
+        },
+        {
+            "words": "冶定检,骨",
+            "probability": {
+                "variance": 0.047815,
+                "average": 0.62537,
+                "min": 0.36469
+            }
+        },
+        {
+            "words": "免妄u线",
+            "probability": {
+                "variance": 0.016765,
+                "average": 0.673656,
+                "min": 0.527766
+            }
+        }
+    ],
+    "language": 3
+}

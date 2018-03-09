@@ -32,7 +32,7 @@ def findImportWords(str):
         patternA17 = re.compile(pA17)
         matcherA17 = re.search(patternA17, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA17!=None:
-            return {"儿童用药":rightvalue}
+            return ["儿童用药", rightvalue]
 
         # 第18个字段：老年用药
         pA18 = r"老年*用药*|老*年用*药"

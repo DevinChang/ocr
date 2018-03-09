@@ -102,6 +102,14 @@ def judge_keywords(strword):
             return ['禁忌' , strword[re_prohibition_accu.search(strword).span()[1]:],re_prohibition_accu.search(strword).group()]
         else:
             return None
+        
+def inrtroduction_judge(strword):
+    keyword = judge_keywords(strword)
+    if not keyword:
+        return findImportWords(strword)
+    else:
+        return keyword
+
 
 def inrtroduction_test(file):
     datajson = load_json(file)
@@ -110,8 +118,7 @@ def inrtroduction_test(file):
     datas = datajson['words_result']
     i = 0
     for (word, i) in zip(datas, range(0, datajson['words_result_num'])):
-        print(findImportWords(word['words'])) 
-        list_result = judge_keywords(word['words'])
+        list_result = inrtroduction_judge(word['words'])
         if list_result != None:
             datadict[list_result[0]] = list_result[1]
             keylist.append([list_result[0],list_result[2]])
@@ -120,10 +127,15 @@ def inrtroduction_test(file):
             while j > 0:
                 if not keylist:
                     break
+                if "日期" in keylist[-1][1]:
+                    if re.match(r'[0-9]{4}年?[0-9]{2}月?[0-9]{2}日?', datas[j]['words']):
+                        continue
+                    else:
+                        break
                 if keylist[-1][1] in datas[j]['words']:
                     datadict[keylist[-1][0]] += word['words']
                     break
-                j -= 1 
+                j -= 1  
     
 
 

@@ -126,7 +126,7 @@ def findImportWords(str):
             return ["企业地址", rightvalue, matcherA30.group()]
 
         # 第31个字段： 生产厂家
-        pA31 = r"生*产*厂家*：*|生*产*厂*家：*"
+        pA31 = r"生*产厂家*：*|生产*厂家*：*|生*产厂*家：*|生产*厂*家：*|生*产企业*：*|生产*企业*：*|生*产企*业：*|生产*企*业：*"
         patternA31 = re.compile(pA31)
         matcherA31 = re.search(patternA31, str)  # 在源文本中搜索符合正则表达式的部分
         if matcherA31!=None:
@@ -329,7 +329,7 @@ def findImportWords(str):
 
         # 第31个字段： 生产厂家
         str31 = str[0:6] #在前六个字符中去判断，无括号，则应该以更加严格的方式检查
-        pB31 = r"生*产厂家*：*|生产*厂家*：*|生*产厂*家：*|生产*厂*家：*"
+        pB31 = r"生*产厂家*：*|生产*厂家*：*|生*产厂*家：*|生产*厂*家：*|生*产企业*：*|生产*企业*：*|生*产企*业：*|生产*企*业：*"
         patternB31 = re.compile(pB31)
         matcherB31 = re.search(patternB31, str31)  # 在源文本中搜索符合正则表达式的部分
         if matcherB31 != None:

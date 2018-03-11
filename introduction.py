@@ -39,7 +39,8 @@ def judge_keywords(strword):
     re_reaction_accu = re.compile(r'.?不?良反应?|.?不?良反?应')
     re_prohibition = re.compile(r'.?禁忌?[】\]]|.?禁?忌[】\]]')
     re_prohibition_accu = re.compile(r'.?禁忌?|.?禁?忌')
-
+    re_precautions = re.compile(r'.?注?意事项?[】\]]|.?注?意事?项[】\]]')
+    re_precautions_accu = re.compile(r'.?注?意事项?|.?注?意事?项')
     if len(strword) >= 6: 
         index = 6
     else:
@@ -62,6 +63,8 @@ def judge_keywords(strword):
             return ['不良反应' , strword[re_reaction.search(strword).span()[1] + 1:],re_reaction.search(strword).group()]
         elif re_prohibition.search(strword[:sort_index(strword)]):
             return ['禁忌' , strword[re_prohibition.search(strword).span()[1] + 1:],re_prohibition.search(strword).group()]
+        elif re_precautions.search(strword[:index]):
+            return ['注意事项' , strword[re_precautions.search(strword).span()[1] + 1:],re_precautions.search(strword).group()]
         else:
             return None
     elif re.match(r'.+?(?:\:)', strword):
@@ -100,6 +103,8 @@ def judge_keywords(strword):
             return ['不良反应' , strword[re_reaction_accu.search(strword).span()[1]:],re_reaction_accu.search(strword).group()]
         elif re_prohibition_accu.search(strword[:sort_index(strword)]):
             return ['禁忌' , strword[re_prohibition_accu.search(strword).span()[1]:],re_prohibition_accu.search(strword).group()]
+        elif re_precautions_accu.search(strword[:index]):
+            return ['注意事项' , strword[re_precautions_accu.search(strword).span()[1]:],re_precautions_accu.search(strword).group()]
         else:
             return None
         

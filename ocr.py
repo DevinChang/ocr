@@ -69,33 +69,12 @@ class MyOcr(object):
         @输出json数据，保存到data文件夹下
         """
         imgpath = self.codepath + '\IMG'+'\国控天星'
-        #for root, dirname, filename in os.walk(imgpath):
-        #    continue
 
         options = {}
         options["detect_direction"] = "true" 
         options["detect_language"] = "true"
         options["probability"] = "true"
-        #rootdir = os.listdir(imgpath)
-        #dirs = os.listdir(imgpath + '\\' + rootdir[0])
-        #cur_path = imgpath + '\\' + rootdir[0]
-        #for dirname in dirs:
-        #    files = os.listdir(cur_path + '\\' + dirname)
-        #    for (file, i) in zip(files, range(0, 5)):
-        #        if (file[-3:] != 'Jpg') and (file[-3:] != 'jpg'):
-        #            continue
-        #        print('Current img: {}'.format(file))
-        #        img = self._get_file_content(cur_path + '\\' + dirname + '\\' + file)
-        #        if self.typeid == 1:
-        #            data = self.client.basicGeneral(img, options)
-        #        elif self.typeid == 2:
-        #            data = self.client.general(img, options)
-        #        elif self.typeid == 3:
-        #            data = self.client.basicAccurate(img, options)
-        #        elif self.typid == 4:
-        #            data = self.client.accurate(img, options)
-        #        #self._write_json_file((self.datapath +'\{}.json').format(str.split(file, '.')[0]), data)
-        #        self._write_json_file((self.datapath +'\{}_{}.json').format(dirname, i), data)
+        
         
         for file in os.walk(imgpath):
             #2018/3/5 modify: 修改读取文件流程，使得保存数据的路径与图片的路径相同

@@ -8,8 +8,7 @@ import os
 from wand.image import Image
 #from introduction import format_introduction
 import introduction
-
-
+import baiduai
 """
 __version__: 1.0
 __application__: ocr识别说明书，药品许可证等证件
@@ -68,20 +67,21 @@ class MyOcr(object):
         识别img文件下的图片
         @输出json数据，保存到data文件夹下
         """
-        imgpath = self.codepath + '\IMG'+'\国控天星'
+        #imgpath = self.codepath + '\IMG'+'\国控天星'
+        imgpath = 'F:\国药海南去重'
 
         options = {}
         options["detect_direction"] = "true" 
         options["detect_language"] = "true"
         options["probability"] = "true"
         
-        
+        i = 0
         for file in os.walk(imgpath):
             #2018/3/5 modify: 修改读取文件流程，使得保存数据的路径与图片的路径相同
             for file_name in file[2]:
                 if '说明书' in file_name:
                     print('Current img: {}'.format(file_name))
-                    index = file[0].rfind('国控天星')
+                    index = file[0].rfind('国药海南去重')
                     tmpath = file[0][index:]
                     curpath = self.datapath + '\\' + tmpath + '\\' + '说明书'
                     if not os.path.exists(curpath):
@@ -94,10 +94,16 @@ class MyOcr(object):
                         data = self.client.general(img, options)
                     elif self.typeid == 3:
                         data = self.client.basicAccurate(img, options)
-                    elif self.typid == 4:
+                    elif self.typeid == 4:
                         data = self.client.accurate(img, options)
                     
                     self._write_json_file((curpath +'\{}.json').format(str.split(file_name, '.')[0]), data)       
+                    
+                    if i < 50:
+                        i += 1
+                    else:
+                        i = 0
+                        self.client = AipOcr(appid[1], apikey[1], secretkey[1])
         #options = {}
         #options["detect_direction"] = "true" 
         #options["detect_language"] = "true"
@@ -122,7 +128,7 @@ class MyOcr(object):
     def _write_dict(self):
         files = os.listdir(self.datapath)
         for file in files:
-            format_data = introduction.format_introduction(self.datapath + '\\' + file)
+            format_data = introduction.introduction(self.datapath + '\\' + file)
             print(format_data)
 
     def pdf2img(self):

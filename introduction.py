@@ -57,7 +57,7 @@ def judge_keywords(strword):
         elif re_indication.search(strword[:index]):
             return ['功能主治' , strword[re_indication.search(strword).span()[1] + 1:],re_indication.search(strword).group()]
         elif re_specification.search(strword[:sort_index(strword)]):
-            return ['规格' , strword[re_specification.span()[1] + 1:],re_specification.search(strword).group()]
+            return ['规格' , strword[re_specification.search(strword).span()[1] + 1:],re_specification.search(strword).group()]
         elif re_dosage.search(strword[:index]):
             return ['用法用量' , strword[re_dosage.search(strword).span()[1] + 1:],re_dosage.search(strword).group()]
         elif re_reaction.search(strword[:index]):
@@ -164,12 +164,13 @@ if __name__ == '__main__':
     datapath = codepath + '\data'
     files = os.listdir(datapath)
     #db = cxOracle()
-    for file in files:
-        #format_data = format_introduction(datapath + '\\' + file)
-        format_data = inrtroduction(datapath + '\\' + file)
-        print(format_data)
-        if not format_data:
-            continue
+    for file in os.walk(datapath):
+        for file_name in file[2]:
+            if '说明书' in file_name:
+                format_data = inrtroduction(file[0] + '\\' + file_name)
+                print(format_data)
+                if not format_data:
+                    continue
         #addsql = db.getsavesql('DRUGPACKAGEINSERT', format_data)
         #db.insert(addsql)
         #datajson = load_json(datapath + '\\' + file)

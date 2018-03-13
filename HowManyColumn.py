@@ -139,6 +139,8 @@ def kinds(imgPath,jsonPath):
         print(imgPath + '情况特殊，请人工处理')
 
     dict.update({'boundary': boundary})
+    dict.update({'direction':direction)
+
     #输出为字典
     #例子： {1: [1735.0, 2549.0], 2: [1167.0, 1981.0], 'kinds': 2, 'parameter': 'top', 'boundary': [1981.0]}
     #kinds是指 栏数，parameter是指应该根据该位置信息对内容 进行分栏 boundary是指内容的划分界限

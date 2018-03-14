@@ -5,10 +5,10 @@ from aip import AipOcr
 import json
 import csv
 import os
-from wand.image import Image
+#from wand.image import Image
 #from introduction import format_introduction
 import introduction
-import baiduai
+from baiduai import *
 """
 __version__: 1.0
 __application__: ocr识别说明书，药品许可证等证件
@@ -43,7 +43,8 @@ class MyOcr(object):
             4--含位置信息的高精度文字识别
     """
     def __init__(self, app_id, api_key, secret_key, typeid):
-        self.client = AipOcr(app_id, api_key, secret_key)
+        #self.client = AipOcr(app_id, api_key, secret_key)
+        self.client = AipOcr(appid[1], apikey[1], secretkey[1])
         self.typeid = typeid
         self.codepath = os.path.dirname(__file__)
         self.datapath = self.codepath + '\data'
@@ -68,7 +69,7 @@ class MyOcr(object):
         @输出json数据，保存到data文件夹下
         """
         #imgpath = self.codepath + '\IMG'+'\国控天星'
-        imgpath = 'F:\国药海南去重'
+        imgpath = 'F:\IMG'
 
         options = {}
         options["detect_direction"] = "true" 
@@ -80,7 +81,7 @@ class MyOcr(object):
             #2018/3/5 modify: 修改读取文件流程，使得保存数据的路径与图片的路径相同
             for file_name in file[2]:
                 if '说明书' in file_name:
-                    print('Current img: {}'.format(file_name))
+                    print('Current img: {}'.format(file[0] + '\\' + file_name))
                     index = file[0].rfind('国药海南去重')
                     tmpath = file[0][index:]
                     curpath = self.datapath + '\\' + tmpath
@@ -96,34 +97,15 @@ class MyOcr(object):
                         data = self.client.basicAccurate(img, options)
                     elif self.typeid == 4:
                         data = self.client.accurate(img, options)
-                    
-                    self._write_json_file((curpath +'\{}.json').format(str.split(file_name, '.')[0]), data)       
+                    prefix,suffix = file_name.split('.')
+                    self._write_json_file((curpath +'\{}.json').format(prefix + '_' + suffix), data)       
                     
                     if i < 50:
                         i += 1
                     else:
                         i = 0
                         self.client = AipOcr(appid[1], apikey[1], secretkey[1])
-        #options = {}
-        #options["detect_direction"] = "true" 
-        #options["detect_language"] = "true"
-        #options["probability"] = "true"
-        #for file in files:
-        #    print('Current img: {}'.format(file))
-        #    img = self._get_file_content(imgpath + '\\' + file)
-        #    if self.typeid == 1:
-        #        data = self.client.basicGeneral(img, options)
-        #    elif self.typeid == 2:
-        #        data = self.client.general(img, options)
-        #    elif self.typeid == 3:
-        #        data = self.client.basicAccurate(img, options)
-        #    elif self.typid == 4:
-        #        data = self.client.accurate(img, options)
-        #    self._write_json_file((self.datapath +'\{}.json').format(str.split(file, '.')[0]), data)
 
-        #data_files = os.listdir(datapath)
-        #for dfile in datas:
-        #    self._write_dict(datapath + dfile) 
         
     def _write_dict(self):
         files = os.listdir(self.datapath)

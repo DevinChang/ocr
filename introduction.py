@@ -2,7 +2,7 @@
 
 import os
 import json
-from databaseTools import cxOracle
+from DatabaseToolsNew import cxOracle
 import re
 from FindKeyword import findImportWords
 import HowManyColumn as hmc
@@ -128,6 +128,9 @@ def inrtroduction(datas, nums):
     i = 0
     for (word, i) in zip(datas, range(0, nums)):
         list_result = inrtroduction_judge(word['words'])
+        #阈值
+        if word['probability']['average'] * 0.6 + word['probability']['min'] * 0.4 < 0.85:
+            continue
         if list_result != None and len(keylist) > 0:
             if list_result[0] in datadict and keylist[-1][0] != list_result[0]:
                 list_result = None
@@ -145,12 +148,30 @@ def inrtroduction(datas, nums):
                     else:
                         break
                 if keylist[-1][1] in datas[j]['words']:
-                    print(i)
-                    #print(word['words'])
                     datadict[keylist[-1][0]] += word['words']
                     break
                 j -= 1  
             
+
+def subfiledata(direction, parameter, boundary, datas):
+    leftdata = []
+    rightdata = []
+    for data in datas:
+        if direction == 1 or direction == 2:
+            if data['location'][parameter] >= boundary:
+                leftdata += data['words']
+            else:
+                rightdata += data['words']
+        else:
+            if data['location'][parameter] <= boundary:
+                leftdata += data['words']
+            else:
+                rightdata += data['words']
+    return leftdata + rightdata
+
+        
+
+
     
 
 
@@ -161,31 +182,42 @@ def inrtroduction(datas, nums):
         
         
             
-    #print(data['words_result']) 
 
 if __name__ == '__main__':
     codepath = os.path.dirname(__file__)
     datapath = codepath + '\data'
     files = os.listdir(datapath)
-    #db = cxOracle()
-    imgpath_root = "F:\国药海南去重"
+    db = cxOracle()
+    imgpath_root = "F:\IMG"
     datas = []
+    leftdata = []
+    rightdata = []
     nums = 0
+    flag = 0
     for file in os.walk(datapath):
         for file_name in file[2]:
             if '说明书' in file_name:
+                imgname = file_name.split('.')[0]
+                curpath = file[0].split('data')[1]
+                index = imgname.rfind('_')
+                kindict = hmc.kinds(imgpath_root + '\\' + curpath + 
+                                        '\\' + imgname[:index] + 
+                                        '.' + imgname[index:].split('_')[1], 
+                                        file[0] + '\\' + file_name)
+
                 datajson = load_json(file[0] + '\\' + file_name)
                 datas += datajson['words_result']
                 nums += datajson['words_result_num']
-                #print(format_data)
-                #inrtroduction(file[0] + '\\' + file_name)
-        if len(datas) > 0 and nums > 0:
-            inrtroduction(datas, nums)
-        print(datadict)
-        #addsql = db.getsavesql('DRUGPACKAGEINSERT', format_data)
-        #db.insert(addsql)
-        #datajson = load_json(datapath + '\\' + file)
-        #datas = datajson['words_result']
+                flag = 1
+        
+        if flag:
+            if kindict['kinds'] == 2:
+                datas = subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'], datas)
+            if len(datas) > 0 and nums > 0:
+                inrtroduction(datas, nums)
+                addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict)
+                db.insert(addsql, param)
+                print(datadict)
         #print(datas)
     
     

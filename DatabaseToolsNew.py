@@ -2,34 +2,30 @@ import json
 import cx_Oracle
 from config import *
 
-"""
-__application__: 数据入库
-__author__: 肖帅
-__date__: 2018/1/31
-"""
-
 
 class cxOracle:
     #connectstr = 'scott/123456@localhost:1521/orcl'
 
     def __init__(self,username = USER_NAME, password = PASSWORD, port = 1521, database = 'orcl'):
         self.connectstr = '{}/{}@localhost:{}/{}'.format(username, password, port, database)
-
-
-    #获取连接
+#获取数据库连接
     def getconnect(self):
         conn = cx_Oracle.connect(self.connectstr)
         return conn
-    #插入数据
+
+
+#执行sql
     def insert(self,sql):
-        conn=self.getconnect()
-        cr = conn.cursor()  # 获取cursor
+        conn = self.getconnect()
+        cr = conn.cursor()
+        # col 是clob字段
         cr.execute(sql)
-        # 关闭连接
+        rs=cr.fetchall()
+        for r in rs:
+            print(r[0])
+            #text = r[0][0].read()
+            #pram.appen(text)
         cr.close()
-        conn.commit()
-        conn.close()
-        print('存入成功')
 
     def _convert_key(self, key):
         """将识别后的数据的key转换为可以插入到数据库的key"""
@@ -89,31 +85,55 @@ class cxOracle:
             return 'WEB_SITE'
         elif key == '药代动力学':
             return 'PHARMACOKINETICS'
-            
+        elif key == '孕妇及哺乳期妇女用药':
+            return 'PREGNANCY_LACTATION'
+        elif key == '儿童用药':
+            return 'USE_IN_CHD'
+        elif key == '老年用药':
+            return 'USE_IN_ELDR'
+        elif key == '药物过量':
+            return 'OVER_DOSAGE'
+        elif key == '药理毒理':
+            return 'PHARMACOLOGY'
+        elif key == '生产厂家':
+            return 'MFRS'
 
-        
+    #根据sql语句（带参数）执行插入数据
+    def insert(self,sql,pram):
+        conn = self.getconnect()
+        cr = conn.cursor()  # 获取cursor
+        cr.execute(sql,pram)
+        # 关闭连接
+        cr.close()
+        conn.commit()
+        conn.close()
+        print('存入成功')
 
+#根据json字典返回
     def getsavesql(self,tablename,jsonstrs):
-        """获取插入sql"""
         keys = ''
         values = ''
+        pram=[]
         #text = json.loads(jsonstrs)
         text = jsonstrs
-        print(text)
         if isinstance(text,dict):
             i = 0
             for key in text:
-                print(key)
-                convert_key = self._convert_key(key) 
+                convert_key = self._convert_key(key)
                 i = i+1
                 if i == len(text):
                     keys = keys+str(convert_key)
-                    values = values+"'"+str(text[key])+"'"
+                    pram.append(str(text[key]))
+                    values = values + ':' + str(i)
                 else:
                     keys = keys + str(convert_key) + ','
-                    values = values+"'"+str(text[key])+"'"+','
+                    pram.append(str(text[key]))
+                    values = values + ':' + str(i) + ','
         else:
             print('json类型不正确')
         sql = 'INSERT INTO '+tablename+'('+keys+') VALUES('+values+')'
         print(sql)
-        return sql
+        print(pram)
+        return sql,pram
+
+

@@ -83,7 +83,7 @@ class MyOcr(object):
                     print('Current img: {}'.format(file_name))
                     index = file[0].rfind('国药海南去重')
                     tmpath = file[0][index:]
-                    curpath = self.datapath + '\\' + tmpath + '\\' + '说明书'
+                    curpath = self.datapath + '\\' + tmpath
                     if not os.path.exists(curpath):
                         os.makedirs(curpath)
 

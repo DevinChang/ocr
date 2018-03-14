@@ -5,6 +5,7 @@ import json
 from databaseTools import cxOracle
 import re
 from FindKeyword import findImportWords
+import HowManyColumn as hmc
 
 def load_json(file):
     with open(file, 'r', encoding='utf-8') as f:
@@ -47,7 +48,7 @@ def judge_keywords(strword):
     else:
         index = len(strword)
 
-    if re.match(r'.+?(?:】)|.+?(?:])', strword):
+    if re.match(r'.+?(?:】)|.+?(?:])', strword[:index]):
         if re_element.search(strword[:sort_index(strword)]):
             return ['成份' , strword[re_element.search(strword).span()[1] + 1:], re_element.search(strword).group()]
         elif re_function_category.search(strword[:index]):
@@ -68,7 +69,7 @@ def judge_keywords(strword):
             return ['注意事项' , strword[re_precautions.search(strword).span()[1] + 1:],re_precautions.search(strword).group()]
         else:
             return None
-    elif re.match(r'.+?(?:\:)', strword):
+    elif re.match(r'.+?(?:\:)', strword[:index]):
         if re_common_name.search(strword[:index]):
             return ['通用名称' , strword[re_common_name.search(strword).span()[1] + 1:], re_common_name.search(strword).group()] 
         elif re_product_name.search(strword[:index]):
@@ -121,14 +122,15 @@ def inrtroduction_judge(strword):
         return keyword
 
 
-def inrtroduction(file):
-    datajson = load_json(file)
-    datadict = {}
-    keylist = []
-    datas = datajson['words_result']
+datadict = {}
+keylist = []
+def inrtroduction(datas, nums):
     i = 0
-    for (word, i) in zip(datas, range(0, datajson['words_result_num'])):
+    for (word, i) in zip(datas, range(0, nums)):
         list_result = inrtroduction_judge(word['words'])
+        if list_result != None and len(keylist) > 0:
+            if list_result[0] in datadict and keylist[-1][0] != list_result[0]:
+                list_result = None
         if list_result != None:
             datadict[list_result[0]] = list_result[1]
             keylist.append([list_result[0],list_result[2]])
@@ -143,10 +145,12 @@ def inrtroduction(file):
                     else:
                         break
                 if keylist[-1][1] in datas[j]['words']:
+                    print(i)
+                    #print(word['words'])
                     datadict[keylist[-1][0]] += word['words']
                     break
                 j -= 1  
-    return datadict
+            
     
 
 
@@ -164,13 +168,20 @@ if __name__ == '__main__':
     datapath = codepath + '\data'
     files = os.listdir(datapath)
     #db = cxOracle()
+    imgpath_root = "F:\国药海南去重"
+    datas = []
+    nums = 0
     for file in os.walk(datapath):
         for file_name in file[2]:
             if '说明书' in file_name:
-                format_data = inrtroduction(file[0] + '\\' + file_name)
-                print(format_data)
-                if not format_data:
-                    continue
+                datajson = load_json(file[0] + '\\' + file_name)
+                datas += datajson['words_result']
+                nums += datajson['words_result_num']
+                #print(format_data)
+                #inrtroduction(file[0] + '\\' + file_name)
+        if len(datas) > 0 and nums > 0:
+            inrtroduction(datas, nums)
+        print(datadict)
         #addsql = db.getsavesql('DRUGPACKAGEINSERT', format_data)
         #db.insert(addsql)
         #datajson = load_json(datapath + '\\' + file)

@@ -199,7 +199,7 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            return ["孕妇及哺乳期妇女用药", rightvalue, matcher.group()]
+            return ["孕妇及哺乳期妇女用药", str[rightvalue:], matcher.group()]
 
         # 第17个字段：儿童用药
         p = r"儿童*用药*|儿*童用*药"
@@ -253,7 +253,7 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            return ["药理毒理", rightvalue, matcher.group()]
+            return ["药理毒理", str[rightvalue:], matcher.group()]
 
         # 第23个字段：药代动力学
         p = r"药代*动力*学|药代*动*力学"

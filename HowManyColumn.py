@@ -139,7 +139,7 @@ def kinds(imgPath,jsonPath):
         print(imgPath + '情况特殊，请人工处理')
 
     dict.update({'boundary': boundary})
-    dict.update({'direction':direction)
+    dict.update({'direction':direction})
 
     #输出为字典
     #例子： {1: [1735.0, 2549.0], 2: [1167.0, 1981.0], 'kinds': 2, 'parameter': 'top', 'boundary': [1981.0]}
@@ -147,12 +147,13 @@ def kinds(imgPath,jsonPath):
     return dict
 
 
+if __name__ == '__main__':
 
-jsonPath = "data/三栏说明书00.json"
-imgPath = "IMG/图片/三栏说明书00.jpg"
+    jsonPath = "data/三栏说明书00.json"
+    imgPath = "IMG/图片/三栏说明书00.jpg"
 
-n = kinds(imgPath,jsonPath)
-print(n)
+    n = kinds(imgPath,jsonPath)
+    print(n)
 
 
 

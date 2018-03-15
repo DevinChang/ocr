@@ -89,7 +89,7 @@ def kinds(imgPath,jsonPath):
         dict.update({'parameter': 'left'})
     else:
         dict.update({'parameter': 'top'})
-
+    boundary = None
     if countOfKinds == 1:
         boundary = None
     elif countOfKinds == 2:

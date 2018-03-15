@@ -159,6 +159,7 @@ def subfiledata(direction, parameter, boundary, datas):
     for data in datas:
         if direction == 1 or direction == 2:
             if data['location'][parameter] >= boundary:
+                #此处有bug
                 leftdata += data['words']
             else:
                 rightdata += data['words']
@@ -206,18 +207,27 @@ if __name__ == '__main__':
                                         file[0] + '\\' + file_name)
 
                 datajson = load_json(file[0] + '\\' + file_name)
-                datas += datajson['words_result']
+                datatmp = datajson['words_result']
                 nums += datajson['words_result_num']
+
+                if kindict['kinds'] == 2:
+                    datas += subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'][0], datatmp)
+                elif kindict['kinds'] == 1:
+                    datas += datatmp
+
                 flag = 1
         
         if flag:
-            if kindict['kinds'] == 2:
-                datas = subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'], datas)
+            
             if len(datas) > 0 and nums > 0:
                 inrtroduction(datas, nums)
+                if not datadict:
+                    continue
                 addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict)
                 db.insert(addsql, param)
                 print(datadict)
+                datas.clear()
+                datadict.clear()
         #print(datas)
     
     

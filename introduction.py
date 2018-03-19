@@ -167,6 +167,7 @@ def inrtroduction(datas, nums):
     for (word, i) in zip(datas, range(0, nums)):
         list_result = inrtroduction_judge(word['words'])
         #阈值
+<<<<<<< HEAD
         #if (word['probability']['average'] * 0.8 + word['probability']['min'] * 0.2) < 0.85:
         #    continue
         #if list_result != None and len(keylist) > 0:
@@ -175,6 +176,13 @@ def inrtroduction(datas, nums):
         #        #list_result = None
         #        datadict[list_result[0]] += list_result[1]
         #        continue
+=======
+        if word['probability']['average'] * 0.6 + word['probability']['min'] * 0.4 < 0.85:
+            continue
+        if list_result != None and len(keylist) > 0:
+            if list_result[0] in datadict and keylist[-1][0] != list_result[0]:
+                list_result = None
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
         if list_result != None:
             if list_result[0] in datadict and keylist[-1][0] != list_result[0]:
                 datadict[list_result[0]] += list_result[1]
@@ -220,7 +228,12 @@ def inrtroduction(datas, nums):
                         flag = 1
                     else:
                         break
+<<<<<<< HEAD
                 if re.match(r'[【\[]|[】\]]', word['words']):
+=======
+                if keylist[-1][1] in datas[j]['words']:
+                    datadict[keylist[-1][0]] += word['words']
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
                     break
                 if flag:
                     if keylist[-1][1] in datas[j]['words']:
@@ -229,6 +242,31 @@ def inrtroduction(datas, nums):
                 j -= 1  
     return datadict
             
+<<<<<<< HEAD
+=======
+
+def subfiledata(direction, parameter, boundary, datas):
+    leftdata = []
+    rightdata = []
+    for data in datas:
+        if direction == 1 or direction == 2:
+            if data['location'][parameter] >= boundary:
+                #此处有bug
+                leftdata += data['words']
+            else:
+                rightdata += data['words']
+        else:
+            if data['location'][parameter] <= boundary:
+                leftdata += data['words']
+            else:
+                rightdata += data['words']
+    return leftdata + rightdata
+
+        
+
+
+    
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
 
 def subfiledata(direction, parameter, boundary, datas):
     leftdata = []
@@ -313,6 +351,7 @@ if __name__ == '__main__':
     codepath = os.path.dirname(__file__)
     datapath = codepath + '\data'
     files = os.listdir(datapath)
+<<<<<<< HEAD
     #excel_path = 'C:\\Users\\DevinChang\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
     #这是笔记本上的路径
     excel_path = 'C:\\Users\\dongd\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
@@ -321,6 +360,10 @@ if __name__ == '__main__':
     imgpath_root = "F:\IMG"
     #笔记本上的是移动硬盘的路径
     imgpaht_root_desktop = "G:\IMG"
+=======
+    db = cxOracle()
+    imgpath_root = "F:\IMG"
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
     datas = []
     leftdata = []
     rightdata = []
@@ -332,6 +375,7 @@ if __name__ == '__main__':
                 imgname = file_name.split('.')[0]
                 curpath = file[0].split('data')[1]
                 index = imgname.rfind('_')
+<<<<<<< HEAD
                 id = curpath[curpath.rfind('\\') + 1:]
                 datajson = load_json(file[0] + '\\' + file_name)
                 #图片过大或者一些原因，没有识别出来就会有error_code字段
@@ -353,10 +397,22 @@ if __name__ == '__main__':
                 
                 datatmp = datajson['words_result']
                 nums += datajson['words_result_num']
+=======
+                kindict = hmc.kinds(imgpath_root + '\\' + curpath + 
+                                        '\\' + imgname[:index] + 
+                                        '.' + imgname[index:].split('_')[1], 
+                                        file[0] + '\\' + file_name)
+
+                datajson = load_json(file[0] + '\\' + file_name)
+                datatmp = datajson['words_result']
+                nums += datajson['words_result_num']
+
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
                 if kindict['kinds'] == 2:
                     datas += subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'][0], datatmp)
                 elif kindict['kinds'] == 1:
                     datas += datatmp
+<<<<<<< HEAD
                 flag = 1
         if flag:
             if len(datas) > 0 and nums > 0:
@@ -397,6 +453,22 @@ if __name__ == '__main__':
                     print('Error: ', e)
                     nums = cleandata(datadict, datas, nums)
                     continue
+=======
+
+                flag = 1
+        
+        if flag:
+            
+            if len(datas) > 0 and nums > 0:
+                inrtroduction(datas, nums)
+                if not datadict:
+                    continue
+                addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict)
+                db.insert(addsql, param)
+                print(datadict)
+                datas.clear()
+                datadict.clear()
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
         #print(datas)
     
     

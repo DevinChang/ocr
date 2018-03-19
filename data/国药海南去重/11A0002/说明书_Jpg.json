@@ -1,1 +1,904 @@
-{"log_id": 8038118151489272249, "direction": 0, "words_result_num": 64, "words_result": [{"probability": {"variance": 4e-06, "average": 0.998111, "min": 0.992944}, "location": {"width": 245, "top": 68, "height": 25, "left": 171}, "words": "核准日期:2006年06月14日"}, {"probability": {"variance": 1.5e-05, "average": 0.99752, "min": 0.990756}, "location": {"width": 84, "top": 93, "height": 23, "left": 171}, "words": "修改日期"}, {"probability": {"variance": 0, "average": 0.999705, "min": 0.999199}, "location": {"width": 73, "top": 84, "height": 26, "left": 892}, "words": "可立袋"}, {"probability": {"variance": 0.001813, "average": 0.98209, "min": 0.835344}, "location": {"width": 382, "top": 232, "height": 28, "left": 424}, "words": "请仔细阅读说明书并在医师指导下使用"}, {"probability": {"variance": 0.000209, "average": 0.996438, "min": 0.907851}, "location": {"width": 793, "top": 266, "height": 27, "left": 204}, "words": "警示语:使用前请认真检查,如存在药液浑浊或有异物、袋体破损或渗漏等情况切勿使用"}, {"probability": {"variance": 5.8e-05, "average": 0.993906, "min": 0.977559}, "location": {"width": 97, "top": 308, "height": 24, "left": 149}, "words": "[药品名称]"}, {"probability": {"variance": 5.4e-05, "average": 0.996408, "min": 0.976018}, "location": {"width": 290, "top": 333, "height": 25, "left": 198}, "words": "通用名称:葡萄糖氯化钠注射液"}, {"probability": {"variance": 0.037859, "average": 0.919667, "min": 0.443069}, "location": {"width": 123, "top": 363, "height": 21, "left": 196}, "words": "英文名称:Gl"}, {"probability": {"variance": 0.036797, "average": 0.723409, "min": 0.519122}, "location": {"width": 138, "top": 365, "height": 18, "left": 396}, "words": " nd Sodium Chie"}, {"probability": {"variance": 0.007191, "average": 0.648749, "min": 0.56395}, "location": {"width": 15, "top": 369, "height": 18, "left": 602}, "words": "je"}, {"probability": {"variance": 0.000382, "average": 0.988113, "min": 0.938966}, "location": {"width": 369, "top": 388, "height": 25, "left": 194}, "words": "汉语拼音: Putaotang Lihuana Zhusheye"}, {"probability": {"variance": 0.00025, "average": 0.991932, "min": 0.939031}, "location": {"width": 710, "top": 415, "height": 25, "left": 156}, "words": "成份1本品为复方制剂,其组份为:每100ml含5g葡萄糖每100ml含0.9g氯化钠"}, {"probability": {"variance": 0.000352, "average": 0.991403, "min": 0.932765}, "location": {"width": 213, "top": 442, "height": 24, "left": 204}, "words": "2.辅料:盐酸注射用水"}, {"probability": {"variance": 0.000324, "average": 0.99203, "min": 0.930564}, "location": {"width": 268, "top": 469, "height": 24, "left": 141}, "words": "[性状]本品为无色的澄明液体"}, {"probability": {"variance": 0.001737, "average": 0.96418, "min": 0.904365}, "location": {"width": 76, "top": 498, "height": 23, "left": 142}, "words": "[适应症]"}, {"probability": {"variance": 2e-06, "average": 0.999289, "min": 0.995004}, "location": {"width": 582, "top": 520, "height": 27, "left": 193}, "words": "补充热能和体液。用于各种原因引起的进食不足或大量体液丢失"}, {"probability": {"variance": 0.002067, "average": 0.976804, "min": 0.725112}, "location": {"width": 656, "top": 548, "height": 29, "left": 140}, "words": "规格](1)50ml:葡萄糖2.5g与氯化钠0.45g(2)100ml:葡萄糖5g与氯化钠0.9g"}, {"probability": {"variance": 0.007034, "average": 0.964049, "min": 0.515275}, "location": {"width": 642, "top": 577, "height": 27, "left": 198}, "words": "3)150ml:葡萄糖7.5g与氯化钠1.35g(4)250ml:葡萄糖12.5g与氯化钠2.25g"}, {"probability": {"variance": 0.007396, "average": 0.972193, "min": 0.601102}, "location": {"width": 298, "top": 603, "height": 23, "left": 200}, "words": "5)500ml葡萄糖25g与氯化钠4.5g"}, {"probability": {"variance": 3.5e-05, "average": 0.996415, "min": 0.979861}, "location": {"width": 454, "top": 627, "height": 26, "left": 140}, "words": "[用法用量]应同时考虑葡萄糖和氯化钠的用法用量"}, {"probability": {"variance": 1.9e-05, "average": 0.997294, "min": 0.986329}, "location": {"width": 168, "top": 654, "height": 24, "left": 235}, "words": "葡萄糖的用法用量"}, {"probability": {"variance": 0.001873, "average": 0.983301, "min": 0.770598}, "location": {"width": 865, "top": 681, "height": 26, "left": 194}, "words": "1.补充热能患者因某些原因进食减少或不能进食时,一般可予1025%葡萄糖注射液静脉滴"}, {"probability": {"variance": 0.000196, "average": 0.994298, "min": 0.937889}, "location": {"width": 477, "top": 701, "height": 25, "left": 143}, "words": "注,并同时补充体液。葡萄糖用量根据所需热能计算"}, {"probability": {"variance": 0.00787, "average": 0.976371, "min": 0.501412}, "location": {"width": 866, "top": 730, "height": 24, "left": 194}, "words": "2.全静脉营养疗法葡萄糖是此疗法最重要的能量供给物质。在非蛋白质热能中,葡萄糖与脂"}, {"probability": {"variance": 4e-06, "average": 0.998752, "min": 0.993387}, "location": {"width": 185, "top": 750, "height": 24, "left": 143}, "words": "肪供给热量之比为2"}, {"probability": {"variance": 0.001628, "average": 0.986044, "min": 0.804958}, "location": {"width": 664, "top": 749, "height": 27, "left": 374}, "words": "具体用量依临床热量需要量决定。根据补液量的需要,葡萄糖可配成25"}, {"probability": {"variance": 0.000786, "average": 0.988212, "min": 0.8575}, "location": {"width": 891, "top": 773, "height": 23, "left": 144}, "words": "50%不同浓度,必要时加胰岛素,每5~10g葡萄糖加正规胰岛素1单位。由于本品常应用高渗溶液"}, {"probability": {"variance": 0.000329, "average": 0.993587, "min": 0.908363}, "location": {"width": 893, "top": 791, "height": 27, "left": 143}, "words": "对静脉刺激性较大,并需输注脂肪乳剂故一般选用较深部的大静脉,如锁骨下静脉、颈内静脉等"}, {"probability": {"variance": 0.005869, "average": 0.98206, "min": 0.558114}, "location": {"width": 582, "top": 816, "height": 28, "left": 193}, "words": "3.低血糖症重者可先子用50%葡萄糖注射液20~40ml静脉注射"}, {"probability": {"variance": 0.009017, "average": 0.976486, "min": 0.382254}, "location": {"width": 816, "top": 845, "height": 28, "left": 223}, "words": "饥饿性酮症严重者应用25%葡萄糖注射液静脉滴注,每日100g葡萄糖可基本控制病情。"}, {"probability": {"variance": 0.000864, "average": 0.989541, "min": 0.858827}, "location": {"width": 473, "top": 871, "height": 24, "left": 192}, "words": "5.失水等渗性失水给予5%葡萄糖注射液静脉滴注"}, {"probability": {"variance": 0.001192, "average": 0.990878, "min": 0.775608}, "location": {"width": 835, "top": 898, "height": 25, "left": 224}, "words": "高钾血症应用10~25%注射液,每2~4g葡萄糖加1单位正规胰岛素输注,可降低血清钾浓"}, {"probability": {"variance": 0.01012, "average": 0.971535, "min": 0.381348}, "location": {"width": 915, "top": 920, "height": 25, "left": 145}, "words": "度。但此疗法仅使细胞外钾离子进入细胞内,体内总钾含量不变。如不采取排钾措施,有次出现"}, {"probability": {"variance": 4.8e-05, "average": 0.996714, "min": 0.979703}, "location": {"width": 144, "top": 942, "height": 23, "left": 143}, "words": "高钾血症的可能"}, {"probability": {"variance": 0.000894, "average": 0.985038, "min": 0.901845}, "location": {"width": 224, "top": 968, "height": 24, "left": 194}, "words": "7.组织脱水高渗溶液"}, {"probability": {"variance": 0.017905, "average": 0.947129, "min": 0.354394}, "location": {"width": 583, "top": 965, "height": 31, "left": 459}, "words": "般采用50%葡萄糖注射液)快速静脉注射2050ml。但作用短"}, {"probability": {"variance": 0.002718, "average": 0.980878, "min": 0.77015}, "location": {"width": 889, "top": 989, "height": 25, "left": 143}, "words": "临床上应注意防止高血糖,目前少用。用于调节腹膜透析液渗透压时,50%葡萄糖注射液20m"}, {"probability": {"variance": 0.009932, "average": 0.955045, "min": 0.516334}, "location": {"width": 893, "top": 1010, "height": 29, "left": 145}, "words": "1g葡萄糖可使1腹膜透析液渗透压提高55mOsm/kgH2O,亦即透折液中葡萄糖浓度每升高1%,渗"}, {"probability": {"variance": 0.002236, "average": 0.969455, "min": 0.830719}, "location": {"width": 212, "top": 1036, "height": 25, "left": 143}, "words": "压提高55mOsm/kgH2O"}, {"probability": {"variance": 0.033023, "average": 0.936801, "min": 0.391742}, "location": {"width": 208, "top": 1064, "height": 23, "left": 195}, "words": "二氯化钠的用法用量"}, {"probability": {"variance": 0.005963, "average": 0.976656, "min": 0.648916}, "location": {"width": 839, "top": 1089, "height": 30, "left": 222}, "words": "高渗性失水高渗性失水时患者脑细胞和脑液渗透浓度升高,若治疗使血浆和细胞外液钠"}, {"probability": {"variance": 0.01104, "average": 0.968891, "min": 0.473405}, "location": {"width": 686, "top": 1110, "height": 28, "left": 142}, "words": "浓度和渗透浓度过快下降,可致脑水肿。故一般认为在治疗形始的48小时"}, {"probability": {"variance": 0.023317, "average": 0.903276, "min": 0.555144}, "location": {"width": 184, "top": 1111, "height": 27, "left": 876}, "words": "血浆钠类度每小时下"}, {"probability": {"variance": 0.015966, "average": 0.947759, "min": 0.416073}, "location": {"width": 919, "top": 1129, "height": 30, "left": 142}, "words": "降不超过0.5mol/L。若患者存在休克,应先子氯化钠注射液怎的情补充体,待休克纠正,血钠"}, {"probability": {"variance": 0.00998, "average": 0.961014, "min": 0.507516}, "location": {"width": 920, "top": 1148, "height": 33, "left": 141}, "words": "155mmol/L,血浆渗透浓度>350mOsm/L,可子0.6%低渗氯化钠注射液待血浆渗透浓度"}, {"probability": {"variance": 0, "average": 1, "min": 1}, "location": {"width": 80, "top": 1183, "height": 17, "left": 151}, "words": " .330mos"}, {"probability": {"variance": 0.000402, "average": 0.993565, "min": 0.889724}, "location": {"width": 765, "top": 1177, "height": 25, "left": 287}, "words": "改用0.9%氯化钠注射液。补液总量根据下列公式计算,作为参考:所需补液量(L)"}, {"probability": {"variance": 0.000264, "average": 0.989673, "min": 0.95738}, "location": {"width": 94, "top": 1202, "height": 20, "left": 154}, "words": "[血钠浓度"}, {"probability": {"variance": 0.015681, "average": 0.932978, "min": 0.558906}, "location": {"width": 250, "top": 1201, "height": 22, "left": 306}, "words": "l/L)-142]×0.6x体重("}, {"probability": {"variance": 2.5e-05, "average": 0.995749, "min": 0.98704}, "location": {"width": 81, "top": 1203, "height": 20, "left": 614}, "words": "血钠浓度"}, {"probability": {"variance": 0.018461, "average": 0.946195, "min": 0.468359}, "location": {"width": 289, "top": 1200, "height": 24, "left": 772}, "words": "L)。一般第←日补给半量,余"}, {"probability": {"variance": 0.000779, "average": 0.989357, "min": 0.894749}, "location": {"width": 476, "top": 1221, "height": 25, "left": 143}, "words": "量在以后2~3日内补给,并根据心肺肾功能酌情调节"}, {"probability": {"variance": 0.009201, "average": 0.959875, "min": 0.57629}, "location": {"width": 838, "top": 1244, "height": 28, "left": 224}, "words": "等渗性失水“原则给予等渗溶液,如09%氯化钠注射液或复方氯化钠注射液,但上述溶液氯"}, {"probability": {"variance": 0.001923, "average": 0.990161, "min": 0.702059}, "location": {"width": 919, "top": 1269, "height": 24, "left": 142}, "words": "浓度明显高于血浆,单独大量使用可致高氯血症,故可将0.9%氯化钠注射液和1.25%碳酸氢钠或"}, {"probability": {"variance": 0.004559, "average": 0.971944, "min": 0.629976}, "location": {"width": 918, "top": 1292, "height": 24, "left": 144}, "words": "186%(1/6M)乳酸钠以7:3的比例配制后补给,后者氯浓度为107mmol/L,并可纠正代谢性酸中毒。补"}, {"probability": {"variance": 0.003947, "average": 0.982035, "min": 0.57219}, "location": {"width": 897, "top": 1314, "height": 23, "left": 144}, "words": "给量可按体重或红细胞压积计算,作为参考。①按体重计算:补液量(L)=[体重下降(kg)×142]/154"}, {"probability": {"variance": 0.008366, "average": 0.971228, "min": 0.463656}, "location": {"width": 918, "top": 1334, "height": 28, "left": 143}, "words": "②按红细胞压积计算:补液量(L)=[(实际红细胞压积一正常红细胞压积)x体重(kg)×0.2]/正常红细"}, {"probability": {"variance": 2e-06, "average": 0.999077, "min": 0.994098}, "location": {"width": 444, "top": 1356, "height": 23, "left": 142}, "words": "胞压积。正常红细胞压积男性为48%,女性为42%"}, {"probability": {"variance": 0.000105, "average": 0.995942, "min": 0.948534}, "location": {"width": 836, "top": 1382, "height": 24, "left": 226}, "words": "低渗性失水严重低渗性失水时,脑细胞内溶质减少以维持细胞容积。若治疗使血浆和细胞"}, {"probability": {"variance": 0.000185, "average": 0.995477, "min": 0.923493}, "location": {"width": 693, "top": 1404, "height": 25, "left": 142}, "words": "外液钠浓度和渗透浓度迅速回升,可致脑细胞损伤。一般认为,当血钠低于"}, {"probability": {"variance": 0.001224, "average": 0.983111, "min": 0.891855}, "location": {"width": 144, "top": 1408, "height": 20, "left": 917}, "words": "/L时,治疗使血"}, {"probability": {"variance": 0.000404, "average": 0.992559, "min": 0.926096}, "location": {"width": 215, "top": 1426, "height": 23, "left": 143}, "words": "钠上升速度在每小时0.5"}, {"probability": {"variance": 3e-05, "average": 0.996655, "min": 0.984837}, "location": {"width": 168, "top": 1428, "height": 21, "left": 418}, "words": "L,不超过每小时1"}, {"probability": {"variance": 0.139915, "average": 0.731584, "min": 0.202615}, "location": {"width": 37, "top": 1431, "height": 17, "left": 646}, "words": "/L"}], "language": -1}
+{
+    "log_id": 1077590616374411032,
+    "direction": 0,
+    "words_result_num": 64,
+    "words_result": [
+        {
+            "probability": {
+                "variance": 4e-06,
+                "average": 0.998111,
+                "min": 0.992944
+            },
+            "location": {
+                "width": 245,
+                "top": 68,
+                "height": 25,
+                "left": 171
+            },
+            "words": "核准日期:2006年06月14日"
+        },
+        {
+            "probability": {
+                "variance": 1.5e-05,
+                "average": 0.99752,
+                "min": 0.990756
+            },
+            "location": {
+                "width": 84,
+                "top": 93,
+                "height": 23,
+                "left": 171
+            },
+            "words": "修改日期"
+        },
+        {
+            "probability": {
+                "variance": 0,
+                "average": 0.999705,
+                "min": 0.999199
+            },
+            "location": {
+                "width": 73,
+                "top": 84,
+                "height": 26,
+                "left": 892
+            },
+            "words": "可立袋"
+        },
+        {
+            "probability": {
+                "variance": 0.001813,
+                "average": 0.98209,
+                "min": 0.835344
+            },
+            "location": {
+                "width": 382,
+                "top": 232,
+                "height": 28,
+                "left": 424
+            },
+            "words": "请仔细阅读说明书并在医师指导下使用"
+        },
+        {
+            "probability": {
+                "variance": 0.000209,
+                "average": 0.996438,
+                "min": 0.907851
+            },
+            "location": {
+                "width": 793,
+                "top": 266,
+                "height": 27,
+                "left": 204
+            },
+            "words": "警示语:使用前请认真检查,如存在药液浑浊或有异物、袋体破损或渗漏等情况切勿使用"
+        },
+        {
+            "probability": {
+                "variance": 5.8e-05,
+                "average": 0.993906,
+                "min": 0.977559
+            },
+            "location": {
+                "width": 97,
+                "top": 308,
+                "height": 24,
+                "left": 149
+            },
+            "words": "[药品名称]"
+        },
+        {
+            "probability": {
+                "variance": 5.4e-05,
+                "average": 0.996408,
+                "min": 0.976018
+            },
+            "location": {
+                "width": 290,
+                "top": 333,
+                "height": 25,
+                "left": 198
+            },
+            "words": "通用名称:葡萄糖氯化钠注射液"
+        },
+        {
+            "probability": {
+                "variance": 0.037859,
+                "average": 0.919667,
+                "min": 0.443069
+            },
+            "location": {
+                "width": 123,
+                "top": 363,
+                "height": 21,
+                "left": 196
+            },
+            "words": "英文名称:Gl"
+        },
+        {
+            "probability": {
+                "variance": 0.036797,
+                "average": 0.723409,
+                "min": 0.519122
+            },
+            "location": {
+                "width": 138,
+                "top": 365,
+                "height": 18,
+                "left": 396
+            },
+            "words": " nd Sodium Chie"
+        },
+        {
+            "probability": {
+                "variance": 0.007191,
+                "average": 0.648749,
+                "min": 0.56395
+            },
+            "location": {
+                "width": 15,
+                "top": 369,
+                "height": 18,
+                "left": 602
+            },
+            "words": "je"
+        },
+        {
+            "probability": {
+                "variance": 0.000382,
+                "average": 0.988113,
+                "min": 0.938966
+            },
+            "location": {
+                "width": 369,
+                "top": 388,
+                "height": 25,
+                "left": 194
+            },
+            "words": "汉语拼音: Putaotang Lihuana Zhusheye"
+        },
+        {
+            "probability": {
+                "variance": 0.00025,
+                "average": 0.991932,
+                "min": 0.939031
+            },
+            "location": {
+                "width": 710,
+                "top": 415,
+                "height": 25,
+                "left": 156
+            },
+            "words": "成份1本品为复方制剂,其组份为:每100ml含5g葡萄糖每100ml含0.9g氯化钠"
+        },
+        {
+            "probability": {
+                "variance": 0.000352,
+                "average": 0.991403,
+                "min": 0.932765
+            },
+            "location": {
+                "width": 213,
+                "top": 442,
+                "height": 24,
+                "left": 204
+            },
+            "words": "2.辅料:盐酸注射用水"
+        },
+        {
+            "probability": {
+                "variance": 0.000324,
+                "average": 0.99203,
+                "min": 0.930564
+            },
+            "location": {
+                "width": 268,
+                "top": 469,
+                "height": 24,
+                "left": 141
+            },
+            "words": "[性状]本品为无色的澄明液体"
+        },
+        {
+            "probability": {
+                "variance": 0.001737,
+                "average": 0.96418,
+                "min": 0.904365
+            },
+            "location": {
+                "width": 76,
+                "top": 498,
+                "height": 23,
+                "left": 142
+            },
+            "words": "[适应症]"
+        },
+        {
+            "probability": {
+                "variance": 2e-06,
+                "average": 0.999289,
+                "min": 0.995004
+            },
+            "location": {
+                "width": 582,
+                "top": 520,
+                "height": 27,
+                "left": 193
+            },
+            "words": "补充热能和体液。用于各种原因引起的进食不足或大量体液丢失"
+        },
+        {
+            "probability": {
+                "variance": 0.002067,
+                "average": 0.976804,
+                "min": 0.725112
+            },
+            "location": {
+                "width": 656,
+                "top": 548,
+                "height": 29,
+                "left": 140
+            },
+            "words": "规格](1)50ml:葡萄糖2.5g与氯化钠0.45g(2)100ml:葡萄糖5g与氯化钠0.9g"
+        },
+        {
+            "probability": {
+                "variance": 0.007034,
+                "average": 0.964049,
+                "min": 0.515275
+            },
+            "location": {
+                "width": 642,
+                "top": 577,
+                "height": 27,
+                "left": 198
+            },
+            "words": "3)150ml:葡萄糖7.5g与氯化钠1.35g(4)250ml:葡萄糖12.5g与氯化钠2.25g"
+        },
+        {
+            "probability": {
+                "variance": 0.007396,
+                "average": 0.972193,
+                "min": 0.601102
+            },
+            "location": {
+                "width": 298,
+                "top": 603,
+                "height": 23,
+                "left": 200
+            },
+            "words": "5)500ml葡萄糖25g与氯化钠4.5g"
+        },
+        {
+            "probability": {
+                "variance": 3.5e-05,
+                "average": 0.996415,
+                "min": 0.979861
+            },
+            "location": {
+                "width": 454,
+                "top": 627,
+                "height": 26,
+                "left": 140
+            },
+            "words": "[用法用量]应同时考虑葡萄糖和氯化钠的用法用量"
+        },
+        {
+            "probability": {
+                "variance": 1.9e-05,
+                "average": 0.997294,
+                "min": 0.986329
+            },
+            "location": {
+                "width": 168,
+                "top": 654,
+                "height": 24,
+                "left": 235
+            },
+            "words": "葡萄糖的用法用量"
+        },
+        {
+            "probability": {
+                "variance": 0.001873,
+                "average": 0.983301,
+                "min": 0.770598
+            },
+            "location": {
+                "width": 865,
+                "top": 681,
+                "height": 26,
+                "left": 194
+            },
+            "words": "1.补充热能患者因某些原因进食减少或不能进食时,一般可予1025%葡萄糖注射液静脉滴"
+        },
+        {
+            "probability": {
+                "variance": 0.000196,
+                "average": 0.994298,
+                "min": 0.937889
+            },
+            "location": {
+                "width": 477,
+                "top": 701,
+                "height": 25,
+                "left": 143
+            },
+            "words": "注,并同时补充体液。葡萄糖用量根据所需热能计算"
+        },
+        {
+            "probability": {
+                "variance": 0.00787,
+                "average": 0.976371,
+                "min": 0.501412
+            },
+            "location": {
+                "width": 866,
+                "top": 730,
+                "height": 24,
+                "left": 194
+            },
+            "words": "2.全静脉营养疗法葡萄糖是此疗法最重要的能量供给物质。在非蛋白质热能中,葡萄糖与脂"
+        },
+        {
+            "probability": {
+                "variance": 4e-06,
+                "average": 0.998752,
+                "min": 0.993387
+            },
+            "location": {
+                "width": 185,
+                "top": 750,
+                "height": 24,
+                "left": 143
+            },
+            "words": "肪供给热量之比为2"
+        },
+        {
+            "probability": {
+                "variance": 0.001628,
+                "average": 0.986044,
+                "min": 0.804958
+            },
+            "location": {
+                "width": 664,
+                "top": 749,
+                "height": 27,
+                "left": 374
+            },
+            "words": "具体用量依临床热量需要量决定。根据补液量的需要,葡萄糖可配成25"
+        },
+        {
+            "probability": {
+                "variance": 0.000786,
+                "average": 0.988212,
+                "min": 0.8575
+            },
+            "location": {
+                "width": 891,
+                "top": 773,
+                "height": 23,
+                "left": 144
+            },
+            "words": "50%不同浓度,必要时加胰岛素,每5~10g葡萄糖加正规胰岛素1单位。由于本品常应用高渗溶液"
+        },
+        {
+            "probability": {
+                "variance": 0.000329,
+                "average": 0.993587,
+                "min": 0.908363
+            },
+            "location": {
+                "width": 893,
+                "top": 791,
+                "height": 27,
+                "left": 143
+            },
+            "words": "对静脉刺激性较大,并需输注脂肪乳剂故一般选用较深部的大静脉,如锁骨下静脉、颈内静脉等"
+        },
+        {
+            "probability": {
+                "variance": 0.005869,
+                "average": 0.98206,
+                "min": 0.558114
+            },
+            "location": {
+                "width": 582,
+                "top": 816,
+                "height": 28,
+                "left": 193
+            },
+            "words": "3.低血糖症重者可先子用50%葡萄糖注射液20~40ml静脉注射"
+        },
+        {
+            "probability": {
+                "variance": 0.009017,
+                "average": 0.976486,
+                "min": 0.382254
+            },
+            "location": {
+                "width": 816,
+                "top": 845,
+                "height": 28,
+                "left": 223
+            },
+            "words": "饥饿性酮症严重者应用25%葡萄糖注射液静脉滴注,每日100g葡萄糖可基本控制病情。"
+        },
+        {
+            "probability": {
+                "variance": 0.000864,
+                "average": 0.989541,
+                "min": 0.858827
+            },
+            "location": {
+                "width": 473,
+                "top": 871,
+                "height": 24,
+                "left": 192
+            },
+            "words": "5.失水等渗性失水给予5%葡萄糖注射液静脉滴注"
+        },
+        {
+            "probability": {
+                "variance": 0.001192,
+                "average": 0.990878,
+                "min": 0.775608
+            },
+            "location": {
+                "width": 835,
+                "top": 898,
+                "height": 25,
+                "left": 224
+            },
+            "words": "高钾血症应用10~25%注射液,每2~4g葡萄糖加1单位正规胰岛素输注,可降低血清钾浓"
+        },
+        {
+            "probability": {
+                "variance": 0.01012,
+                "average": 0.971535,
+                "min": 0.381348
+            },
+            "location": {
+                "width": 915,
+                "top": 920,
+                "height": 25,
+                "left": 145
+            },
+            "words": "度。但此疗法仅使细胞外钾离子进入细胞内,体内总钾含量不变。如不采取排钾措施,有次出现"
+        },
+        {
+            "probability": {
+                "variance": 4.8e-05,
+                "average": 0.996714,
+                "min": 0.979703
+            },
+            "location": {
+                "width": 144,
+                "top": 942,
+                "height": 23,
+                "left": 143
+            },
+            "words": "高钾血症的可能"
+        },
+        {
+            "probability": {
+                "variance": 0.000894,
+                "average": 0.985038,
+                "min": 0.901845
+            },
+            "location": {
+                "width": 224,
+                "top": 968,
+                "height": 24,
+                "left": 194
+            },
+            "words": "7.组织脱水高渗溶液"
+        },
+        {
+            "probability": {
+                "variance": 0.017905,
+                "average": 0.947129,
+                "min": 0.354394
+            },
+            "location": {
+                "width": 583,
+                "top": 965,
+                "height": 31,
+                "left": 459
+            },
+            "words": "般采用50%葡萄糖注射液)快速静脉注射2050ml。但作用短"
+        },
+        {
+            "probability": {
+                "variance": 0.002718,
+                "average": 0.980878,
+                "min": 0.77015
+            },
+            "location": {
+                "width": 889,
+                "top": 989,
+                "height": 25,
+                "left": 143
+            },
+            "words": "临床上应注意防止高血糖,目前少用。用于调节腹膜透析液渗透压时,50%葡萄糖注射液20m"
+        },
+        {
+            "probability": {
+                "variance": 0.009932,
+                "average": 0.955045,
+                "min": 0.516334
+            },
+            "location": {
+                "width": 893,
+                "top": 1010,
+                "height": 29,
+                "left": 145
+            },
+            "words": "1g葡萄糖可使1腹膜透析液渗透压提高55mOsm/kgH2O,亦即透折液中葡萄糖浓度每升高1%,渗"
+        },
+        {
+            "probability": {
+                "variance": 0.002236,
+                "average": 0.969455,
+                "min": 0.830719
+            },
+            "location": {
+                "width": 212,
+                "top": 1036,
+                "height": 25,
+                "left": 143
+            },
+            "words": "压提高55mOsm/kgH2O"
+        },
+        {
+            "probability": {
+                "variance": 0.033023,
+                "average": 0.936801,
+                "min": 0.391742
+            },
+            "location": {
+                "width": 208,
+                "top": 1064,
+                "height": 23,
+                "left": 195
+            },
+            "words": "二氯化钠的用法用量"
+        },
+        {
+            "probability": {
+                "variance": 0.005963,
+                "average": 0.976656,
+                "min": 0.648916
+            },
+            "location": {
+                "width": 839,
+                "top": 1089,
+                "height": 30,
+                "left": 222
+            },
+            "words": "高渗性失水高渗性失水时患者脑细胞和脑液渗透浓度升高,若治疗使血浆和细胞外液钠"
+        },
+        {
+            "probability": {
+                "variance": 0.01104,
+                "average": 0.968891,
+                "min": 0.473405
+            },
+            "location": {
+                "width": 686,
+                "top": 1110,
+                "height": 28,
+                "left": 142
+            },
+            "words": "浓度和渗透浓度过快下降,可致脑水肿。故一般认为在治疗形始的48小时"
+        },
+        {
+            "probability": {
+                "variance": 0.023317,
+                "average": 0.903276,
+                "min": 0.555144
+            },
+            "location": {
+                "width": 184,
+                "top": 1111,
+                "height": 27,
+                "left": 876
+            },
+            "words": "血浆钠类度每小时下"
+        },
+        {
+            "probability": {
+                "variance": 0.015966,
+                "average": 0.947759,
+                "min": 0.416073
+            },
+            "location": {
+                "width": 919,
+                "top": 1129,
+                "height": 30,
+                "left": 142
+            },
+            "words": "降不超过0.5mol/L。若患者存在休克,应先子氯化钠注射液怎的情补充体,待休克纠正,血钠"
+        },
+        {
+            "probability": {
+                "variance": 0.00998,
+                "average": 0.961014,
+                "min": 0.507516
+            },
+            "location": {
+                "width": 920,
+                "top": 1148,
+                "height": 33,
+                "left": 141
+            },
+            "words": "155mmol/L,血浆渗透浓度>350mOsm/L,可子0.6%低渗氯化钠注射液待血浆渗透浓度"
+        },
+        {
+            "probability": {
+                "variance": 0,
+                "average": 1,
+                "min": 1
+            },
+            "location": {
+                "width": 80,
+                "top": 1183,
+                "height": 17,
+                "left": 151
+            },
+            "words": " .330mos"
+        },
+        {
+            "probability": {
+                "variance": 0.000402,
+                "average": 0.993565,
+                "min": 0.889724
+            },
+            "location": {
+                "width": 765,
+                "top": 1177,
+                "height": 25,
+                "left": 287
+            },
+            "words": "改用0.9%氯化钠注射液。补液总量根据下列公式计算,作为参考:所需补液量(L)"
+        },
+        {
+            "probability": {
+                "variance": 0.000264,
+                "average": 0.989673,
+                "min": 0.95738
+            },
+            "location": {
+                "width": 94,
+                "top": 1202,
+                "height": 20,
+                "left": 154
+            },
+            "words": "[血钠浓度"
+        },
+        {
+            "probability": {
+                "variance": 0.015681,
+                "average": 0.932978,
+                "min": 0.558906
+            },
+            "location": {
+                "width": 250,
+                "top": 1201,
+                "height": 22,
+                "left": 306
+            },
+            "words": "l/L)-142]×0.6x体重("
+        },
+        {
+            "probability": {
+                "variance": 2.5e-05,
+                "average": 0.995749,
+                "min": 0.98704
+            },
+            "location": {
+                "width": 81,
+                "top": 1203,
+                "height": 20,
+                "left": 614
+            },
+            "words": "血钠浓度"
+        },
+        {
+            "probability": {
+                "variance": 0.018461,
+                "average": 0.946195,
+                "min": 0.468359
+            },
+            "location": {
+                "width": 289,
+                "top": 1200,
+                "height": 24,
+                "left": 772
+            },
+            "words": "L)。一般第←日补给半量,余"
+        },
+        {
+            "probability": {
+                "variance": 0.000779,
+                "average": 0.989357,
+                "min": 0.894749
+            },
+            "location": {
+                "width": 476,
+                "top": 1221,
+                "height": 25,
+                "left": 143
+            },
+            "words": "量在以后2~3日内补给,并根据心肺肾功能酌情调节"
+        },
+        {
+            "probability": {
+                "variance": 0.009201,
+                "average": 0.959875,
+                "min": 0.57629
+            },
+            "location": {
+                "width": 838,
+                "top": 1244,
+                "height": 28,
+                "left": 224
+            },
+            "words": "等渗性失水“原则给予等渗溶液,如09%氯化钠注射液或复方氯化钠注射液,但上述溶液氯"
+        },
+        {
+            "probability": {
+                "variance": 0.001923,
+                "average": 0.990161,
+                "min": 0.702059
+            },
+            "location": {
+                "width": 919,
+                "top": 1269,
+                "height": 24,
+                "left": 142
+            },
+            "words": "浓度明显高于血浆,单独大量使用可致高氯血症,故可将0.9%氯化钠注射液和1.25%碳酸氢钠或"
+        },
+        {
+            "probability": {
+                "variance": 0.004559,
+                "average": 0.971944,
+                "min": 0.629976
+            },
+            "location": {
+                "width": 918,
+                "top": 1292,
+                "height": 24,
+                "left": 144
+            },
+            "words": "186%(1/6M)乳酸钠以7:3的比例配制后补给,后者氯浓度为107mmol/L,并可纠正代谢性酸中毒。补"
+        },
+        {
+            "probability": {
+                "variance": 0.003947,
+                "average": 0.982035,
+                "min": 0.57219
+            },
+            "location": {
+                "width": 897,
+                "top": 1314,
+                "height": 23,
+                "left": 144
+            },
+            "words": "给量可按体重或红细胞压积计算,作为参考。①按体重计算:补液量(L)=[体重下降(kg)×142]/154"
+        },
+        {
+            "probability": {
+                "variance": 0.008366,
+                "average": 0.971228,
+                "min": 0.463656
+            },
+            "location": {
+                "width": 918,
+                "top": 1334,
+                "height": 28,
+                "left": 143
+            },
+            "words": "②按红细胞压积计算:补液量(L)=[(实际红细胞压积一正常红细胞压积)x体重(kg)×0.2]/正常红细"
+        },
+        {
+            "probability": {
+                "variance": 2e-06,
+                "average": 0.999077,
+                "min": 0.994098
+            },
+            "location": {
+                "width": 444,
+                "top": 1356,
+                "height": 23,
+                "left": 142
+            },
+            "words": "胞压积。正常红细胞压积男性为48%,女性为42%"
+        },
+        {
+            "probability": {
+                "variance": 0.000105,
+                "average": 0.995942,
+                "min": 0.948534
+            },
+            "location": {
+                "width": 836,
+                "top": 1382,
+                "height": 24,
+                "left": 226
+            },
+            "words": "低渗性失水严重低渗性失水时,脑细胞内溶质减少以维持细胞容积。若治疗使血浆和细胞"
+        },
+        {
+            "probability": {
+                "variance": 0.000185,
+                "average": 0.995477,
+                "min": 0.923493
+            },
+            "location": {
+                "width": 693,
+                "top": 1404,
+                "height": 25,
+                "left": 142
+            },
+            "words": "外液钠浓度和渗透浓度迅速回升,可致脑细胞损伤。一般认为,当血钠低于"
+        },
+        {
+            "probability": {
+                "variance": 0.001224,
+                "average": 0.983111,
+                "min": 0.891855
+            },
+            "location": {
+                "width": 144,
+                "top": 1408,
+                "height": 20,
+                "left": 917
+            },
+            "words": "/L时,治疗使血"
+        },
+        {
+            "probability": {
+                "variance": 0.000404,
+                "average": 0.992559,
+                "min": 0.926096
+            },
+            "location": {
+                "width": 215,
+                "top": 1426,
+                "height": 23,
+                "left": 143
+            },
+            "words": "钠上升速度在每小时0.5"
+        },
+        {
+            "probability": {
+                "variance": 3e-05,
+                "average": 0.996655,
+                "min": 0.984837
+            },
+            "location": {
+                "width": 168,
+                "top": 1428,
+                "height": 21,
+                "left": 418
+            },
+            "words": "L,不超过每小时1"
+        },
+        {
+            "probability": {
+                "variance": 0.139915,
+                "average": 0.731584,
+                "min": 0.202615
+            },
+            "location": {
+                "width": 37,
+                "top": 1431,
+                "height": 17,
+                "left": 646
+            },
+            "words": "/L"
+        }
+    ],
+    "language": -1
+}

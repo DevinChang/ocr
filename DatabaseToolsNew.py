@@ -35,6 +35,11 @@ class cxOracle:
             return 'CHN_PINYIN'
         elif key == '英文名称':
             return 'EN_NAME'
+<<<<<<< HEAD
+=======
+        elif key == 'OTC':
+            return 'OTC_SIGN'
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
         elif key == '成份':
             return 'INGREDIENTS'
         elif key == '性状':
@@ -61,12 +66,19 @@ class cxOracle:
             return 'SPEC_NO'
         elif key == '批准文号':
             return 'APRV_NO'
+<<<<<<< HEAD
         elif key == '生产厂家':
             return 'MFRS'
         elif key == '企业名称':
             return 'CO_NAME'
         elif key == '企业地址':
             return 'CO_ADDR'
+=======
+        elif key == '生产企业':
+            return 'MFRS'
+        elif key == '企业名称':
+            return 'CO_NAME'
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
         elif key == '生产地址':
             return 'PROD_ADDR'
         elif key == '邮政编码':
@@ -97,6 +109,7 @@ class cxOracle:
             return 'PHARMACOLOGY'
         elif key == '生产厂家':
             return 'MFRS'
+<<<<<<< HEAD
         elif key == '商品名称':
             return 'TRADE_NAME'
         elif key == '临床试验':
@@ -107,6 +120,8 @@ class cxOracle:
             return 'IS_EXT_MEDICINE'
         elif key == '作用类别':
             return 'ACTION_CATE'
+=======
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
 
     #根据sql语句（带参数）执行插入数据
     def insert(self,sql,pram):
@@ -129,12 +144,18 @@ class cxOracle:
         if isinstance(text,dict):
             i = 0
             for key in text:
+<<<<<<< HEAD
                 i = i+1
                 if (key == '质量电话') or (key == '销售电话'):
                     continue
                 convert_key = self._convert_key(key)
                 if i == len(text):
 
+=======
+                convert_key = self._convert_key(key)
+                i = i+1
+                if i == len(text):
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
                     keys = keys+str(convert_key)
                     pram.append(str(text[key]))
                     values = values + ':' + str(i)
@@ -146,7 +167,11 @@ class cxOracle:
             print('json类型不正确')
         sql = 'INSERT INTO '+tablename+'('+keys+') VALUES('+values+')'
         print(sql)
+<<<<<<< HEAD
         
+=======
+        print(pram)
+>>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
         return sql,pram
 
 

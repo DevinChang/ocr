@@ -16,10 +16,10 @@ def cv_imread(filePath):
 
 #输入为图片的路径，以及json文件的路径
 #此程序设计的还是不够完美可能会出现判断出错的情况，以后会慢慢改进
-def kinds(imgPath,jsonPath):
+def kinds(imgPath,datajson):
     print('进入函数')
     #json文件的读取
-    word = loadJson(jsonPath)
+    word = datajson
 
     # 图片文件的读取
     img = cv_imread(imgPath)
@@ -85,11 +85,11 @@ def kinds(imgPath,jsonPath):
 
 
     dict.update({'kinds': countOfKinds})
-    if direction == 0 | direction == 2:
+    if direction == 0 or direction == 2:
         dict.update({'parameter': 'left'})
     else:
         dict.update({'parameter': 'top'})
-
+    boundary = None
     if countOfKinds == 1:
         boundary = None
     elif countOfKinds == 2:
@@ -103,7 +103,7 @@ def kinds(imgPath,jsonPath):
         else:
             boundary[0] = b2
     elif  countOfKinds == 3:
-        boundary = [1,2]
+        boundary = [-1, -1]
         a1 = dict[1][0]
         a2 = dict[1][1]
         b1 = dict[2][0]
@@ -111,7 +111,7 @@ def kinds(imgPath,jsonPath):
         c1 = dict[3][0]
         c2 = dict[3][1]
         #将三种情况排好序
-        if a1<b1 & a1<c1:
+        if a1<b1 and a1<c1:
             boundary[0] = a2
             if b1<c1:
                 boundary[1] = b2
@@ -119,7 +119,7 @@ def kinds(imgPath,jsonPath):
             else:
                 boundary[1] = c2
                 boundary[2] = b2
-        elif b1<a1 & b1<c1:
+        elif b1<a1 and b1<c1:
             boundary[0] = b2
             if a1<c1:
                 boundary[1] = a2
@@ -127,7 +127,7 @@ def kinds(imgPath,jsonPath):
             else:
                 boundary[1] = c2
                 boundary[2] = a2
-        elif c1<a1 & c1<b1:
+        elif c1<a1 and c1<b1:
             boundary[0] = c1
             if a1<b1:
                 boundary[1] = a1

@@ -37,6 +37,8 @@ class cxOracle:
             return 'GENERIC_NAME'
         elif key == '汉语拼音':
             return 'CHN_PINYIN'
+        elif key == '英文名称':
+            return 'EN_NAME'
         elif key == 'OTC':
             return 'OTC_SIGN'
         elif key == '成份':
@@ -83,6 +85,11 @@ class cxOracle:
             return 'MOD_DATE'
         elif key == '药物相互作用':
             return 'INTERACTION_DRUG'
+        elif key == '网址':
+            return 'WEB_SITE'
+        elif key == '药代动力学':
+            return 'PHARMACOKINETICS'
+            
 
         
 

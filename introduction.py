@@ -10,6 +10,7 @@ import HowManyColumn4 as hmc
 import xlwings as xw
 from log import LogMgr
 
+logmgr = LogMgr()
 
 '''
 使用openpyxl太慢了,改用xlwings
@@ -219,9 +220,6 @@ def inrtroduction(datas, nums):
             while j > 0:
                 if not keylist:
                     break
-                if re.match(r'[【\[]|[】\]]', word['words'][8]):
-                    flag = 0
-                    break
                 if ("英文名称" in keylist[-1][0]) or ("汉语拼音" in keylist[-1][0]):
                     if re.match(r'[a-zA-z]+', word['words']):
                         flag = 1 
@@ -265,6 +263,9 @@ def inrtroduction(datas, nums):
                     else:
                         break
                 #TODO:OTC，外，以及字段追加问题
+                if re.match(r'[【\[]|[】\]]', word['words'][8]):
+                    flag = 0
+                    break
                 if flag:
                     if keylist[-1][1] in datas[j]['words']:
                         datadict[keylist[-1][0]] += word['words']
@@ -388,6 +389,7 @@ if __name__ == '__main__':
                                             datajson)
                 except Exception as e:
                     print("Error :", e)
+                    logmgr.error(file[0] + '\\' + file_name + ':' + e)
                     continue
                 print('Current processing: {}'.format(imgpaht_root_desktop + '\\' + curpath + 
                                         '\\' + imgname[:index] + 
@@ -441,6 +443,7 @@ if __name__ == '__main__':
                     nums = cleandata(datadict, datas, nums)
                 except Exception as e:
                     print('Error: ', e)
+                    logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + e)
                     nums = cleandata(datadict, datas, nums)
                     continue
         #print(datas)

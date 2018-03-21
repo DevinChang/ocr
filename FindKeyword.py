@@ -110,7 +110,49 @@ def findImportWords(str):
         matcherA28 = re.search(patternA28, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA28 != None:
             return ["批准文号", rightvalue, matcherA28.group()]
-
+        #修改返回值 DONE
+        #第39个字段：委托方企业名称
+        p = r"委托*方*企*业*名称*|委托*方*企*业*名*称"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            return ["委托方企业名称", rightvalue, matcher.group()]
+        #第40个字段：委托方企业地址
+        p = r"委托*方*企*业*地址*|委托*方*企*业*地*址"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            return ["委托方企业地址", rightvalue, matcher.group()]
+        #第41个字段：受托方企业名称
+        p = r"受托*方*企*业*名称*|受托*方*企*业*名*称"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            return ["受托方企业名称", rightvalue, matcher.group()]
+        #第42个字段：受托方企业地址
+        p = r"受托*方*企*业*地址*|受托*方*企*业*地*址"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            return ["受托方企业地址": rightvalue, matcher.group()]
+        #第43个字段：分装企业名称
+        p = r"分装*企*业*名称*|分装*企*业*名*称"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            return ["分装企业名称", rightvalue, matcher.group()]
+        #第44个字段：分装企业地址
+        p = r"分装企*业*地址*|分装企*业*地*址"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            return ["分装企业地址", rightvalue, matcher.group()]
         # 第29个字段：企业名称
         pA29 = r"企业*名称*|企*业名*称"
         patternA29 = re.compile(pA29)
@@ -334,7 +376,67 @@ def findImportWords(str):
             if isinstance(rightvalue, int):
                 rightvalue = ''
             return ["批准文号", rightvalue, matcher.group()]
-
+        
+        #第39个字段：委托方企业名称
+        p = r"委托*方*企*业*名称*|委托*方*企*业*名*称"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            rightvalue = matcher.span()[1]
+            if isinstance(rightvalue, int):
+                rightvalue = ''
+            return ["委托方企业名称", rightvalue, str[rightvalue:]]
+        #第40个字段：委托方企业地址
+        p = r"委托*方*企*业*地址*|委托*方*企*业*地*址"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            rightvalue = matcher.span()[1]
+            if isinstance(rightvalue, int):
+                rightvalue = ''
+            return ["委托方企业地址", rightvalue, str[rightvalue:]]
+        #第41个字段：受托方企业名称
+        p = r"受托*方*企*业*名称*|受托*方*企*业*名*称"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            rightvalue = matcher.span()[1]
+            if isinstance(rightvalue, int):
+                rightvalue = ''
+            return ["受托方企业名称", rightvalue, str[rightvalue:]]
+        #第42个字段：受托方企业地址
+        p = r"受托*方*企*业*地址*|受托*方*企*业*地*址"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            rightvalue = matcher.span()[1]
+            if isinstance(rightvalue, int):
+                rightvalue = ''
+            return ["受托方企业地址", rightvalue, str[rightvalue:]]
+        #第43个字段：分装企业名称
+        p = r"分装*企*业*名称*|分装*企*业*名*称"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            rightvalue = matcher.span()[1]
+            if isinstance(rightvalue, int):
+                rightvalue = ''
+            return ["分装企业名称", rightvalue, str[rightvalue:]]
+        #第44个字段：分装企业地址
+        p = r"分装企*业*地址*|分装企*业*地*址"
+        keystr = str[0:9]
+        pattern = re.compile(p)
+        matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
+        if matcher != None:
+            rightvalue = matcher.span()[1]
+            if isinstance(rightvalue, int):
+                rightvalue = ''
+            return ["分装企业地址", rightvalue, str[rightvalue:]]
         # 第29个字段：企业名称
         p = r"企业*名称*|企*业名*称"
         keystr = str[0:6]

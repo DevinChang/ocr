@@ -8,12 +8,8 @@ import os
 #from wand.image import Image
 #from introduction import format_introduction
 import introduction
-<<<<<<< HEAD
 #from baiduai import *
 import re
-=======
-from baiduai import *
->>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
 """
 __version__: 1.0
 __application__: ocr识别说明书，药品许可证等证件
@@ -48,13 +44,8 @@ class MyOcr(object):
             4--含位置信息的高精度文字识别
     """
     def __init__(self, app_id, api_key, secret_key, typeid):
-<<<<<<< HEAD
         self.client = AipOcr(app_id, api_key, secret_key)
         #self.client = AipOcr(appid[1], apikey[1], secretkey[1])
-=======
-        #self.client = AipOcr(app_id, api_key, secret_key)
-        self.client = AipOcr(appid[1], apikey[1], secretkey[1])
->>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
         self.typeid = typeid
         self.codepath = os.path.dirname(__file__)
         self.datapath = self.codepath + '\data'
@@ -95,39 +86,39 @@ class MyOcr(object):
             filepath = os.listdir(curpath)
             for file_name in filepath:
                 if '说明书' in file_name:
-<<<<<<< HEAD
                     if '备案' in file_name:
                         continue
                     if os.path.isdir(curpath + '\\' + file_name):
                         continue
                     if not re.match(r'[jJ][pP][gG]', file_name[-3:]):
                         continue
-                    print('Current img: {}'.format(curpath + '\\' + file_name))
+                    
                     if not os.path.exists(datafilepath):
                         os.makedirs(datafilepath)
                     img = self._get_file_content(curpath + '\\' + file_name)
-=======
-                    print('Current img: {}'.format(file[0] + '\\' + file_name))
-                    index = file[0].rfind('国药海南去重')
-                    tmpath = file[0][index:]
-                    curpath = self.datapath + '\\' + tmpath
-                    if not os.path.exists(curpath):
-                        os.makedirs(curpath)
-
-                    img = self._get_file_content(file[0] + '\\' + file_name)
->>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
-                    if self.typeid == 1:
-                        data = self.client.basicGeneral(img, options)
-                    elif self.typeid == 2:
-                        data = self.client.general(img, options)
-                    elif self.typeid == 3:
-                        data = self.client.basicAccurate(img, options)
-                    elif self.typeid == 4:
-                        data = self.client.accurate(img, options)
-<<<<<<< HEAD
                     if file_name[:-4].find('.'):
                         file_name = file_name[:-4].replace('.', '') + file_name[-4:]
-                    prefix,suffix = file_name.split('.')
+                    try:
+                        prefix,suffix = file_name.split('.')
+                    except Exception as e:
+                        print('split error: {}\ncurrent file: {}'.format(e, curpath + '\\' + file_name))
+                        continue
+                    #判断文件是否存在
+                    if os.path.isfile((datafilepath +'\{}.json').format(prefix + '_' + suffix)):
+                        continue
+                    print('Current img: {}'.format(curpath + '\\' + file_name))
+                    try: 
+                        if self.typeid == 1:
+                            data = self.client.basicGeneral(img, options)
+                        elif self.typeid == 2:
+                            data = self.client.general(img, options)
+                        elif self.typeid == 3:
+                            data = self.client.basicAccurate(img, options)
+                        elif self.typeid == 4:
+                            data = self.client.accurate(img, options)
+                    except Exception as e:
+                         print('Error: ', e)
+                         continue
                     self._write_json_file((datafilepath +'\{}.json').format(prefix + '_' + suffix), data)       
 #        i = 0
 #        for file in os.walk(imgpath):
@@ -159,17 +150,6 @@ class MyOcr(object):
 #                        i = 0
 #                        self.client = AipOcr(appid[1], apikey[1], secretkey[1])
 #
-=======
-                    prefix,suffix = file_name.split('.')
-                    self._write_json_file((curpath +'\{}.json').format(prefix + '_' + suffix), data)       
-                    
-                    if i < 50:
-                        i += 1
-                    else:
-                        i = 0
-                        self.client = AipOcr(appid[1], apikey[1], secretkey[1])
-
->>>>>>> b3337d550d0ee1b0ed5cec16dfaf76fa6484a456
         
     def _write_dict(self):
         files = os.listdir(self.datapath)

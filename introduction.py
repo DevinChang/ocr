@@ -8,7 +8,7 @@ from FindKeyword import findImportWords
 import HowManyColumn4 as hmc
 #import openpyxl
 import xlwings as xw
-
+from log import LogMgr
 
 
 '''
@@ -71,6 +71,7 @@ def judge_keywords(strword):
     re_registeraddr = re.compile(r'注?册地址?|注?册地?址')
     re_qualitytel = re.compile(r'质?量电话|质量?电话')
     re_saletel = re.compile(r'销?售电话|销售?电话')
+    #TODO:新增几个字段的匹配
     if len(strword) >= 8: 
         index = 6
     else:
@@ -157,6 +158,36 @@ def inrtroduction_judge(strword):
     else:
         return keyword
 
+def GetRightStrength(strength):
+    '''
+    调整excle读取规格问题
+    '''
+    pattren = r'[0-9]+[TS丸袋片贴]'
+    if '*'  in strength:
+        strength = strength.split('*')[0]
+    if 'IU' in strength:
+        strength = strength.replace('IU','国际单位')
+    elif 'iu' in strength:
+        strength =strength.replace('iu','国际单位')
+    elif ('U' in strength) and ('Ug' not in strength):
+        strength =strength.replace('U','单位')
+    elif ('u' in strength) and ('ug' not in strength):
+        strength = strength.replace('u','单位')
+    elif re.match(pattren,strength):
+        if 'T' in strength:
+            strength =strength.replace('T','人份')
+        elif 'S' in strength:
+            strength =''
+        elif '丸' in strength:
+            strength =''
+        elif '袋' in strength:
+            strength =''
+        elif '片' in strength:
+            strength =''
+        elif '贴' in strength:
+            strength =''
+    print(strength)
+    return strength
 
 
 def inrtroduction(datas, nums):
@@ -178,13 +209,18 @@ def inrtroduction(datas, nums):
         if list_result != None:
             if list_result[0] in datadict and keylist[-1][0] != list_result[0]:
                 datadict[list_result[0]] += list_result[1]
+                flag = 1
             else:
                 datadict[list_result[0]] = list_result[1]
+                flag = 1
             keylist.append([list_result[0],list_result[2]])
         else:
             j = i
             while j > 0:
                 if not keylist:
+                    break
+                if re.match(r'[【\[]|[】\]]', word['words'][8]):
+                    flag = 0
                     break
                 if ("英文名称" in keylist[-1][0]) or ("汉语拼音" in keylist[-1][0]):
                     if re.match(r'[a-zA-z]+', word['words']):
@@ -221,13 +257,14 @@ def inrtroduction(datas, nums):
                     else:
                         break
                 elif "批准文号" == keylist[-1][0]:
-                    if re.match(r'.?[a-zA-Z]', word['words']):
+                    if re.match(r'国?药准?字', word['words']):
+                        flag = 1
+                    elif re.match(r'.?[a-zA-Z][0-9]', word['words']) and (keylist[-1][1]
+                                                                    in datadict['批准文号']):
                         flag = 1
                     else:
                         break
                 #TODO:OTC，外，以及字段追加问题
-                if re.match(r'[【\[]|[】\]]', word['words']):
-                    break
                 if flag:
                     if keylist[-1][1] in datas[j]['words']:
                         datadict[keylist[-1][0]] += word['words']
@@ -343,7 +380,7 @@ if __name__ == '__main__':
                 #图片过大或者一些原因，没有识别出来就会有error_code字段
                 if 'error_code' in datajson:
                     continue
-                #换工作环境这里也得改！
+                #FIXME:换工作环境这里也得改！
                 try:
                     kindict = hmc.kinds(imgpaht_root_desktop + '\\' + curpath + 
                                             '\\' + imgname[:index] + 
@@ -384,8 +421,11 @@ if __name__ == '__main__':
                         datadict.update({"通用名称" : name[index]})
                     else:
                         datadict["通用名称"] = name[index]
+                    #TODO:调整规格逻辑
                     if "规格" not in datadict:
-                        datadict.update({"规格" : strength[index]})
+                        strength = GetRightStrength(strength[index])
+                        if strength:
+                            datadict.update({"规格" : strength})
                     else:
                         datadict["规格"] = strength[index]
                     if "生产厂家" not in datadict:

@@ -138,7 +138,7 @@ def findImportWords(str):
         pattern = re.compile(p)
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
-            return ["受托方企业地址": rightvalue, matcher.group()]
+            return ["受托方企业地址", rightvalue, matcher.group()]
         #第43个字段：分装企业名称
         p = r"分装*企*业*名称*|分装*企*业*名*称"
         keystr = str[0:9]

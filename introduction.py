@@ -72,7 +72,10 @@ def judge_keywords(strword):
     re_registeraddr = re.compile(r'注?册地址?|注?册地?址')
     re_qualitytel = re.compile(r'质?量电话|质量?电话')
     re_saletel = re.compile(r'销?售电话|销售?电话')
-    #TODO:新增几个字段的匹配
+    #TODO:新增OTC,外的匹配
+    re_otc = re.compile(r'[0oO]T[oO0]')
+    re_external = re.complie(r'外')
+
     if len(strword) >= 8: 
         index = 6
     else:
@@ -145,10 +148,10 @@ def judge_keywords(strword):
             return ['注意事项' , strword[re_precautions_accu.search(strword).span()[1]:],re_precautions_accu.search(strword).group()]
         elif re_registeraddr.search(strword[:index]):
             return ['注册地址' , strword[re_registeraddr.search(strword).span()[1]:], re_registeraddr.search(strword).group()]
-        #elif re.match(r'OTC*|O*TC|OT*C', strword[:3]):
-        #    return ['OTC', '是', 'otc']
-        #elif len(strword) == 1 and strword == '外':
-        #    return ['外', '是', '外']
+        elif re.match(r'[0oO]T[CO0]*|[0oO]*T[CO0]', strword[:3]):
+            return ['OTC', '是', 'otc']
+        elif len(strword) == 1 and strword == '外':
+            return ['外', '是', '外']
         else:
             return None
         
@@ -262,6 +265,10 @@ def inrtroduction(datas, nums):
                         flag = 1
                     else:
                         break
+                elif "OTC" == keylist[-1][0]:
+                    break
+                elif "外" == keylist[-1][0]:
+                    break
                 #TODO:OTC，外，以及字段追加问题
                 if re.match(r'[【\[]|[】\]]', word['words'][8]):
                     flag = 0

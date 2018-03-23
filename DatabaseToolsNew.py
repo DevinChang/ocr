@@ -35,8 +35,6 @@ class cxOracle:
             return 'CHN_PINYIN'
         elif key == '英文名称':
             return 'EN_NAME'
-        elif key == 'OTC':
-            return 'OTC_SIGN'
         elif key == '成份':
             return 'INGREDIENTS'
         elif key == '性状':
@@ -144,9 +142,11 @@ class cxOracle:
             i = 0
             for key in text:
                 i = i+1
-                if (key == '质量电话') or (key == '销售电话'):
-                    continue
+                #if (key == '质量电话') or (key == '销售电话'):
+                #    continue
                 convert_key = self._convert_key(key)
+                if not convert_key:
+                    continue
                 if i == len(text):
 
                     keys = keys+str(convert_key)

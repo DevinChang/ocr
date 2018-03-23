@@ -22,6 +22,7 @@ name = sheet['C']
 strength = sheet['D']
 mfrs = sheet['F']
 '''
+
 def load_excel(excel):
     wb = xw.Book(excel)
     sheet = wb.sheets[0]
@@ -73,8 +74,6 @@ def judge_keywords(strword):
     re_qualitytel = re.compile(r'质?量电话|质量?电话')
     re_saletel = re.compile(r'销?售电话|销售?电话')
     #TODO:新增OTC,外的匹配
-    re_otc = re.compile(r'[0oO]T[oO0]')
-    re_external = re.complie(r'外')
 
     if len(strword) >= 8: 
         index = 6
@@ -82,24 +81,25 @@ def judge_keywords(strword):
         index = len(strword)
 
     if re.match(r'.+?(?:】)|.+?(?:])', strword[:index]):
+        #FIXME: 成份，性状字段缺失
         if re_element.search(strword[:sort_index(strword)]):
-            return ['成份' , strword[re_element.search(strword).span()[1] + 1:], re_element.search(strword).group()]
+            return ['成份' , strword[re_element.search(strword).span()[1]:], re_element.search(strword).group()]
         elif re_function_category.search(strword[:index]):
             return ['作用类别' , strword[re_function_category.search(strword).span()[1] + 1:], re_function_category.search(strword).group()]
         elif re_traits.search(strword[:sort_index(strword)]):
-            return ['性状' , strword[re_traits.search(strword).span()[1] + 1:],re_traits.search(strword).group()]
+            return ['性状' , strword[re_traits.search(strword).span()[1]:],re_traits.search(strword).group()]
         elif re_indication.search(strword[:index]):
-            return ['功能主治' , strword[re_indication.search(strword).span()[1] + 1:],re_indication.search(strword).group()]
+            return ['功能主治' , strword[re_indication.search(strword).span()[1]:],re_indication.search(strword).group()]
         elif re_specification.search(strword[:sort_index(strword)]):
-            return ['规格' , strword[re_specification.search(strword).span()[1] + 1:],re_specification.search(strword).group()]
+            return ['规格' , strword[re_specification.search(strword).span()[1]:],re_specification.search(strword).group()]
         elif re_dosage.search(strword[:index]):
-            return ['用法用量' , strword[re_dosage.search(strword).span()[1] + 1:],re_dosage.search(strword).group()]
+            return ['用法用量' , strword[re_dosage.search(strword).span()[1]:],re_dosage.search(strword).group()]
         elif re_reaction.search(strword[:index]):
-            return ['不良反应' , strword[re_reaction.search(strword).span()[1] + 1:],re_reaction.search(strword).group()]
+            return ['不良反应' , strword[re_reaction.search(strword).span()[1]:],re_reaction.search(strword).group()]
         elif re_prohibition.search(strword[:sort_index(strword)]):
-            return ['禁忌' , strword[re_prohibition.search(strword).span()[1] + 1:],re_prohibition.search(strword).group()]
+            return ['禁忌' , strword[re_prohibition.search(strword).span()[1]:],re_prohibition.search(strword).group()]
         elif re_precautions.search(strword[:index]):
-            return ['注意事项' , strword[re_precautions.search(strword).span()[1] + 1:],re_precautions.search(strword).group()]
+            return ['注意事项' , strword[re_precautions.search(strword).span()[1]:],re_precautions.search(strword).group()]
         else:
             return None
     elif re.match(r'.+?(?:\:)', strword[:index]):
@@ -148,9 +148,11 @@ def judge_keywords(strword):
             return ['注意事项' , strword[re_precautions_accu.search(strword).span()[1]:],re_precautions_accu.search(strword).group()]
         elif re_registeraddr.search(strword[:index]):
             return ['注册地址' , strword[re_registeraddr.search(strword).span()[1]:], re_registeraddr.search(strword).group()]
-        elif re.match(r'[0oO]T[CO0]*|[0oO]*T[CO0]', strword[:3]):
+        elif re.match(r'.?[0oO]T[CO0]*|.?[0oO]*T[CO0]', strword[:5]):
             return ['OTC', '是', 'otc']
         elif len(strword) == 1 and strword == '外':
+            return ['外', '是', '外']
+        elif re.match(r'.?说明书外', strword[-4:]):
             return ['外', '是', '外']
         else:
             return None
@@ -270,7 +272,7 @@ def inrtroduction(datas, nums):
                 elif "外" == keylist[-1][0]:
                     break
                 #TODO:OTC，外，以及字段追加问题
-                if re.match(r'[【\[]|[】\]]', word['words'][8]):
+                if re.match(r'[【\[]|.?[】\]]|.?[:：]', word['words'][:8]):
                     flag = 0
                     break
                 if flag:
@@ -367,7 +369,7 @@ if __name__ == '__main__':
     #excel_path = 'C:\\Users\\DevinChang\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
     #这是笔记本上的路径
     excel_path = 'C:\\Users\\dongd\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
-    shopid, name, strength, mfrs  = load_excel(excel_path)
+    #shopid, name, strength, mfrs  = load_excel(excel_path)
     db = cxOracle()
     imgpath_root = "F:\IMG"
     #笔记本上的是移动硬盘的路径
@@ -396,7 +398,7 @@ if __name__ == '__main__':
                                             datajson)
                 except Exception as e:
                     print("Error :", e)
-                    logmgr.error(file[0] + '\\' + file_name + ':' + e)
+                    logmgr.error(file[0] + '\\' + file_name + ':' + str(e))
                     continue
                 print('Current processing: {}'.format(imgpaht_root_desktop + '\\' + curpath + 
                                         '\\' + imgname[:index] + 
@@ -414,33 +416,44 @@ if __name__ == '__main__':
             if len(datas) > 0 and nums > 0:
                 datadict = inrtroduction(datas, nums)
                 print(datadict)
+                name_index_e = re.match(r'.*[A-Z]', id).span()[1]
+                dragname = id[:name_index_e - 1]
+                if dragname.find('(') > 0:
+                    dragname = dragname[:dragname.find('(')]
                 if not datadict:
                     nums = cleandata(datadict, datas, nums)
                     continue
+                
+                if "通用名称" not in datadict:
+                    datadict.update({"通用名称" : dragname})
+                else:
+                    datadict["通用名称"] = dragname
                 ##整个识别完后，再将excel表中对应的数据替换掉识别的结果
-                if id in shopid:
-                    index = shopid.index(id)
-                    #if "通用名称" in datadict:
-                    #    del datadict["通用名称"]
-                    #if "规格" in datadict:
-                    #    del datadict['规格']
-                    #if "生产厂家"in datadict:
-                    #    del datadict['生产厂家']
-                    if "通用名称" not in datadict:
-                        datadict.update({"通用名称" : name[index]})
-                    else:
-                        datadict["通用名称"] = name[index]
-                    #TODO:调整规格逻辑
-                    if "规格" not in datadict:
-                        strength = GetRightStrength(strength[index])
-                        if strength:
-                            datadict.update({"规格" : strength})
-                    else:
-                        datadict["规格"] = strength[index]
-                    if "生产厂家" not in datadict:
-                        datadict.update({"生产厂家" : mfrs[index]})
-                    else:
-                        datadict["生产厂家"] = mfrs[index]
+                #if id in shopid:
+                #    index = shopid.index(id)
+                #    #if "通用名称" in datadict:
+                #    #    del datadict["通用名称"]
+                #    #if "规格" in datadict:
+                #    #    del datadict['规格']
+                #    #if "生产厂家"in datadict:
+                #    #    del datadict['生产厂家']
+                #    if "通用名称" not in datadict:
+                #        datadict.update({"通用名称" : name[index]})
+                #    else:
+                #        datadict["通用名称"] = name[index]
+                #    #TODO:调整规格逻辑
+                #    if "规格" not in datadict:
+                #        strength_t = GetRightStrength(strength[index])
+                #        if strength_t:
+                #            datadict.update({"规格" : strength_t})
+                #    else:
+                #        strength_t = GetRightStrength(strength[index])
+                #        if strength_t:
+                #            datadict["规格"] = strength_t
+                #    if "生产厂家" not in datadict:
+                #        datadict.update({"生产厂家" : mfrs[index]})
+                #    else:
+                #        datadict["生产厂家"] = mfrs[index]
                     
                     
                 datadict = maxdata(datadict)
@@ -450,7 +463,7 @@ if __name__ == '__main__':
                     nums = cleandata(datadict, datas, nums)
                 except Exception as e:
                     print('Error: ', e)
-                    logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + e)
+                    logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
                     nums = cleandata(datadict, datas, nums)
                     continue
         #print(datas)

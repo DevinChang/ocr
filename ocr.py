@@ -10,6 +10,7 @@ import os
 import introduction
 #from baiduai import *
 import re
+from log import LogMgr
 """
 __version__: 1.0
 __application__: ocr识别说明书，药品许可证等证件
@@ -50,6 +51,7 @@ class MyOcr(object):
         self.codepath = os.path.dirname(__file__)
         self.datapath = self.codepath + '\data'
         os.makedirs(self.datapath, exist_ok=True)
+        self.log = LogMgr()
     
 
     def _get_file_content(self, filePath):
@@ -72,7 +74,9 @@ class MyOcr(object):
         @输出json数据，保存到data文件夹下
         """
         #imgpath = self.codepath + '\IMG'+'\国控天星'
-        imgpath = 'F:\IMG'
+        #FIXME:电脑环境不同，路径也不一样，切换环境的话要修改路径
+        #imgpath = 'F:\IMG'
+        imgpath = 'G:\IMG\国控盐城'
 
         options = {}
         options["detect_direction"] = "true" 
@@ -102,6 +106,7 @@ class MyOcr(object):
                         prefix,suffix = file_name.split('.')
                     except Exception as e:
                         print('split error: {}\ncurrent file: {}'.format(e, curpath + '\\' + file_name))
+                        self.log.error(curpath + '\\' + file_name + " Error!! : " + str(e))
                         continue
                     #判断文件是否存在
                     if os.path.isfile((datafilepath +'\{}.json').format(prefix + '_' + suffix)):
@@ -118,6 +123,7 @@ class MyOcr(object):
                             data = self.client.accurate(img, options)
                     except Exception as e:
                          print('Error: ', e)
+                         self.log.error(curpath + '\\' + file_name + " Error!! : " + str(e))
                          continue
                     self._write_json_file((datafilepath +'\{}.json').format(prefix + '_' + suffix), data)       
 #        i = 0
@@ -179,6 +185,6 @@ class MyOcr(object):
         print('********Start Identify********')
         self._ocr()
         print('********End********')
-        print('=================Format Data================')
-        self._write_dict()
-        print('======================End===================')
+        #print('=================Format Data================')
+        #self._write_dict()
+        #print('======================End===================')

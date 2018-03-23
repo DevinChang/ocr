@@ -241,9 +241,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["孕妇及哺乳期妇女用药", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["孕妇及哺乳期妇女用药", str[rightvalue:], matcher.group()]
 
         # 第17个字段：儿童用药
         p = r"儿童*用药*|儿*童用*药"
@@ -252,9 +252,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["儿童用药", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["儿童用药", str[rightvalue:], matcher.group()]
 
         # 第18个字段：老年用药
         p = r"老年*用药*|老*年用*药"
@@ -263,9 +263,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["老年用药", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["老年用药", str[rightvalue:], matcher.group()]
 
         # 第19个字段：药物相互作用
         pA19 = r"药*物相互作用*|药物*相互作用"
@@ -274,9 +274,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["药物相互作用", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["药物相互作用", str[rightvalue:], matcher.group()]
 
         # 第20个字段：药物过量
         p = r"药*物过量*|药物*过量*"
@@ -285,9 +285,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["药物过量", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["药物过量", str[rightvalue:], matcher.group()]
 
         # 第21个字段：临床试验
         p = r"临*床试验*|临床*试*验"
@@ -296,9 +296,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["临床试验", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["临床试验", str[rightvalue:], matcher.group()]
 
         # 第22个字段：药理毒理
         p = r"药理毒*理*|药理*毒理*"
@@ -307,9 +307,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["药理毒理", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["药理毒理", str[rightvalue:], matcher.group()]
 
         # 第23个字段：药代动力学
         p = r"药代*动力*学|药代*动*力学"
@@ -318,9 +318,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["药代动力学", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["药代动力学", str[rightvalue:], matcher.group()]
 
         # 第24个字段：贮藏
         p = r"贮藏"
@@ -329,9 +329,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["贮藏", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["贮藏", str[rightvalue:], matcher.group()]
 
         # 第25个字段：包装
         p = r"包装"
@@ -340,9 +340,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["包装", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["包装", str[rightvalue:], matcher.group()]
 
         # 第26个字段：有效期
         p = r"有*效期|有效*期"
@@ -351,9 +351,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["有效期", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["有效期", str[rightvalue:], matcher.group()]
 
         # 第27个字段：执行标准
         p = r"执行*标*准|执*行标*准|执行*标准*"
@@ -362,9 +362,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["执行标准", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["执行标准", str[rightvalue:], matcher.group()]
 
         # 第28个字段：批准文号
         p = r"批准*文*号|批*准文*号|批*准文号*"
@@ -373,9 +373,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["批准文号", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["批准文号", str[rightvalue:], matcher.group()]
         
         #第39个字段：委托方企业名称
         p = r"委托*方*企*业*名称*|委托*方*企*业*名*称"
@@ -384,9 +384,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["委托方企业名称", rightvalue, str[rightvalue:]]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["委托方企业名称", str[rightvalue:], matcher.group()]
         #第40个字段：委托方企业地址
         p = r"委托*方*企*业*地址*|委托*方*企*业*地*址"
         keystr = str[0:9]
@@ -394,9 +394,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["委托方企业地址", rightvalue, str[rightvalue:]]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["委托方企业地址", str[rightvalue:], matcher.group()]
         #第41个字段：受托方企业名称
         p = r"受托*方*企*业*名称*|受托*方*企*业*名*称"
         keystr = str[0:9]
@@ -404,9 +404,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["受托方企业名称", rightvalue, str[rightvalue:]]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["受托方企业名称", str[rightvalue:], matcher.group()]
         #第42个字段：受托方企业地址
         p = r"受托*方*企*业*地址*|受托*方*企*业*地*址"
         keystr = str[0:9]
@@ -414,9 +414,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["受托方企业地址", rightvalue, str[rightvalue:]]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["受托方企业地址", str[rightvalue:], matcher.group()]
         #第43个字段：分装企业名称
         p = r"分装*企*业*名称*|分装*企*业*名*称"
         keystr = str[0:9]
@@ -424,9 +424,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["分装企业名称", rightvalue, str[rightvalue:]]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["分装企业名称", str[rightvalue:], matcher.group()]
         #第44个字段：分装企业地址
         p = r"分装企*业*地址*|分装企*业*地*址"
         keystr = str[0:9]
@@ -434,9 +434,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["分装企业地址", rightvalue, str[rightvalue:]]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["分装企业地址", str[rightvalue:], matcher.group()]
         # 第29个字段：企业名称
         p = r"企业*名称*|企*业名*称"
         keystr = str[0:6]
@@ -444,9 +444,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["企业名称", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["企业名称", str[rightvalue:], matcher.group()]
 
         # 第30个字段：企业地址
         p = r"企业*地址|企*业地址*|企*业地*址"
@@ -455,9 +455,9 @@ def findImportWords(str):
         matcher = re.search(pattern, keystr)  # 限制在源文本前4个词中搜索符合正则表达式的部分
         if matcher != None:
             rightvalue = matcher.span()[1]
-            if isinstance(rightvalue, int):
-                rightvalue = ''
-            return ["企业地址", rightvalue, matcher.group()]
+            #if isinstance(rightvalue, int):
+            #    rightvalue = ''
+            return ["企业地址", str[rightvalue:], matcher.group()]
 
         # 第31个字段： 生产厂家
         str31 = str[0:6] #在前六个字符中去判断，无括号，则应该以更加严格的方式检查
@@ -516,7 +516,7 @@ def findImportWords(str):
             indexB37 = matcherB37.span()[1]
             return ["核准日期", str[indexB37:], matcherB37.group()]
         ##第38个字段： 修改日期
-        str38 = str[0:6]
+        str38 = str[0:9]
         pB38 = r"修*改日期：*"
         patternB38 = re.compile(pB38)
         matcherB38 = re.search(patternB38, str38)  # 在源文本中搜索符合正则表达式的部分

@@ -148,11 +148,9 @@ def judge_keywords(strword):
             return ['注意事项' , strword[re_precautions_accu.search(strword).span()[1]:],re_precautions_accu.search(strword).group()]
         elif re_registeraddr.search(strword[:index]):
             return ['注册地址' , strword[re_registeraddr.search(strword).span()[1]:], re_registeraddr.search(strword).group()]
-        elif re.match(r'.?[0oO]T[CO0]*|.?[0oO]*T[CO0]', strword[:5]):
+        elif re.match(r'[0oO]T[CO0]*|[0oO]*T[CO0]', strword[:3]):
             return ['OTC', '是', 'otc']
         elif len(strword) == 1 and strword == '外':
-            return ['外', '是', '外']
-        elif re.match(r'.?说明书外', strword[-4:]):
             return ['外', '是', '外']
         else:
             return None
@@ -272,7 +270,7 @@ def inrtroduction(datas, nums):
                 elif "外" == keylist[-1][0]:
                     break
                 #TODO:OTC，外，以及字段追加问题
-                if re.match(r'[【\[]|.?[】\]]|.?[:：]', word['words'][:8]):
+                if re.match(r'[【\[]|.?[】\]]', word['words'][:8]):
                     flag = 0
                     break
                 if flag:
@@ -363,132 +361,108 @@ def maxdata(datadict):
             
 
 if __name__ == '__main__':
-    codepath = os.path.dirname(__file__)
-    datapath = codepath + '\data'
-    files = os.listdir(datapath)
-    #excel_path = 'C:\\Users\\DevinChang\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
-    #这是笔记本上的路径
-    excel_path = 'C:\\Users\\dongd\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
-    #shopid, name, strength, mfrs  = load_excel(excel_path)
-    db = cxOracle()
-    imgpath_root = "F:\IMG"
-    #笔记本上的是移动硬盘的路径
-    imgpaht_root_desktop = "G:\IMG"
-    datas = []
-    leftdata = []
-    rightdata = []
-    nums = 0
-    flag = 0
-    for file in os.walk(datapath):
-        for file_name in file[2]:
-            if '说明书' in file_name:
-                imgname = file_name.split('.')[0]
-                curpath = file[0].split('data')[1]
-                index = imgname.rfind('_')
-                id = curpath[curpath.rfind('\\') + 1:]
-                datajson = load_json(file[0] + '\\' + file_name)
-                #图片过大或者一些原因，没有识别出来就会有error_code字段
-                if 'error_code' in datajson:
-                    continue
-                #FIXME:换工作环境这里也得改！
-                try:
-                    kindict = hmc.kinds(imgpaht_root_desktop + '\\' + curpath + 
-                                            '\\' + imgname[:index] + 
-                                            '.' + imgname[index:].split('_')[1], 
-                                            datajson)
-                except Exception as e:
-                    print("Error :", e)
-                    logmgr.error(file[0] + '\\' + file_name + ':' + str(e))
-                    continue
-                print('Current processing: {}'.format(imgpaht_root_desktop + '\\' + curpath + 
-                                        '\\' + imgname[:index] + 
-                                        '.' + imgname[index:].split('_')[1], 
-                                        file[0] + '\\' + file_name))
-                
-                datatmp = datajson['words_result']
-                nums += datajson['words_result_num']
-                if kindict['kinds'] == 2:
-                    datas += subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'][0], datatmp)
-                elif kindict['kinds'] == 1:
-                    datas += datatmp
-                flag = 1
-        if flag:
-            if len(datas) > 0 and nums > 0:
-                datadict = inrtroduction(datas, nums)
-                print(datadict)
-                name_index_e = re.match(r'.*[A-Z]', id).span()[1]
-                dragname = id[:name_index_e - 1]
-                if dragname.find('(') > 0:
-                    dragname = dragname[:dragname.find('(')]
-                if not datadict:
-                    nums = cleandata(datadict, datas, nums)
-                    continue
-                
-                if "通用名称" not in datadict:
-                    datadict.update({"通用名称" : dragname})
-                else:
-                    datadict["通用名称"] = dragname
-                ##整个识别完后，再将excel表中对应的数据替换掉识别的结果
-                #if id in shopid:
-                #    index = shopid.index(id)
-                #    #if "通用名称" in datadict:
-                #    #    del datadict["通用名称"]
-                #    #if "规格" in datadict:
-                #    #    del datadict['规格']
-                #    #if "生产厂家"in datadict:
-                #    #    del datadict['生产厂家']
-                #    if "通用名称" not in datadict:
-                #        datadict.update({"通用名称" : name[index]})
-                #    else:
-                #        datadict["通用名称"] = name[index]
-                #    #TODO:调整规格逻辑
-                #    if "规格" not in datadict:
-                #        strength_t = GetRightStrength(strength[index])
-                #        if strength_t:
-                #            datadict.update({"规格" : strength_t})
-                #    else:
-                #        strength_t = GetRightStrength(strength[index])
-                #        if strength_t:
-                #            datadict["规格"] = strength_t
-                #    if "生产厂家" not in datadict:
-                #        datadict.update({"生产厂家" : mfrs[index]})
-                #    else:
-                #        datadict["生产厂家"] = mfrs[index]
-                    
-                
-                    
-                datadict = maxdata(datadict)
-                if '企业名称' in datadict:
-                    if ('生产厂家' not in datadict) or (len(datadict['生产厂家'])== 0):
-                        datadict.update({"生产厂家" : datadict['企业名称']})
-                        del datadict['企业名称']
-                if '生产厂家' in datadict:
-                    #用正则 DONE
-                    re_comfrs = re.compile(r'企*业名称[:：]*|企业*名称[:：]*')
-                    if re_comfrs.match(datadict['生产厂家']):
-                        comfrs_index = re_comfrs.match(datadict['生产厂家']).span()[1]
-                        datadict['生产厂家'] = datadict['生产厂家'][comfrs_index:]
-
-                if ("膏" or "贴") in datadict['通用名称'][-1]:
-                    if "外" not in datadict:
-                        datadict.update({"外" : "是"})
-                if '批准文号' in datadict:
-                    re_guoyao = re.compile(r'国药准?字?|国?药准?字|国药?准字')
-                    if re_guoyao.match(datadict['批准文号']):
-                        re.sub(re_guoyao, '国药准字', datadict['批准文号'])
-
-
-
-                try:
-                    addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict)
-                    db.insert(addsql, param)
-                    nums = cleandata(datadict, datas, nums)
-                except Exception as e:
-                    print('Error: ', e)
-                    logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
-                    nums = cleandata(datadict, datas, nums)
-                    continue
-        #print(datas)
+    datajson = load_json('F:\DevinChang\Code\Python\ocr\data\国控盐城\西药\葡萄糖酸钙锌口服溶液A000060279\\药品说明书_1_jpg.json')
+    datas = datajson['words_result']
+    nums = datajson['words_result_num']
+    #kindict = hmc.kinds('C:\\Users\\dongd\\Desktop\\阿奇霉素颗粒A000021514\\药品说明书_2.jpg', datajson)
+    #datas = subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'], datas)
+    datadict = inrtroduction(datas, nums)
+    
+    #codepath = os.path.dirname(__file__)
+    #datapath = codepath + '\data'
+    #files = os.listdir(datapath)
+    ##excel_path = 'C:\\Users\\DevinChang\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
+    ##这是笔记本上的路径
+    #excel_path = 'C:\\Users\\dongd\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
+    ##shopid, name, strength, mfrs  = load_excel(excel_path)
+    #db = cxOracle()
+    #imgpath_root = "F:\IMG"
+    ##笔记本上的是移动硬盘的路径
+    #imgpaht_root_desktop = "G:\IMG"
+    #datas = []
+    #leftdata = []
+    #rightdata = []
+    #nums = 0
+    #flag = 0
+    #for file in os.walk(datapath):
+    #    for file_name in file[2]:
+    #        if '说明书' in file_name:
+    #            imgname = file_name.split('.')[0]
+    #            curpath = file[0].split('data')[1]
+    #            index = imgname.rfind('_')
+    #            id = curpath[curpath.rfind('\\') + 1:]
+    #            datajson = load_json(file[0] + '\\' + file_name)
+    #            #图片过大或者一些原因，没有识别出来就会有error_code字段
+    #            if 'error_code' in datajson:
+    #                continue
+    #            #FIXME:换工作环境这里也得改！
+    #            try:
+    #                kindict = hmc.kinds(imgpaht_root_desktop + '\\' + curpath + 
+    #                                        '\\' + imgname[:index] + 
+    #                                        '.' + imgname[index:].split('_')[1], 
+    #                                        datajson)
+    #            except Exception as e:
+    #                print("Error :", e)
+    #                logmgr.error(file[0] + '\\' + file_name + ':' + str(e))
+    #                continue
+    #            print('Current processing: {}'.format(imgpaht_root_desktop + '\\' + curpath + 
+    #                                    '\\' + imgname[:index] + 
+    #                                    '.' + imgname[index:].split('_')[1], 
+    #                                    file[0] + '\\' + file_name))
+    #            
+    #            datatmp = datajson['words_result']
+    #            nums += datajson['words_result_num']
+    #            if kindict['kinds'] == 2:
+    #                datas += subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'][0], datatmp)
+    #            elif kindict['kinds'] == 1:
+    #                datas += datatmp
+    #            flag = 1
+    #    if flag:
+    #        if len(datas) > 0 and nums > 0:
+    #            datadict = inrtroduction(datas, nums)
+    #            print(datadict)
+    #            if not datadict:
+    #                nums = cleandata(datadict, datas, nums)
+    #                continue
+    #            ##整个识别完后，再将excel表中对应的数据替换掉识别的结果
+    #            #if id in shopid:
+    #            #    index = shopid.index(id)
+    #            #    #if "通用名称" in datadict:
+    #            #    #    del datadict["通用名称"]
+    #            #    #if "规格" in datadict:
+    #            #    #    del datadict['规格']
+    #            #    #if "生产厂家"in datadict:
+    #            #    #    del datadict['生产厂家']
+    #            #    if "通用名称" not in datadict:
+    #            #        datadict.update({"通用名称" : name[index]})
+    #            #    else:
+    #            #        datadict["通用名称"] = name[index]
+    #            #    #TODO:调整规格逻辑
+    #            #    if "规格" not in datadict:
+    #            #        strength_t = GetRightStrength(strength[index])
+    #            #        if strength_t:
+    #            #            datadict.update({"规格" : strength_t})
+    #            #    else:
+    #            #        strength_t = GetRightStrength(strength[index])
+    #            #        if strength_t:
+    #            #            datadict["规格"] = strength_t
+    #            #    if "生产厂家" not in datadict:
+    #            #        datadict.update({"生产厂家" : mfrs[index]})
+    #            #    else:
+    #            #        datadict["生产厂家"] = mfrs[index]
+    #                
+    #                
+    #            datadict = maxdata(datadict)
+    #            try:
+    #                addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict)
+    #                db.insert(addsql, param)
+    #                nums = cleandata(datadict, datas, nums)
+    #            except Exception as e:
+    #                print('Error: ', e)
+    #                logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
+    #                nums = cleandata(datadict, datas, nums)
+    #                continue
+    #    #print(datas)
     
     
 

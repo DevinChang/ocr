@@ -10,11 +10,11 @@ def findImportWords(str):
         leftvalue = str.split(']')[0]
         rightvalue = str.split(']')[1]
         flag = 1
-    elif re.match(r".+?(?=：)", str):
+    elif re.match(r".+?(?=：)", str[:8]):
         leftvalue = str.split('：')[0]
         rightvalue = str.split('：')[1]
         flag = 1
-    elif re.match(r".+?(?=:)", str):
+    elif re.match(r".+?(?=:)", str[:8]):
         leftvalue = str.split(':')[0]
         rightvalue = str.split(':')[1]
         flag = 1
@@ -170,67 +170,67 @@ def findImportWords(str):
         # 第31个字段： 生产厂家
         pA31 = r"生*产厂家*：*|生产*厂家*：*|生*产厂*家：*|生产*厂*家：*|生*产企业*：*|生产*企业*：*|生*产企*业：*|生产*企*业：*"
         patternA31 = re.compile(pA31)
-        matcherA31 = re.search(patternA31, str)  # 在源文本中搜索符合正则表达式的部分
+        matcherA31 = re.search(patternA31, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA31!=None:
             indexA31 = matcherA31.span()[1] + 1
-            return ["生产厂家", str[indexA31:], matcherA31.group()]
+            return ["生产厂家", rightvalue, matcherA31.group()]
 
         # 第32个字段： 生产地址
         pA32 = r"生*产地址*|生*产地*址|生产*地*址|生产*地址*"
         patternA32 = re.compile(pA32)
-        matcherA32 = re.search(patternA32, str)  # 在源文本中搜索符合正则表达式的部分
+        matcherA32 = re.search(patternA32, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA32 != None:
             indexA32 = matcherA32.span()[1] + 1
-            return ["生产地址", str[indexA32:], matcherA32.group()]
+            return ["生产地址", rightvalue, matcherA32.group()]
 
 
         #第33个字段： 邮政编码
         pA33 = r"邮*政*编码*"
         patternA33 = re.compile(pA33)
-        matcherA33 = re.search(patternA33, str)  # 在源文本中搜索符合正则表达式的部分
+        matcherA33 = re.search(patternA33, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA33 != None:
             indexA33 = matcherA33.span()[1] + 1
-            return ["邮政编码", str[indexA33:], matcherA33.group()]
+            return ["邮政编码", rightvalue, matcherA33.group()]
 
         #第34个字段： 电话号码
         pA34 = r"电*话号码*|电话号*码*"
         patternA34 = re.compile(pA34)
-        matcherA34 = re.search(patternA34, str)  # 在源文本中搜索符合正则表达式的部分
+        matcherA34 = re.search(patternA34, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA34 != None:
             indexA34 = matcherA34.span()[1] + 1
-            return ["电话号码", str[indexA34:], matcherA34.group()]
+            return ["电话号码", rightvalue, matcherA34.group()]
 
         ##第35个字段： 传真号码
         pA35 = r"传*真号码*|传真号*码*"
         patternA35 = re.compile(pA35)
-        matcherA35 = re.search(patternA35, str)  # 在源文本中搜索符合正则表达式的部分
+        matcherA35 = re.search(patternA35, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA35 != None:
             indexA35 = matcherA35.span()[1] + 1
-            return ["传真号码", str[indexA35:], matcherA35.group()]
+            return ["传真号码", rightvalue, matcherA35.group()]
 
         #第36个字段： 网址
         pA36 = r"网址"
         patternA36 = re.compile(pA36)
-        matcherA36 = re.search(patternA36, str)  # 在源文本中搜索符合正则表达式的部分
+        matcherA36 = re.search(patternA36, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA36 != None:
             indexA36 = matcherA36.span()[1] + 1
-            return ["网址", str[indexA36:], matcherA36.group()]
+            return ["网址", rightvalue, matcherA36.group()]
 
         #第37个字段： 核准日期
         pA37 = r"核*准日期*：*|核准*日期"
         patternA37 = re.compile(pA37)
-        matcherA37 = re.search(patternA37, str)  # 在源文本中搜索符合正则表达式的部分
+        matcherA37 = re.search(patternA37, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA37 != None:
             indexA37 = matcherA37.span()[1] + 1
-            return ["核准日期", str[indexA37:], matcherA37.group()]
+            return ["核准日期", rightvalue, matcherA37.group()]
 
         #第38个字段： 修改日期
         pA38 = r"修*改日期*：*"
         patternA38 = re.compile(pA38)
-        matcherA38 = re.search(patternA38, str)  # 在源文本中搜索符合正则表达式的部分
+        matcherA38 = re.search(patternA38, leftvalue)  # 在源文本中搜索符合正则表达式的部分
         if matcherA38 != None:
             indexA38 = matcherA38.span()[1] + 1
-            return ["修改日期", str[indexA38:], matcherA38.group()]
+            return ["修改日期", rightvalue, matcherA38.group()]
 
     # case b:当'】'不能够被提取的时候
     else:

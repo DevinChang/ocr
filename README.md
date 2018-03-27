@@ -2,7 +2,10 @@
 ====
 
 
-
+Modify:<br>
+---
+`2018/3/26`:<br>
+删除data中的README
 
 Todo:<br>
 ---
@@ -18,7 +21,9 @@ Todo:<br>
   `2018/3/24`:<br>
     ✔ 企业名称与生产商家逻辑修改 @done(18-03-24 20:20)<br>
   `2018/3/26`:<br>
-    ☐ 增加job表 @started(18-03-26 10:21)<br>
-    ☐ GMP识别<br>
+    ✔增加job表 @started(18-03-26 10:21)@done(18-03-27 20:42) @lasted(1 day 10 hours 21 minutes 37 seconds)<br>
+  `2018/3/28`:<br>
+  ☐ GMP识别入库
+  
 
 

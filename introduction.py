@@ -8,7 +8,10 @@ from FindKeyword import findImportWords
 import HowManyColumn4 as hmc
 #import openpyxl
 import xlwings as xw
+import time
+import hashlib
 from log import LogMgr
+from job import JobTable
 
 logmgr = LogMgr()
 
@@ -22,6 +25,15 @@ name = sheet['C']
 strength = sheet['D']
 mfrs = sheet['F']
 '''
+
+
+
+
+class inrtroduction(object):
+    def __init__(self):
+        pass
+    
+    
 
 def load_excel(excel):
     wb = xw.Book(excel)
@@ -359,8 +371,26 @@ def maxdata(datadict):
     #    datadict['委托方企业名称'] = datadict['委托方企业名称'][:]
     return datadict
     
+
+def generatemd5(strid):
+    md5 = hashlib.md5()
+    md5.update(strid.encode('utf-8'))
+    return md5.hexdigest()
     
             
+def getscore(datas, nums):
+    scores = 0
+    for data in datas:
+        scores += data['probability']['average']
+    return (scores / nums) * 100
+
+def middict(datas):
+    relist = []
+    for word in datas:
+        relist.append(word['words'])
+    return relist
+
+
 
 if __name__ == '__main__':
     codepath = os.path.dirname(__file__)
@@ -371,33 +401,40 @@ if __name__ == '__main__':
     excel_path = 'C:\\Users\\dongd\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
     #shopid, name, strength, mfrs  = load_excel(excel_path)
     db = cxOracle()
+    job = JobTable() 
     imgpath_root = "F:\IMG"
     #笔记本上的是移动硬盘的路径
     imgpaht_root_desktop = "G:\IMG"
+    path_root = "G:\源文件"
     datas = []
     leftdata = []
     rightdata = []
     nums = 0
     flag = 0
+    srcco_dir = os.listdir(datapath)
     for file in os.walk(datapath):
+        page = 0
         for file_name in file[2]:
             if '说明书' in file_name:
                 imgname = file_name.split('.')[0]
                 curpath = file[0].split('data')[1]
                 index = imgname.rfind('_')
                 id = curpath[curpath.rfind('\\') + 1:]
+                name_index_e = re.match(r'.*[A-Z]', id).span()[1]
+                dragname = id[:name_index_e - 1]
+                if dragname.find('(') > 0:
+                    dragname = dragname[:dragname.find('(')]
+                id_code = id[name_index_e - 1:]
                 datajson = load_json(file[0] + '\\' + file_name)
                 #图片过大或者一些原因，没有识别出来就会有error_code字段
                 if 'error_code' in datajson:
                     continue
+                source_img_path = imgpaht_root_desktop + '\\' + curpath + '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
+                original_path = path_root + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
                 #FIXME:换工作环境这里也得改！
                 try:
-                    kindict = hmc.kinds(imgpaht_root_desktop + '\\' + curpath + 
-                                            '\\' + imgname[:index] + 
-                                            '.' + imgname[index:].split('_')[1], 
-                                            datajson)
+                    kindict = hmc.kinds(source_img_path, datajson)
                 except Exception as e:
-                    print("Error :", e)
                     logmgr.error(file[0] + '\\' + file_name + ':' + str(e))
                     continue
                 print('Current processing: {}'.format(imgpaht_root_desktop + '\\' + curpath + 
@@ -412,14 +449,58 @@ if __name__ == '__main__':
                 elif kindict['kinds'] == 1:
                     datas += datatmp
                 flag = 1
+                page += 1
+                jobdict = {}
+                #服务器
+                jobdict['SER_IP'] = '10.67.28.8'
+                #job id
+                jobdict['JOB_ID'] = generatemd5(file[0])
+                jobdict['SRC_FILE_NAME'] = imgname[:index - 2] + '.' + 'pdf'
+                jobdict['SRC_FILE_PATH'] = original_path
+                #原文件
+                jobdict['CUT_FILE_NAME'] = imgname[:index] + '.' + imgname[index:].split('_')[1]
+                #原路径
+                jobdict['CUT_FILE_PATH'] = imgpaht_root_desktop + '\\' + curpath
+                #中间文件
+                jobdict['MID_FILE_NAME'] = file_name
+                #中间文件路径
+                jobdict['MID_FILE_PATH'] = file[0]
+                #评分
+                jobdict['OCR_SCORE'] = int(getscore(datas, nums))
+                #时间
+                jobdict['HANDLE_TIME'] = time.strftime("%Y-%m-%d %X", time.localtime())
+                #药品名
+                jobdict['DRUG_NAME'] = dragname
+                #影像件类型
+                jobdict['FILE_TYPE'] = imgname[index:].split('_')[1]
+                #影像件内容是否入库
+                jobdict['IS_TO_DB'] = 'T'
+                #同一套影像件识别码
+                jobdict['ID_CODE'] = id_code
+                #分公司
+                jobdict['SRC_CO'] = srcco_dir[0]
+                #源文件相对路径
+                jobdict['FILE_REL_PATH'] = '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
+                #文件服务器域名
+                jobdict['SYS_URL'] = '10.67.28.8'
+                #文件文本内容
+                jobdict['FILE_TEXT'] = str(middict(datas))
+                #页数
+                jobdict['PAGE_NUM'] = page
+                #文件ocr解析识别状态 fk sysparams
+                jobdict['OCR_STATE'] = 'T'
+                #备注说明
+                jobdict['REMARK'] = ''
+                #创建用户
+                jobdict['ADD_USER'] = 'DevinChang'
+                job.job_add(jobdict)
+                job.job_todb()
+                job.job_del()
         if flag:
             if len(datas) > 0 and nums > 0:
                 datadict = inrtroduction(datas, nums)
                 print(datadict)
-                name_index_e = re.match(r'.*[A-Z]', id).span()[1]
-                dragname = id[:name_index_e - 1]
-                if dragname.find('(') > 0:
-                    dragname = dragname[:dragname.find('(')]
+                id_code = id[name_index_e - 1:]
                 if not datadict:
                     nums = cleandata(datadict, datas, nums)
                     continue
@@ -428,32 +509,7 @@ if __name__ == '__main__':
                     datadict.update({"通用名称" : dragname})
                 else:
                     datadict["通用名称"] = dragname
-                ##整个识别完后，再将excel表中对应的数据替换掉识别的结果
-                #if id in shopid:
-                #    index = shopid.index(id)
-                #    #if "通用名称" in datadict:
-                #    #    del datadict["通用名称"]
-                #    #if "规格" in datadict:
-                #    #    del datadict['规格']
-                #    #if "生产厂家"in datadict:
-                #    #    del datadict['生产厂家']
-                #    if "通用名称" not in datadict:
-                #        datadict.update({"通用名称" : name[index]})
-                #    else:
-                #        datadict["通用名称"] = name[index]
-                #    #TODO:调整规格逻辑
-                #    if "规格" not in datadict:
-                #        strength_t = GetRightStrength(strength[index])
-                #        if strength_t:
-                #            datadict.update({"规格" : strength_t})
-                #    else:
-                #        strength_t = GetRightStrength(strength[index])
-                #        if strength_t:
-                #            datadict["规格"] = strength_t
-                #    if "生产厂家" not in datadict:
-                #        datadict.update({"生产厂家" : mfrs[index]})
-                #    else:
-                #        datadict["生产厂家"] = mfrs[index]
+
                     
                 
                     
@@ -478,10 +534,17 @@ if __name__ == '__main__':
                         re.sub(re_guoyao, '国药准字', datadict['批准文号'])
 
 
+                
+
+
+                
+
 
                 try:
-                    addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict)
-                    db.insert(addsql, param)
+                    #addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict)
+                    #jobsql, jobparam = db.getsavesql('OCRWORKFILE', jobdict, 2)
+                    #db.insert(addsql, param)
+                    #db.insert(jobsql, jobparam)
                     nums = cleandata(datadict, datas, nums)
                 except Exception as e:
                     print('Error: ', e)

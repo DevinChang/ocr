@@ -132,7 +132,7 @@ class cxOracle:
         print('存入成功')
 
 #根据json字典返回
-    def getsavesql(self,tablename,jsonstrs):
+    def getsavesql(self,tablename,jsonstrs, flag):
         keys = ''
         values = ''
         pram=[]
@@ -144,7 +144,10 @@ class cxOracle:
                 i = i+1
                 #if (key == '质量电话') or (key == '销售电话'):
                 #    continue
-                convert_key = self._convert_key(key)
+                if flag == 1:
+                    convert_key = self._convert_key(key)
+                else:
+                    convert_key = key
                 if not convert_key:
                     continue
                 if i == len(text):

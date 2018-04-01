@@ -89,7 +89,9 @@ class MyOcr(object):
             datafilepath = self.datapath + root.split('IMG')[1] + '\\' + path
             filepath = os.listdir(curpath)
             for file_name in filepath:
-                if '说明书' in file_name:
+                #if '说明书' in file_name:
+                #TODO:当一整套的时候，需调整此块逻辑
+                if '药品生产许可证' in file_name:
                     if '备案' in file_name:
                         continue
                     if os.path.isdir(curpath + '\\' + file_name):

@@ -1,3 +1,0 @@
-TODO:
-  ☐ #TODO:新增几个字段的匹配 @file://f:\DevinChang\Code\Python\ocr\introduction.py#74
-  ☐ #TODO:OTC，外，以及字段追加问题 @file://f:\DevinChang\Code\Python\ocr\introduction.py#229

@@ -119,6 +119,8 @@ class cxOracle:
             return 'SU_NAME'
         elif key == '分装企业地址':
             return 'SU_ADDR'
+        elif key == 'ID_CODE':
+            return 'ID_CODE'
 
     #根据sql语句（带参数）执行插入数据
     def insert(self,sql,pram):

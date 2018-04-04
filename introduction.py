@@ -12,6 +12,7 @@ import time
 import hashlib
 from log import LogMgr
 from job import JobTable
+import random
 
 logmgr = LogMgr()
 
@@ -380,6 +381,8 @@ def generatemd5(strid):
             
 def getscore(datas, nums):
     scores = 0
+    if nums == 0:
+        return 0
     for data in datas:
         scores += data['probability']['average']
     return (scores / nums) * 100
@@ -391,6 +394,13 @@ def middict(datas):
     return relist
 
 
+def randomidcode():
+    letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    randomnum = random.randint(1000, 99999)
+    if randomnum < 10000:
+        return random.choice(letter) + '00000' + str(randomnum)
+    else:
+        return random.choice(letter) + '0000' + str(randomnum)
 
 if __name__ == '__main__':
     codepath = os.path.dirname(__file__)
@@ -411,6 +421,7 @@ if __name__ == '__main__':
     rightdata = []
     nums = 0
     flag = 0
+    #FIXME:需修改SRC_CO字段
     srcco_dir = os.listdir(datapath)
     for file in os.walk(datapath):
         page = 0
@@ -420,14 +431,22 @@ if __name__ == '__main__':
                 curpath = file[0].split('data')[1]
                 index = imgname.rfind('_')
                 id = curpath[curpath.rfind('\\') + 1:]
-                name_index_e = re.match(r'.*[A-Z]', id).span()[1]
-                dragname = id[:name_index_e - 1]
-                if dragname.find('(') > 0:
-                    dragname = dragname[:dragname.find('(')]
-                id_code = id[name_index_e - 1:]
+                if re.search(r'[A-Z][0-9][0-9]+|[0-9][0-9][0-9][0-9][0-9][0-9]+', id):
+                    id_code = re.search(r'[A-Z][0-9][0-9]+|[0-9][0-9][0-9][0-9][0-9][0-9]+', id).group()
+                    name_index = re.search(r'[A-Z][0-9][0-9]+|[0-9][0-9][0-9][0-9][0-9][0-9]+', id).span()[1]
+                    dragname = id[:name_index - len(id_code)]
+                    if dragname.find('(') > 0:
+                        dragname = dragname[:dragname.find('(')]
+                else:
+                    logmgr.error(file[0] + '\\' + file_name + ':' 'no match')
+                    ic_code = 0
+                    dragname = ''
+                dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+                id_code = randomidcode()
                 datajson = load_json(file[0] + '\\' + file_name)
                 #图片过大或者一些原因，没有识别出来就会有error_code字段
                 if 'error_code' in datajson:
+                    logmgr.error(file[0] + '\\' + file_name + ':' 'Size Error!')
                     continue
                 source_img_path = imgpaht_root_desktop + '\\' + curpath + '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
                 original_path = path_root + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
@@ -500,7 +519,6 @@ if __name__ == '__main__':
             if len(datas) > 0 and nums > 0:
                 datadict = inrtroduction(datas, nums)
                 print(datadict)
-                id_code = id[name_index_e - 1:]
                 if not datadict:
                     nums = cleandata(datadict, datas, nums)
                     continue
@@ -511,23 +529,26 @@ if __name__ == '__main__':
                     datadict["通用名称"] = dragname
 
                     
-                
+                if datadict['通用名称']:
+                    if re.match(r'[\u4e00-\u9fa5]*', datadict['通用名称']):
+                        datadict['通用名称'] = re.match(r'[\u4e00-\u9fa5]*', datadict['通用名称']).group()
                     
                 datadict = maxdata(datadict)
+                datadict.update({"ID_CODE" : id_code})
                 if '企业名称' in datadict:
                     if ('生产厂家' not in datadict) or (len(datadict['生产厂家'])== 0):
                         datadict.update({"生产厂家" : datadict['企业名称']})
                         del datadict['企业名称']
                 if '生产厂家' in datadict:
                     #用正则 DONE
-                    re_comfrs = re.compile(r'企*业名称[:：]*|企业*名称[:：]*')
+                    re_comfrs =re.compile(r'企*业名称[:：]*|企业*名称[:：]*')
                     if re_comfrs.match(datadict['生产厂家']):
                         comfrs_index = re_comfrs.match(datadict['生产厂家']).span()[1]
                         datadict['生产厂家'] = datadict['生产厂家'][comfrs_index:]
 
-                if ("膏" or "贴") in datadict['通用名称'][-1]:
-                    if "外" not in datadict:
-                        datadict.update({"外" : "是"})
+                #if ("膏" or "贴") in datadict['通用名称'][-1]:
+                #    if "外" not in datadict:
+                #        datadict.update({"外" : "是"})
                 if '批准文号' in datadict:
                     re_guoyao = re.compile(r'国药准?字?|国?药准?字|国药?准字')
                     if re_guoyao.match(datadict['批准文号']):
@@ -541,10 +562,8 @@ if __name__ == '__main__':
 
 
                 try:
-                    #addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict)
-                    #jobsql, jobparam = db.getsavesql('OCRWORKFILE', jobdict, 2)
-                    #db.insert(addsql, param)
-                    #db.insert(jobsql, jobparam)
+                    addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict, 1)
+                    db.insert(addsql, param)
                     nums = cleandata(datadict, datas, nums)
                 except Exception as e:
                     print('Error: ', e)

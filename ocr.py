@@ -76,44 +76,42 @@ class MyOcr(object):
         #imgpath = self.codepath + '\IMG'+'\国控天星'
         #FIXME:电脑环境不同，路径也不一样，切换环境的话要修改路径
         #imgpath = 'F:\IMG'
-        imgpath = 'G:\IMG\国控盐城'
+        imgpath = 'G:\IMG\国控山东'
 
         options = {}
         options["detect_direction"] = "true" 
         options["detect_language"] = "true"
         options["probability"] = "true"
         
-        dirlist, root = self._list_custom(imgpath)
-        for path in dirlist:
-            curpath = root + '\\' + path
-            datafilepath = self.datapath + root.split('IMG')[1] + '\\' + path
-            filepath = os.listdir(curpath)
-            for file_name in filepath:
-                #if '说明书' in file_name:
-                #TODO:当一整套的时候，需调整此块逻辑
-                if '药品生产许可证' in file_name:
+        #FIXME:图片路径需改
+        dirlist = os.listdir(imgpath)
+        root = imgpath
+        #dirlist, root = self._list_custom(imgpath)
+        for file in os.walk(imgpath):
+            for file_name in file[2]:
+                if '说明书' in file_name:
                     if '备案' in file_name:
                         continue
-                    if os.path.isdir(curpath + '\\' + file_name):
+                    if os.path.isdir(file[0] + '\\' + file_name):
                         continue
                     if not re.match(r'[jJ][pP][gG]', file_name[-3:]):
                         continue
-                    
+                    datafilepath = self.datapath + file[0].split('IMG')[1]
                     if not os.path.exists(datafilepath):
                         os.makedirs(datafilepath)
-                    img = self._get_file_content(curpath + '\\' + file_name)
+                    img = self._get_file_content(file[0] + '\\' + file_name)
                     if file_name[:-4].find('.'):
                         file_name = file_name[:-4].replace('.', '') + file_name[-4:]
                     try:
                         prefix,suffix = file_name.split('.')
                     except Exception as e:
-                        print('split error: {}\ncurrent file: {}'.format(e, curpath + '\\' + file_name))
-                        self.log.error(curpath + '\\' + file_name + " Error!! : " + str(e))
+                        print('split error: {}\ncurrent file: {}'.format(e, file[0] + '\\' + file_name))
+                        self.log.error(file[0] + '\\' + file_name + " Error!! : " + str(e))
                         continue
                     #判断文件是否存在
                     if os.path.isfile((datafilepath +'\{}.json').format(prefix + '_' + suffix)):
                         continue
-                    print('Current img: {}'.format(curpath + '\\' + file_name))
+                    print('Current img: {}'.format(file[0] + '\\' + file_name))
                     try: 
                         if self.typeid == 1:
                             data = self.client.basicGeneral(img, options)
@@ -125,9 +123,52 @@ class MyOcr(object):
                             data = self.client.accurate(img, options)
                     except Exception as e:
                          print('Error: ', e)
-                         self.log.error(curpath + '\\' + file_name + " Error!! : " + str(e))
+                         self.log.error(file[0] + '\\' + file_name + " Error!! : " + str(e))
                          continue
                     self._write_json_file((datafilepath +'\{}.json').format(prefix + '_' + suffix), data)       
+        #for path in dirlist:
+        #    curpath = root + '\\' + path
+        #    datafilepath = self.datapath + root.split('IMG')[1] + '\\' + path
+        #    filepath = os.listdir(curpath)
+        #    for file_name in filepath:
+        #        #if '说明书' in file_name:
+        #        #TODO:当一整套的时候，需调整此块逻辑
+        #        if '说明书' in file_name:
+        #            if '备案' in file_name:
+        #                continue
+        #            if os.path.isdir(curpath + '\\' + file_name):
+        #                continue
+        #            if not re.match(r'[jJ][pP][gG]', file_name[-3:]):
+        #                continue
+        #            
+        #            if not os.path.exists(datafilepath):
+        #                os.makedirs(datafilepath)
+        #            img = self._get_file_content(curpath + '\\' + file_name)
+        #            if file_name[:-4].find('.'):
+        #                file_name = file_name[:-4].replace('.', '') + file_name[-4:]
+        #            try:
+        #                prefix,suffix = file_name.split('.')
+        #            except Exception as e:
+        #                print('split error: {}\ncurrent file: {}'.format(e, curpath + '\\' + file_name))
+        #                self.log.error(curpath + '\\' + file_name + " Error!! : " + str(e))
+        #                continue
+        #            #判断文件是否存在
+        #            if os.path.isfile((datafilepath +'\{}.json').format(prefix + '_' + suffix)):
+        #                continue
+        #            print('Current img: {}'.format(curpath + '\\' + file_name))
+        #            try: 
+        #                if self.typeid == 1:
+        #                    data = self.client.basicGeneral(img, options)
+        #                elif self.typeid == 2:
+        #                    data = self.client.general(img, options)
+        #                elif self.typeid == 3:
+        #                    data = self.client.basicAccurate(img, options)
+        #                elif self.typeid == 4:
+        #                    data = self.client.accurate(img, options)
+        #            except Exception as e:
+        #                 print('Error: ', e)
+        #                 self.log.error(curpath + '\\' + file_name + " Error!! : " + str(e))
+        #                 continue
 #        i = 0
 #        for file in os.walk(imgpath):
 #            #2018/3/5 modify: 修改读取文件流程，使得保存数据的路径与图片的路径相同

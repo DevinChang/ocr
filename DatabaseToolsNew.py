@@ -15,17 +15,21 @@ class cxOracle:
 
 
 #执行sql
-    def insert(self,sql):
+    def insertsql(self,sql):
         conn = self.getconnect()
         cr = conn.cursor()
         # col 是clob字段
         cr.execute(sql)
-        rs=cr.fetchall()
-        for r in rs:
-            print(r[0])
-            #text = r[0][0].read()
-            #pram.appen(text)
+        # rs=cr.fetchall()
+        # for r in rs:
+        #     print(r[0])
+        #     #text = r[0][0].read()
+        #     #pram.appen(text)
         cr.close()
+        conn.commit()
+        conn.close()
+
+        # print('执行成功')
 
     def _convert_key(self, key):
         """将识别后的数据的key转换为可以插入到数据库的key"""
@@ -133,6 +137,15 @@ class cxOracle:
         conn.close()
         print('存入成功')
 
+    def update(self,tablename,uniqueid,uniqueidvalue,update_pram,update_value):#依次为：表名 唯一性标识如JOB_ID JOB_ID的内容 要更新的字段  要更新为的内容
+        insertsql = 'UPDATE '+tablename+' SET '+update_pram+' = '+"'"+update_value+"'"+' WHERE '+uniqueid+" = '"+uniqueidvalue+"'"
+        print('insert语句为：'+insertsql)
+        try:
+            self.insertsql(insertsql)
+        except Exception as e:
+            print(e)
+            print('更新失败')
+
 #根据json字典返回
     def getsavesql(self,tablename,jsonstrs, flag):
         keys = ''
@@ -169,3 +182,6 @@ class cxOracle:
         return sql,pram
 
 
+
+# cxoracle = cxOracle('scott','123456')
+# cxoracle.update('OCRWORKFILE','JOB_ID','9c4298c9eacdd342f9d224b425b07c62','IS_TO_DB','T')

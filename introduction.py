@@ -13,6 +13,7 @@ import hashlib
 from log import LogMgr
 from job import JobTable
 import random
+from json2word import json2word
 
 logmgr = LogMgr()
 
@@ -387,11 +388,14 @@ def getscore(datas, nums):
         scores += data['probability']['average']
     return (scores / nums) * 100
 
-def middict(datas):
+def middict(datas, middatapath, filename):
+    if not os.path.exists(middatapath):
+        os.makedirs(middatapath)
     relist = []
     for word in datas:
         relist.append(word['words'])
-    return relist
+    json2word(relist, middatapath, filename)
+    return middatapath + '\\' + filename
 
 
 def randomidcode():
@@ -431,16 +435,6 @@ if __name__ == '__main__':
                 curpath = file[0].split('data')[1]
                 index = imgname.rfind('_')
                 id = curpath[curpath.rfind('\\') + 1:]
-                if re.search(r'[A-Z][0-9][0-9]+|[0-9][0-9][0-9][0-9][0-9][0-9]+', id):
-                    id_code = re.search(r'[A-Z][0-9][0-9]+|[0-9][0-9][0-9][0-9][0-9][0-9]+', id).group()
-                    name_index = re.search(r'[A-Z][0-9][0-9]+|[0-9][0-9][0-9][0-9][0-9][0-9]+', id).span()[1]
-                    dragname = id[:name_index - len(id_code)]
-                    if dragname.find('(') > 0:
-                        dragname = dragname[:dragname.find('(')]
-                else:
-                    logmgr.error(file[0] + '\\' + file_name + ':' 'no match')
-                    ic_code = 0
-                    dragname = ''
                 dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
                 id_code = randomidcode()
                 datajson = load_json(file[0] + '\\' + file_name)
@@ -491,19 +485,19 @@ if __name__ == '__main__':
                 #药品名
                 jobdict['DRUG_NAME'] = dragname
                 #影像件类型
-                jobdict['FILE_TYPE'] = imgname[index:].split('_')[1]
+                jobdict['FILE_TYPE'] = '说明书'
                 #影像件内容是否入库
                 jobdict['IS_TO_DB'] = 'T'
                 #同一套影像件识别码
                 jobdict['ID_CODE'] = id_code
                 #分公司
-                jobdict['SRC_CO'] = srcco_dir[0]
+                jobdict['SRC_CO'] = curpath.split('\\')[1]
                 #源文件相对路径
                 jobdict['FILE_REL_PATH'] = '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
                 #文件服务器域名
                 jobdict['SYS_URL'] = '10.67.28.8'
                 #文件文本内容
-                jobdict['FILE_TEXT'] = str(middict(datas))
+                jobdict['FILE_TEXT'] = middict(datas, codepath + '\\middata\\' + curpath, imgname)
                 #页数
                 jobdict['PAGE_NUM'] = page
                 #文件ocr解析识别状态 fk sysparams

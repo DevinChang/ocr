@@ -435,6 +435,7 @@ if __name__ == '__main__':
                 curpath = file[0].split('data')[1]
                 index = imgname.rfind('_')
                 id = curpath[curpath.rfind('\\') + 1:]
+                #dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
                 dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
                 id_code = randomidcode()
                 datajson = load_json(file[0] + '\\' + file_name)
@@ -485,9 +486,12 @@ if __name__ == '__main__':
                 #药品名
                 jobdict['DRUG_NAME'] = dragname
                 #影像件类型
-                jobdict['FILE_TYPE'] = '说明书'
+                jobdict['FILE_TYPE'] = '说明书全文'
                 #影像件内容是否入库
-                jobdict['IS_TO_DB'] = 'T'
+                if len(datas) > 0 and nums > 0:
+                    jobdict['IS_TO_DB'] = 'T'
+                else:
+                    jobdict['IS_TO_DB'] = 'F'
                 #同一套影像件识别码
                 jobdict['ID_CODE'] = id_code
                 #分公司
@@ -514,6 +518,7 @@ if __name__ == '__main__':
                 datadict = inrtroduction(datas, nums)
                 print(datadict)
                 if not datadict:
+                    #db.update('OCRWORKFILE', 'JOB_ID', jobdict['JOB_ID'], 'IS_TO_DB', 'F')
                     nums = cleandata(datadict, datas, nums)
                     continue
                 
@@ -547,14 +552,6 @@ if __name__ == '__main__':
                     re_guoyao = re.compile(r'国药准?字?|国?药准?字|国药?准字')
                     if re_guoyao.match(datadict['批准文号']):
                         re.sub(re_guoyao, '国药准字', datadict['批准文号'])
-
-
-                
-
-
-                
-
-
                 try:
                     addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict, 1)
                     db.insert(addsql, param)
@@ -564,6 +561,9 @@ if __name__ == '__main__':
                     logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
                     nums = cleandata(datadict, datas, nums)
                     continue
+            #else:
+            #    db.update('OCRWORKFILE','JOB_ID', jobdict['JOB_ID'], 'IS_TO_DB', 'F')
+
         #print(datas)
     
     

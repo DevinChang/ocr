@@ -23,9 +23,13 @@ Todo:<br>
   `2018/3/26`:<br>
     ✔增加job表 @started(18-03-26 10:21)@done(18-03-27 20:42) @lasted(1 day 10 hours 21 minutes 37 seconds)<br>
   `2018/3/28`:<br>
-    ✘ GMP识别入库 @cancelled(18-04-11 20:14)
+    ✘ GMP识别入库 @cancelled(18-04-11 20:14)<br>
   `2018/4/11`:<br>
-    ✔ GMP识别第一版 @done(18-04-11 20:15)
+    ✔ GMP识别第一版 @done(18-04-11 20:15)<br>
+  `2018/4/12`:<br>
+    ☐ 调整GMP精度<br>
+    ☐ 处理药品处理批件<br>
+
   
 
 

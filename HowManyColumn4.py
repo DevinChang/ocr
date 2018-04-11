@@ -96,6 +96,7 @@ def kinds(imgPath,jsonPath):
                 tempList[j] = 0
             if count != 0:
                 count += 1
+        tempList[i] = 0
 
         if count >= 1*numberOfWords/6:
             countOfKinds += 1
@@ -122,9 +123,18 @@ def kinds(imgPath,jsonPath):
         b1 = dict[2][0]
         b2 = dict[2][1]
         if a1 <= b1:
-            boundary[0] = a2
+            if a2 < b1:
+                boundary[0] = a2
+            else:
+                boundary[0] = b1
+            # boundary[0] = b1
         else:
-            boundary[0] = b2
+            if b2 < a1:
+                boundary[0] = b2
+            else:
+                boundary[0] = a1
+            # boundary[0] = b1
+            # boundary[0] = a1
     elif  countOfKinds == 3:
         boundary = [-1,-1]
         a1 = dict[1][0]

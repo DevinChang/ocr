@@ -1,21 +1,32 @@
 # -*- coding: utf-8 -*-
 import os
 import re
-import json
-from log import LogMgr
+from tool import Tools
 
-class GMP(object):
+class GMP(Tools):
+    """
+    GMP证书的识别
+    """
     def __init__(self, imgpath):
         self.imgpath = imgpath
-        self.log = LogMgr()
 
-    def _gmp(self,datas, nums):
+    def _recognize(self,datas, nums):
         """
-        识别GMP证书
+        识别GMP证书, 程序的主逻辑
         """
         keylist = []
         datadict = dict()
+      
         for (word, i) in zip(datas, range(0, nums)):
+            '''
+            循环读识别出的数据，然后根据judge_keywords函数是否提取到了关键信息；
+            若提取到了，则保存到datadict中。
+            若未提取到，list_result为空。有两种情况，
+                1.这段信息不是我们所需要的。
+                2.这段信息是上个关键字的值。
+                然后执行else，进行更精确的判别。若是需归到上个字段，则循环递减，根据
+                keylist[1],也就是list_reault[2]是否出现再上面的某个字段。若有则追加。
+            '''
             list_result = self._judge_keywords(word['words'])
             if list_result != None:
                 if list_result[0] in datadict and keylist[-1][0] != list_result[0]:
@@ -24,6 +35,7 @@ class GMP(object):
                 else:
                     datadict[list_result[0]] = list_result[1]
                     flag = 1
+                #保存关键字段的信息，以及这段信息原本关键字段的信息
                 keylist.append([list_result[0],list_result[2]])
             else:
                 j = i
@@ -59,18 +71,15 @@ class GMP(object):
                     j -= 1  
         return datadict
 
-    def _load_json(self, file):
-        with open(file, 'r', encoding='utf-8') as f:
-            return json.loads(f.read())
-        
-    def _sort_index(self, strword):
-        if len(strword) <= 2:
-            return len(strword)
-        else:
-            return 4
-            
     def _judge_keywords(self, strword):
-        '''判断关键字'''
+        '''
+        判断关键字,若识别到关键字，返回一个包含关键字的list。
+        $resultlist[0] -----要入库的关键字
+        $resultlist[1] -----提取到内容
+        $resultlist[2] -----需判断的信息中本来的关键字
+        如:'证书编号:H12345',resultlist = ['证书编号', 'H12345', '证书编号']
+           '证书号:H123', resultlist = ['证书编号', 'H123', '证书号']
+        '''
         re_coname = re.compile(r"企业*名称*|企*业名*称")
         re_cernum = re.compile(r"证书*编号*|证*书编*号")
         re_addr = re.compile(r"地址")
@@ -122,16 +131,8 @@ class GMP(object):
             else:
                 return None
 
-    def _cleandata(self, datadict, data, num):
-        if datadict:
-            datadict.clear()
-        if data:
-            data.clear()
-        if num != 0:
-            num = 0
-        return num
 
-    def recognize(self):
+    def gmp(self):
         flag = 0
         for file in os.walk(self.imgpath):
             for file_name in file[2]:
@@ -167,7 +168,7 @@ class GMP(object):
                     flag = 1
             if flag:
                 if len(datas) > 0 and nums > 0:
-                    datadict = self._gmp(datas, nums)
+                    datadict = self._recognize(datas, nums)
                     print(datadict)
                     if not datadict:
                         nums = cleandata(datadict, datas, nums)
@@ -178,4 +179,4 @@ class GMP(object):
 if __name__ == '__main__':
     codepath = os.path.dirname(__file__)
     gmptest = GMP(codepath + '\data')
-    gmptest.recognize()
+    gmptest.gmp()

@@ -357,16 +357,32 @@ def maxdata(datadict):
     #    datadict['委托方企业名称'] = datadict['委托方企业名称'][:]
     return datadict
     
+
+
+class base(object):
+    def __init__(self):
+        self.data = 0
+        self.nums = 10
+
+
+class child(base):
+    def __init__(self):
+        base.__init__(self)
+    def print(self):
+        print(self.data)
+        print(self.nums)
     
             
 
 if __name__ == '__main__':
-    datajson = load_json('F:\DevinChang\Code\Python\ocr\data\国控盐城\西药\葡萄糖酸钙锌口服溶液A000060279\\药品说明书_1_jpg.json')
-    datas = datajson['words_result']
-    nums = datajson['words_result_num']
+    child = child()
+    child.print()
+    #datajson = load_json('F:\DevinChang\Code\Python\ocr\data\国控盐城\西药\葡萄糖酸钙锌口服溶液A000060279\\药品说明书_1_jpg.json')
+    #datas = datajson['words_result']
+    #nums = datajson['words_result_num']
     #kindict = hmc.kinds('C:\\Users\\dongd\\Desktop\\阿奇霉素颗粒A000021514\\药品说明书_2.jpg', datajson)
     #datas = subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'], datas)
-    datadict = inrtroduction(datas, nums)
+    #datadict = inrtroduction(datas, nums)
     
     #codepath = os.path.dirname(__file__)
     #datapath = codepath + '\data'

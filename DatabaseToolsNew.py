@@ -125,6 +125,65 @@ class cxOracle:
             return 'SU_ADDR'
         elif key == 'ID_CODE':
             return 'ID_CODE'
+        elif key == '剂型':
+            return 'DRUG_FORM'
+        elif key == '证书编号':
+            return 'GMP_NO'
+        elif key == '地址':
+            return 'ADDR'
+        elif key == '认证范围':
+            return 'INSP_SCOPE'
+        elif key == '有效期至':
+            return 'VLD'
+        elif key == '发证机关':
+            return 'ISSUE_ORG'
+        elif key == '发证日期':
+            return 'ISSUE_DATE'
+        elif key == 'ENT_NAME':
+            return 'ENT_NAME'
+        elif key == 'ENT_TYPE':
+            return 'ENT_TYPE'
+        elif key == '住所':
+            return 'ADDR'
+        elif key == '法定代表人':
+            return 'LEGAL_REPS'
+        elif key == '注册资本':
+            return 'REG_CAPITAL'
+        elif key == '成立日期':
+            return 'EST_DATE'
+        elif key == '营业期限':
+            return 'OPT_TERM'
+        elif key == '经营范围':
+            return 'BIZ_SCOPE'
+        elif key == '统一社会信用代码':
+            return 'USCC'
+        elif key == '药品名称':
+            return 'DRUG_NAME'
+        elif key == '企业名称_许可证':
+            return 'ENT_NAME'
+        elif key == '注册地址':
+            return 'REG_ADDR'
+        elif key == '企业负责人':
+            return 'ENT_PRINCIPAL'
+        elif key == '质量负责人':
+            return 'QC_PRINCIPAL'
+        elif key == '日常监管机构':
+            return 'SUPERVISION_DEPT'
+        elif key == '日常监管人员':
+            return 'SUPERVISOR'
+        elif key == '监督举报电话':
+            return 'SUPERVISOR_CT'
+        elif key == '许可证编号':
+            return 'LIC_NO'
+        elif key == '分类码':
+            return 'CATE_CODE'
+        elif key == '许可证编号':
+            return 'LIC_NO'
+        elif key == '生产地址和生产范围':
+            return 'PROD_ADDR_SCOPE'
+        elif key == '签发人':
+            return 'ISSUER'
+            
 
     #根据sql语句（带参数）执行插入数据
     def insert(self,sql,pram):
@@ -161,7 +220,7 @@ class cxOracle:
                 #    continue
                 if flag == 1:
                     convert_key = self._convert_key(key)
-                else:
+                elif flag ==2:
                     convert_key = key
                 if not convert_key:
                     continue

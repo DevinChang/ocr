@@ -53,7 +53,7 @@ def load_json(file):
     with open(file, 'r', encoding='utf-8') as f:
         return json.loads(f.read())
 
-def sort_index(strword):
+def short_index(strword):
     if len(strword) <= 2:
         return len(strword)
     else:
@@ -96,21 +96,21 @@ def judge_keywords(strword):
 
     if re.match(r'.+?(?:】)|.+?(?:])', strword[:index]):
         #FIXME: 成份，性状字段缺失
-        if re_element.search(strword[:sort_index(strword)]):
+        if re_element.search(strword[:short_index(strword)]):
             return ['成份' , strword[re_element.search(strword).span()[1]:], re_element.search(strword).group()]
         elif re_function_category.search(strword[:index]):
             return ['作用类别' , strword[re_function_category.search(strword).span()[1] + 1:], re_function_category.search(strword).group()]
-        elif re_traits.search(strword[:sort_index(strword)]):
+        elif re_traits.search(strword[:short_index(strword)]):
             return ['性状' , strword[re_traits.search(strword).span()[1]:],re_traits.search(strword).group()]
         elif re_indication.search(strword[:index]):
             return ['功能主治' , strword[re_indication.search(strword).span()[1]:],re_indication.search(strword).group()]
-        elif re_specification.search(strword[:sort_index(strword)]):
+        elif re_specification.search(strword[:short_index(strword)]):
             return ['规格' , strword[re_specification.search(strword).span()[1]:],re_specification.search(strword).group()]
         elif re_dosage.search(strword[:index]):
             return ['用法用量' , strword[re_dosage.search(strword).span()[1]:],re_dosage.search(strword).group()]
         elif re_reaction.search(strword[:index]):
             return ['不良反应' , strword[re_reaction.search(strword).span()[1]:],re_reaction.search(strword).group()]
-        elif re_prohibition.search(strword[:sort_index(strword)]):
+        elif re_prohibition.search(strword[:short_index(strword)]):
             return ['禁忌' , strword[re_prohibition.search(strword).span()[1]:],re_prohibition.search(strword).group()]
         elif re_precautions.search(strword[:index]):
             return ['注意事项' , strword[re_precautions.search(strword).span()[1]:],re_precautions.search(strword).group()]
@@ -142,21 +142,21 @@ def judge_keywords(strword):
             return ['英文名称' , strword[re_english.search(strword).span()[1]:], re_english.search(strword).group()]
         elif re_pinyin.search(strword[:index]):
             return ['汉语拼音' , strword[re_pinyin.search(strword).span()[1]:], re_pinyin.search(strword).group()]
-        elif re_element_accu.search(strword[:sort_index(strword) - 1]):
+        elif re_element_accu.search(strword[:short_index(strword) - 1]):
             return ['成份' , strword[re_element_accu.search(strword).span()[1]:], re_element_accu.search(strword).group()]
         elif re_function_category.search(strword[:index]):
             return ['作用类别' , strword[re_function_category.search(strword).span()[1]:], re_function_category.search(strword).group()]
-        elif re_traits_accu.search(strword[:sort_index(strword) - 1]):
+        elif re_traits_accu.search(strword[:short_index(strword) - 1]):
             return ['性状' , strword[re_traits_accu.search(strword).span()[1]:],re_traits_accu.search(strword).group()]
         elif re_indication_accu.search(strword[:index]):
             return ['功能主治' , strword[re_indication_accu.search(strword).span()[1]:],re_indication_accu.search(strword).group()]
-        elif re_specification_accu.search(strword[:sort_index(strword) - 1]):
+        elif re_specification_accu.search(strword[:short_index(strword) - 1]):
             return ['规格' , strword[re_specification_accu.search(strword).span()[1]:],re_specification_accu.search(strword).group()]
         elif re_dosage_accu.search(strword[:index]):
             return ['用法用量' , strword[re_dosage_accu.search(strword).span()[1]:],re_dosage_accu.search(strword).group()]
         elif re_reaction_accu.search(strword[:index]):
             return ['不良反应' , strword[re_reaction_accu.search(strword).span()[1]:],re_reaction_accu.search(strword).group()]
-        elif re_prohibition_accu.search(strword[:sort_index(strword) - 1]):
+        elif re_prohibition_accu.search(strword[:short_index(strword) - 1]):
             return ['禁忌' , strword[re_prohibition_accu.search(strword).span()[1]:],re_prohibition_accu.search(strword).group()]
         elif re_precautions_accu.search(strword[:index]):
             return ['注意事项' , strword[re_precautions_accu.search(strword).span()[1]:],re_precautions_accu.search(strword).group()]
@@ -568,3 +568,159 @@ if __name__ == '__main__':
     
     
 
+def run_introduction(path, id_code):
+    codepath = os.path.dirname(__file__)
+    datapath = codepath + '\data'
+    files = os.listdir(datapath)
+    #excel_path = 'C:\\Users\\DevinChang\\Desktop\\四家分公司影印件清单_去重匹配版.xlsx'
+    #这是笔记本上的路径
+    #shopid, name, strength, mfrs  = load_excel(excel_path)
+    db = cxOracle()
+    job = JobTable() 
+    imgpath_root = "F:\IMG"
+    #笔记本上的是移动硬盘的路径
+    imgpaht_root_desktop = "G:\IMG"
+    path_root = "G:\源文件"
+    datas = []
+    leftdata = []
+    rightdata = []
+    nums = 0
+    flag = 0
+    #FIXME:需修改SRC_CO字段
+    srcco_dir = os.listdir(datapath)
+    for file in os.walk(path):
+        page = 0
+        for file_name in file[2]:
+            if '说明书' in file_name:
+                imgname = file_name.split('.')[0]
+                curpath = file[0].split('data')[1]
+                index = imgname.rfind('_')
+                id = curpath[curpath.rfind('\\') + 1:]
+                #dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
+                dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+                datajson = load_json(file[0] + '\\' + file_name)
+                #图片过大或者一些原因，没有识别出来就会有error_code字段
+                if 'error_code' in datajson:
+                    logmgr.error(file[0] + '\\' + file_name + ':' 'Size Error!')
+                    continue
+                source_img_path = imgpaht_root_desktop + '\\' + curpath + '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
+                original_path = path_root + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
+                #FIXME:换工作环境这里也得改！
+                try:
+                    kindict = hmc.kinds(source_img_path, datajson)
+                except Exception as e:
+                    logmgr.error(file[0] + '\\' + file_name + ':' + str(e))
+                    continue
+                print('Current processing: {}'.format(imgpaht_root_desktop + '\\' + curpath + 
+                                        '\\' + imgname[:index] + 
+                                        '.' + imgname[index:].split('_')[1], 
+                                        file[0] + '\\' + file_name))
+                
+                datatmp = datajson['words_result']
+                nums += datajson['words_result_num']
+                if kindict['kinds'] == 2:
+                    datas += subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'][0], datatmp)
+                elif kindict['kinds'] == 1:
+                    datas += datatmp
+                flag = 1
+                page += 1
+                jobdict = {}
+                #服务器
+                jobdict['SER_IP'] = '10.67.28.8'
+                #job id
+                job_id = generatemd5(file[0])
+                jobdict['JOB_ID'] = job_id
+                jobdict['SRC_FILE_NAME'] = imgname[:index - 2] + '.' + 'pdf'
+                jobdict['SRC_FILE_PATH'] = original_path
+                #原文件
+                jobdict['CUT_FILE_NAME'] = imgname[:index] + '.' + imgname[index:].split('_')[1]
+                #原路径
+                jobdict['CUT_FILE_PATH'] = imgpaht_root_desktop + '\\' + curpath
+                #中间文件
+                jobdict['MID_FILE_NAME'] = file_name
+                #中间文件路径
+                jobdict['MID_FILE_PATH'] = file[0]
+                #评分
+                jobdict['OCR_SCORE'] = int(getscore(datas, nums))
+                #时间
+                jobdict['HANDLE_TIME'] = time.strftime("%Y-%m-%d %X", time.localtime())
+                #药品名
+                jobdict['DRUG_NAME'] = dragname
+                #影像件类型
+                jobdict['FILE_TYPE'] = '说明书全文'
+                #影像件内容是否入库
+                if len(datas) > 0 and nums > 0:
+                    jobdict['IS_TO_DB'] = 'T'
+                else:
+                    jobdict['IS_TO_DB'] = 'F'
+                #同一套影像件识别码
+                jobdict['ID_CODE'] = id_code
+                #分公司
+                jobdict['SRC_CO'] = curpath.split('\\')[1]
+                #源文件相对路径
+                jobdict['FILE_REL_PATH'] = '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
+                #文件服务器域名
+                jobdict['SYS_URL'] = '10.67.28.8'
+                #文件文本内容
+                jobdict['FILE_TEXT'] = middict(datas, codepath + '\\middata\\' + curpath, imgname)
+                #页数
+                jobdict['PAGE_NUM'] = page
+                #文件ocr解析识别状态 fk sysparams
+                jobdict['OCR_STATE'] = 'T'
+                #备注说明
+                jobdict['REMARK'] = ''
+                #创建用户
+                jobdict['ADD_USER'] = 'DevinChang'
+                job.job_add(jobdict)
+                job.job_todb()
+                job.job_del()
+        if flag:
+            if len(datas) > 0 and nums > 0:
+                datadict = inrtroduction(datas, nums)
+                if not datadict:
+                    #db.update('OCRWORKFILE', 'JOB_ID', jobdict['JOB_ID'], 'IS_TO_DB', 'F')
+                    nums = cleandata(datadict, datas, nums)
+                    continue
+                
+                if "通用名称" not in datadict:
+                    datadict.update({"通用名称" : dragname})
+                else:
+                    datadict["通用名称"] = dragname
+
+                    
+                if datadict['通用名称']:
+                    if re.match(r'[\u4e00-\u9fa5]*', datadict['通用名称']):
+                        datadict['通用名称'] = re.match(r'[\u4e00-\u9fa5]*', datadict['通用名称']).group()
+                    
+                datadict = maxdata(datadict)
+                datadict.update({"ID_CODE" : id_code})
+                #datadict.update({"JOB_ID": job_id})
+                #datadict.update({"ADD_USER" : 'DevinChang'})
+                if '企业名称' in datadict:
+                    if ('生产厂家' not in datadict) or (len(datadict['生产厂家'])== 0):
+                        datadict.update({"生产厂家" : datadict['企业名称']})
+                        del datadict['企业名称']
+                if '生产厂家' in datadict:
+                    #用正则 DONE
+                    re_comfrs =re.compile(r'企*业名称[:：]*|企业*名称[:：]*')
+                    if re_comfrs.match(datadict['生产厂家']):
+                        comfrs_index = re_comfrs.match(datadict['生产厂家']).span()[1]
+                        datadict['生产厂家'] = datadict['生产厂家'][comfrs_index:]
+
+                #if ("膏" or "贴") in datadict['通用名称'][-1]:
+                #    if "外" not in datadict:
+                #        datadict.update({"外" : "是"})
+                if '批准文号' in datadict:
+                    re_guoyao = re.compile(r'国药准?字?|国?药准?字|国药?准字')
+                    if re_guoyao.match(datadict['批准文号']):
+                        re.sub(re_guoyao, '国药准字', datadict['批准文号'])
+                print(datadict)
+                try:
+                    addsql, param = db.getsavesql('DRUGPACKAGEINSERT', datadict, 1)
+                    db.insert(addsql, param)
+                    nums = cleandata(datadict, datas, nums)
+                except Exception as e:
+                    print('Error: ', e)
+                    logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
+                    nums = cleandata(datadict, datas, nums)
+                    continue

@@ -1,22 +1,24 @@
-# -*- coding: utf-8 -*-
 import os
 import re
 import time
 from tool import Tools
 from log import LogMgr
 
-class GMP(Tools):
+
+
+
+class License(Tools):
     """
-    GMP证书的识别
+    识别营业执照
     """
     def __init__(self, datapath):
         Tools.__init__(self)
-        self.imgpath = datapath
+        self.datapath = datapath
         self.logmgr = LogMgr()
 
     def _recognize(self,datas, nums):
         """
-        识别GMP证书, 程序的主逻辑
+        程序的主逻辑
         """
         keylist = []
         datadict = dict()
@@ -32,6 +34,15 @@ class GMP(Tools):
                 keylist[1],也就是list_reault[2]是否出现再上面的某个字段。若有则追加。
             '''
             list_result = self._judge_keywords(word['words'])
+            if '名' == word['words'] and datas[i + 1]['words'][0] == '称':
+                datadict['ENT_NAME'] = datas[i + 1]['words'][1:]
+                continue
+            elif '类' == word['words'] and '型' == datas[i + 1]['words'][0]:
+                datadict['ENT_TYPE'] = datas[i + 1]['words'][1:]
+                continue
+            elif '住' == word['words'] and '所' == datas[i + 1]['words'][0]:
+                datadict['住所'] = datas[i + 1]['words'][1:]
+                continue
             if list_result != None:
                 if list_result[0] in datadict and keylist[-1][0] != list_result[0]:
                     datadict[list_result[0]] += list_result[1]
@@ -46,35 +57,16 @@ class GMP(Tools):
                 while j > 0:
                     if not keylist:
                         break
-                    #FIXMEED:逻辑问题  4/10 DONE
-                    if re.match(r'\s[a-zA-Z]+', word['words']):
-                        break
-                    #提取"有效期至"与"发证日期"字段
-                    if re.match(r'\d{4}|\d{2}', word['words']):
-                        if len(word['words']) <= 4:
+                    if keylist[-1][0] == '统一社会信用代码':
+                        if re.search(r'[\u4e00-\u9fa5]+', word['words']):
                             break
-                        elif '/' in word['words']:
-                            if keylist[-1][0] == '发证机关':
-                                datadict['发证日期'] = word['words']
-                                keylist.append(['杂', '杂'])
-                                break
-                            if re.search(r'\d{4}|\d{2}', datadict['有效期至']):
-                                break
-                            else:
-                                datadict['有效期至'] = word['words']
-                                break
                     if flag:
-                        if keylist[-1][0] == '地址':
-                            is_scope = self._judge_keywords(datas[i + 1]['words'])
-                            if is_scope != None and is_scope[0] == '认证范围':
-                                datadict['认证范围'] = word['words']
-                                break
                         if keylist[-1][1] in datas[j]['words']:
                             datadict[keylist[-1][0]] += word['words']
                             break
                     j -= 1  
         return datadict
-
+    
     def _judge_keywords(self, strword):
         '''
         判断关键字,若识别到关键字，返回一个包含关键字的list。
@@ -84,64 +76,48 @@ class GMP(Tools):
         如:'证书编号:H12345',resultlist = ['证书编号', 'H12345', '证书编号']
            '证书号:H123', resultlist = ['证书编号', 'H123', '证书号']
         '''
-        re_coname = re.compile(r"企业*名称*|企*业名*称")
-        re_cernum = re.compile(r"证书*编号*|证*书编*号")
-        re_addr = re.compile(r"地址")
-        re_cerscope = re.compile(r"认证*范围*|认*证范*围")
-        re_valid = re.compile(r"有效期至*|有效*期至")
-        re_liceauth = re.compile(r"发证*机关*|发*证机*关")
-        re_licedate = re.compile(r"发证*日期*|发*证日*期")
-        re_abandon = re.compile(r"经审*查")
+        re_name = re.compile(r"名称")
+        re_social_code = re.compile(r"统*一社*会信用代码|统一*社会*信用*代码")
+        re_type = re.compile(r"类型")
+        re_residence = re.compile(r"住所")
+        re_legal_representative = re.compile(r"法定*代表*人|法*定代表人*")
+        re_capital = re.compile(r'注册*资本*|注*册资*本')
+        re_establish = re.compile(r'成立*日期*|成*立日*期')
+        re_period = re.compile(r'营业*期限*|营*业期*限')    
+        re_scope = re.compile(r"经营*范围*|经*营范*围")
+        re_authority = re.compile(r"登记*机关*|登*记机*关")
 
-        if len(strword) >= 8: 
+        if len(strword) >= 10: 
+            index = 8
+        elif len(strword) >=8:
             index = 6
         else:
             index = len(strword)
 
-        if(re.match(r'.+?(?:\:)', strword[:index])):
-            if re_coname.search(strword[:index]):
-                return ['企业名称', strword[re_coname.search(strword).span()[1]:], re_coname.search(strword).group()]
-            elif re_cernum.search(strword[:index]):
-                return ['证书编号' , strword[re_cernum.search(strword).span()[1] + 1:], re_cernum.search(strword).group()]
-            elif re_addr.search(strword[:self._sort_index(strword)]):
-                return ['地址' , strword[re_addr.search(strword).span()[1]:],re_addr.search(strword).group()]
-            elif re_cerscope.search(strword[:index]):
-                return ['认证范围' , strword[re_cerscope.search(strword).span()[1]:],re_cerscope.search(strword).group()]
-            elif re_valid.search(strword[:index]):
-                return ['有效期至' , strword[re_valid.search(strword).span()[1]:],re_valid.search(strword).group()]
-            elif re_liceauth.search(strword[:index]):
-                return ['发证机关' , strword[re_liceauth.search(strword).span()[1]:],re_liceauth.search(strword).group()]
-            elif re_licedate.search(strword[:index]):
-                return ['发证时间' , strword[re_licedate.search(strword).span()[1]:],re_licedate.search(strword).group()]
-            else:
-                return None
-        else: 
-            if re_coname.search(strword[:index]):
-                return ['企业名称', strword[re_coname.search(strword).span()[1]:], re_coname.search(strword).group()]
-            elif re_cernum.search(strword[:index]):
-                return ['证书编号' , strword[re_cernum.search(strword).span()[1] + 1:], re_cernum.search(strword).group()]
-            elif re_addr.search(strword[:self._sort_index(strword)]):
-                return ['地址' , strword[re_addr.search(strword).span()[1]:],re_addr.search(strword).group()]
-            elif re_cerscope.search(strword[:index]):
-                return ['认证范围' , strword[re_cerscope.search(strword).span()[1]:],re_cerscope.search(strword).group()]
-            elif re_valid.search(strword[:index]):
-                return ['有效期至' , strword[re_valid.search(strword).span()[1]:],re_valid.search(strword).group()]
-            elif re_liceauth.search(strword[:index]):
-                return ['发证机关' , strword[re_liceauth.search(strword).span()[1]:],re_liceauth.search(strword).group()]
-            elif re_licedate.search(strword[:index]):
-                return ['发证时间' , strword[re_licedate.search(strword).span()[1]:],re_licedate.search(strword).group()]
-            elif re_abandon.search(strword[:index]):
-                return ['经审查', strword[re_abandon.search(strword).span()[1]:], re_abandon.search(strword).group()]
-            else:
-                return None
+        if re_social_code.search(strword[:index]):
+            return ['统一社会信用代码', strword[re_social_code.search(strword).span()[1]:], re_social_code.search(strword).group()]
+        elif re_legal_representative.search(strword[:index]):
+            return ['法定代表人', strword[re_legal_representative.search(strword).span()[1]:], re_legal_representative.search(strword).group()]
+        elif re_capital.search(strword[:index]):
+            return ['注册资本', strword[re_capital.search(strword).span()[1]:], re_capital.search(strword).group()]
+        elif re_establish.search(strword[:index]):
+            return ['成立日期', strword[re_establish.search(strword).span()[1]:], re_establish.search(strword).group()]
+        elif re_period.search(strword[:index]):
+            return ['营业期限', strword[re_period.search(strword).span()[1]:], re_period.search(strword).group()]
+        elif re_scope.search(strword[:index]):
+            return ['经营范围', strword[re_scope.search(strword).span()[1]:], re_scope.search(strword).group()]
+        elif re_authority.search(strword[:index]):
+            return ['登记机关', strword[re_authority.search(strword).span()[1]:], re_authority.search(strword).group()]
+        else:
+            return None
 
 
-    def gmp(self, path, id_code):
+    def license(self, path, id_code):
         flag = 0
         for file in os.walk(path):
+            page = 1
             for file_name in file[2]:
-                page = 1
-                if 'GMP证书' in file_name:
+                if '营业执照' in file_name:
                     imgname = file_name.split('.')[0]
                     curpath = file[0].split('data')[1]
                     index = imgname.rfind('_')
@@ -149,23 +125,12 @@ class GMP(Tools):
                     dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
                     if dragname.find('(') > 0:
                         dragname = dragname[:dragname.find('(')]
-                    #id_code = id[name_index_e - 1:]
                     datajson = self._load_json(file[0] + '\\' + file_name)
                     #图片过大或者一些原因，没有识别出来就会有error_code字段
                     if 'error_code' in datajson:
                         self.logmgr.error(file[0] + '\\' + file_name + ": img size error!")
                         continue
-                    #source_img_path = imgpaht_root_desktop + '\\' + curpath + '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
                     original_path = 'G:\\IMG' + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
-                    #try:
-                    #    kindict = hmc.kinds(source_img_path, datajson)
-                    #except Exception as e:
-                    #    logmgr.error(file[0] + '\\' + file_name + ':' + str(e))
-                    #    continue
-                    #print('Current processing: {}'.format(imgpaht_root_desktop + '\\' + curpath + 
-                    #                        '\\' + imgname[:index] + 
-                    #                        '.' + imgname[index:].split('_')[1], 
-                    #                        file[0] + '\\' + file_name))
                     datas = datajson['words_result']
                     nums = datajson['words_result_num']
                     flag = 1
@@ -192,7 +157,7 @@ class GMP(Tools):
                     #药品名
                     jobdict['DRUG_NAME'] = dragname
                     #影像件类型
-                    jobdict['FILE_TYPE'] = 'GMP证书'
+                    jobdict['FILE_TYPE'] = '营业执照'
                     #影像件内容是否入库
                     if len(datas) > 0 and nums > 0:
                         jobdict['IS_TO_DB'] = 'T'
@@ -216,31 +181,21 @@ class GMP(Tools):
                     jobdict['REMARK'] = ''
                     #创建用户
                     jobdict['ADD_USER'] = 'DevinChang'
+                    page += 1
                     self.job.job_add(jobdict)
                     self.job.job_todb()
                     self.job.job_del()
             if flag:
                 if len(datas) > 0 and nums > 0:
-                    datadicttmp = self._recognize(datas, nums)
-                    datadict = dict()
-                    if '证书编号' in datadicttmp:
-                        datadict['证书编号'] = datadicttmp['证书编号']
-                    if '地址' in datadicttmp:
-                        datadict['地址'] = datadicttmp['地址']
-                    if '认证范围' in datadicttmp:
-                        datadict['认证范围'] = datadicttmp['认证范围']
-                    if '有效期至' in datadicttmp:
-                        datadict['有效期至'] = datadicttmp['有效期至']
-                    if '发证机关' in datadicttmp:
-                        datadict['发证机关'] = datadicttmp['发证机关']
-                    if '发证日期' in datadicttmp:
-                        datadict['发证日期'] = datadicttmp['发证日期']
+                    datadict = self._recognize(datas, nums)
                     print(datadict)
                     if not datadict:
                         nums = self._cleandata(datadict, datas, nums)
                         continue
+                    if '登记机关' in datadict:
+                        del datadict['登记机关']
                     try:
-                        self._data_to_db('GMPCERT', datadict)
+                        self._data_to_db('BUSINESSLICENCE', datadict)
                         nums = self._cleandata(datadict, datas, nums)
                     except Exception as e:
                         print('Error: ', e)
@@ -248,9 +203,7 @@ class GMP(Tools):
                         nums = self._cleandata(datadict, datas, nums)
                         continue 
 
-
-
 if __name__ == '__main__':
     datapath = os.path.dirname(__file__) + '\data'
-    gmptest = GMP(datapath)
-    gmptest.gmp(datapath, '12345')
+    license = License(datapath)
+    license.license(datapath, '12345')

@@ -1,8 +1,13 @@
 # -*- coding:utf-8 -*-
 
 
-from log import LogMgr
+import os
 import json
+import hashlib
+from log import LogMgr
+from DatabaseToolsNew import cxOracle
+from job import JobTable
+from json2word import json2word
 
 
 class Tools(object):
@@ -10,7 +15,52 @@ class Tools(object):
     工具类，一些通用函数
     """
     def __init__(self):
-        self.log = LogMgr()
+        #self.logmgr = LogMgr()
+        self.db = cxOracle()
+        self.job = JobTable()
+        self.codepath = os.path.dirname(__file__)
+    
+    def _data_to_db(self, table, datadict, flag = 1):
+        """
+        将提取好的数据入库
+        @table      ----数据库表名
+        @datadict   ----提取出的字典
+        @flag       ----是否需要将字典的key转换成英文的标识，默认为1需要
+                        2为不需要，若直接命名的key为数据库中的英文，应设置为2
+        """
+        addsql, param = self.db.getsavesql(table, datadict, flag)
+        self.db.insert(addsql, param)
+       
+
+
+    def _generatemd5(self, strid):
+        """
+        生成md5码做jobid
+        """
+        md5 = hashlib.md5()
+        md5.update(strid.encode('utf-8'))
+        return md5.hexdigest()
+
+    def _middict(self, datas, middatapath, filename):
+        """
+        生成中间数据
+        """
+        if not os.path.exists(middatapath):
+            os.makedirs(middatapath)
+        relist = []
+        for word in datas:
+            relist.append(word['words'])
+        json2word(relist, middatapath, filename)
+        return middatapath + '\\' + filename
+
+    def _getscore(self, datas, nums):
+        """打分"""
+        scores = 0
+        if nums == 0:
+            return 0
+        for data in datas:
+            scores += data['probability']['average']
+        return (scores / nums) * 100
 
     def _load_json(self, file):
         """
@@ -30,6 +80,12 @@ class Tools(object):
         else:
             return 4     
 
+    def _short_index(self, strword):
+        if len(strword) <= 2:
+            return len(strword)
+        else:
+            return 4
+            
     def _cleandata(self, datadict, data, num):
         """
         初始化识别函数运行过程中的一些变量

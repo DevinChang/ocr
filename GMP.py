@@ -223,6 +223,8 @@ class GMP(Tools):
                 if len(datas) > 0 and nums > 0:
                     datadicttmp = self._recognize(datas, nums)
                     datadict = dict()
+                    if '企业名称' in datadicttmp:
+                        datadict['企业名称'] = datadicttmp['企业名称']
                     if '证书编号' in datadicttmp:
                         datadict['证书编号'] = datadicttmp['证书编号']
                     if '地址' in datadicttmp:

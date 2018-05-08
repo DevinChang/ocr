@@ -114,6 +114,8 @@ class License(Tools):
 
     def license(self, path, id_code):
         flag = 0
+        temp = ''
+        jobdict = {}
         for file in os.walk(path):
             page = 1
             for file_name in file[2]:
@@ -126,43 +128,25 @@ class License(Tools):
                     if dragname.find('(') > 0:
                         dragname = dragname[:dragname.find('(')]
                     datajson = self._load_json(file[0] + '\\' + file_name)
-                    #图片过大或者一些原因，没有识别出来就会有error_code字段
-                    if 'error_code' in datajson:
-                        self.logmgr.error(file[0] + '\\' + file_name + ": img size error!")
-                        continue
                     original_path = 'G:\\IMG' + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
-                    datas = datajson['words_result']
-                    nums = datajson['words_result_num']
-                    flag = 1
 
-                    jobdict = {}
                     #服务器
                     jobdict['SER_IP'] = '10.67.28.8'
                     #job id
-                    jobdict['JOB_ID'] = self._generatemd5(file[0] + dragname)
+                    jobdict['JOB_ID'] = self._generatemd5(file[0] + imgname)
+                    jobid = jobdict['JOB_ID']
                     jobdict['SRC_FILE_NAME'] = imgname[:index - 2] + '.' + 'pdf'
                     jobdict['SRC_FILE_PATH'] = original_path
                     #原文件
                     jobdict['CUT_FILE_NAME'] = imgname[:index] + '.' + imgname[index:].split('_')[1]
                     #原路径
                     jobdict['CUT_FILE_PATH'] = 'G:\\IMG' + '\\' + curpath
-                    #中间文件
-                    jobdict['MID_FILE_NAME'] = file_name
-                    #中间文件路径
-                    jobdict['MID_FILE_PATH'] = file[0]
-                    #评分
-                    jobdict['OCR_SCORE'] = int(self._getscore(datas, nums))
                     #时间
                     jobdict['HANDLE_TIME'] = time.strftime("%Y-%m-%d %X", time.localtime())
                     #药品名
                     jobdict['DRUG_NAME'] = dragname
                     #影像件类型
                     jobdict['FILE_TYPE'] = '营业执照'
-                    #影像件内容是否入库
-                    if len(datas) > 0 and nums > 0:
-                        jobdict['IS_TO_DB'] = 'T'
-                    else:
-                        jobdict['IS_TO_DB'] = 'F'
                     #同一套影像件识别码
                     jobdict['ID_CODE'] = id_code
                     #分公司
@@ -171,8 +155,6 @@ class License(Tools):
                     jobdict['FILE_REL_PATH'] = '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
                     #文件服务器域名
                     jobdict['SYS_URL'] = '10.67.28.8'
-                    #文件文本内容
-                    jobdict['FILE_TEXT'] = self._middict(datas, self.codepath + '\\middata\\' + curpath, imgname)
                     #页数
                     jobdict['PAGE_NUM'] = page
                     #文件ocr解析识别状态 fk sysparams
@@ -181,6 +163,40 @@ class License(Tools):
                     jobdict['REMARK'] = ''
                     #创建用户
                     jobdict['ADD_USER'] = 'DevinChang'
+                    #图片过大或者一些原因，没有识别出来就会有error_code字段
+                    if 'error_code' in datajson:
+                        jobdict['IS_TO_DB'] = 'F'
+                        self.job.job_add(jobdict)
+                        self.job.job_todb()
+                        self.job.job_del()
+                        self.logmgr.error(file[0] + '\\' + file_name + ": img size error!")
+                        continue
+                    datas = datajson['words_result']
+                    nums = datajson['words_result_num']
+                    flag = 1
+
+                    
+                    #中间文件
+                    jobdict['MID_FILE_NAME'] = file_name
+                    #中间文件路径
+                    jobdict['MID_FILE_PATH'] = file[0]
+                    #评分
+                    jobdict['OCR_SCORE'] = int(self._getscore(datas, nums))
+                    
+                    #影像件内容是否入库
+                    if len(datas) > 0 and nums > 0:
+                        jobdict['IS_TO_DB'] = 'T'
+                    else:
+                        jobdict['IS_TO_DB'] = 'F'
+                    
+                    #文件文本内容
+                    jobdict['FILE_TEXT'] = self._middict(datas, self.codepath + '\\middata\\' + curpath, imgname)
+                    ###########################
+                    temp = jobdict['FILE_TEXT']
+                    ###########################
+                    #jobdict['JOB_ID'] = self._generatemd5(jobdict['FILE_TEXT'])
+                    ###############
+                    
                     page += 1
                     self.job.job_add(jobdict)
                     self.job.job_todb()
@@ -188,6 +204,12 @@ class License(Tools):
             if flag:
                 if len(datas) > 0 and nums > 0:
                     datadict = self._recognize(datas, nums)
+                    ######################################增加部分###########################################
+                    datadict['ID_CODE']=id_code
+                    datadict['REMARK']=''
+                    datadict['ADD_USER']='shuai'
+                    datadict['JOB_ID'] = self._generatemd5(temp)
+                    ######################################增加部分###########################################
                     print(datadict)
                     if not datadict:
                         nums = self._cleandata(datadict, datas, nums)
@@ -200,10 +222,12 @@ class License(Tools):
                     except Exception as e:
                         print('Error: ', e)
                         self.logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
+                        self._update_item('OCRWORKFILE','JOB_ID', jobid,'IS_TO_DB','F')
                         nums = self._cleandata(datadict, datas, nums)
                         continue 
 
 if __name__ == '__main__':
     datapath = os.path.dirname(__file__) + '\data'
+    testpath = 'f:\DevinChang\Code\Python\ocr\data\国控盐城\西药\酮康唑乳膏A000060628'
     license = License(datapath)
-    license.license(datapath, '12345')
+    license.license(testpath, '12345')

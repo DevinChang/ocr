@@ -244,6 +244,8 @@ class ProductionCertificate(Tools):
     def recognize(self, path, id_code):
         flag = 0
         page = 0
+        temp  =''
+        jobdict = {}
         for file in os.walk(path):#这里将原来imgpath换成了 jsonpath
             for file_name in file[2]:
                 if '药品生产许可证' in file_name:
@@ -256,12 +258,51 @@ class ProductionCertificate(Tools):
                         dragname = dragname[:dragname.find('(')]
                     jsonPath = file[0] + '\\' + file_name
                     datajson = self._load_json(file[0] + '\\' + file_name)
+                    source_img_path = 'G:\\IMG' + curpath + '\\' + jsonname[:index] + '.' + jsonname[index:].split('_')[1]
+                    original_path = 'G:\\IMG' + '\\' + curpath + '\\' + jsonname[:index - 2] + '.' + 'pdf'
+
+                    #服务器
+                    jobdict['SER_IP'] = '10.67.28.8'
+                    #job id
+                    jobdict['JOB_ID'] = self._generatemd5(file[0] + jsonname)
+                    jobid = jobdict['JOB_ID']
+                    jobdict['SRC_FILE_NAME'] = jsonname[:index - 2] + '.' + 'pdf'
+                    jobdict['SRC_FILE_PATH'] = original_path
+                    #原文件
+                    jobdict['CUT_FILE_NAME'] = jsonname[:index] + '.' + jsonname[index:].split('_')[1]
+                    #原路径
+                    jobdict['CUT_FILE_PATH'] = 'G:\\IMG' + '\\' + curpath
+                    #时间
+                    jobdict['HANDLE_TIME'] = time.strftime("%Y-%m-%d %X", time.localtime())
+                    #药品名
+                    jobdict['DRUG_NAME'] = dragname
+                    #影像件类型
+                    jobdict['FILE_TYPE'] = '药品生产许可证'
+                    #同一套影像件识别码
+                    jobdict['ID_CODE'] = id_code
+                    #分公司
+                    jobdict['SRC_CO'] = curpath.split('\\')[1]
+                    #源文件相对路径
+                    jobdict['FILE_REL_PATH'] = '\\' + jsonname[:index] + '.' + jsonname[index:].split('_')[1]
+                    #文件服务器域名
+                    jobdict['SYS_URL'] = '10.67.28.8'
+                    #页数
+                    jobdict['PAGE_NUM'] = page
+                    #文件ocr解析识别状态 fk sysparams
+                    jobdict['OCR_STATE'] = 'T'
+                    #备注说明
+                    jobdict['REMARK'] = ''
+                    #创建用户
+                    jobdict['ADD_USER'] = 'DevinChang'
                     # 图片过大或者一些原因，没有识别出来就会有error_code字段
                     if 'error_code' in datajson:
+                        jobdict['IS_TO_DB'] = 'F'
+                        self.job.job_add(jobdict)
+                        self.job.job_todb()
+                        self.job.job_del() 
                         self.logmgr.error(file[0] + '\\' + file_name + ": img size error!")
                         continue
 
-                    source_img_path = 'G:\\IMG' + curpath + '\\' + jsonname[:index] + '.' + jsonname[index:].split('_')[1]
                     #source_img_path = 'img\\'+jsonname+'.jpg' #由于需要增加分栏的程序所以，需要图片的路径，但是目前这里面的路径存在一定的问题
                     # source_img_path = file[0] + '\\' + file_name
                     # original_path = path_root + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
@@ -285,53 +326,27 @@ class ProductionCertificate(Tools):
                         datas = datas
                     flag = 1
                     page += 1
-                    original_path = 'G:\\IMG' + '\\' + curpath + '\\' + jsonname[:index - 2] + '.' + 'pdf'
-                    jobdict = {}
-                    #服务器
-                    jobdict['SER_IP'] = '10.67.28.8'
-                    #job id
-                    jobdict['JOB_ID'] = self._generatemd5(file[0] + dragname)
-                    jobdict['SRC_FILE_NAME'] = jsonname[:index - 2] + '.' + 'pdf'
-                    jobdict['SRC_FILE_PATH'] = original_path
-                    #原文件
-                    jobdict['CUT_FILE_NAME'] = jsonname[:index] + '.' + jsonname[index:].split('_')[1]
-                    #原路径
-                    jobdict['CUT_FILE_PATH'] = 'G:\\IMG' + '\\' + curpath
+                    
                     #中间文件
                     jobdict['MID_FILE_NAME'] = file_name
                     #中间文件路径
                     jobdict['MID_FILE_PATH'] = file[0]
                     #评分
                     jobdict['OCR_SCORE'] = int(self._getscore(datas, nums))
-                    #时间
-                    jobdict['HANDLE_TIME'] = time.strftime("%Y-%m-%d %X", time.localtime())
-                    #药品名
-                    jobdict['DRUG_NAME'] = dragname
-                    #影像件类型
-                    jobdict['FILE_TYPE'] = '药品生产许可证'
+                    
                     #影像件内容是否入库
                     if len(datas) > 0 and nums > 0:
                         jobdict['IS_TO_DB'] = 'T'
                     else:
                         jobdict['IS_TO_DB'] = 'F'
-                    #同一套影像件识别码
-                    jobdict['ID_CODE'] = id_code
-                    #分公司
-                    jobdict['SRC_CO'] = curpath.split('\\')[1]
-                    #源文件相对路径
-                    jobdict['FILE_REL_PATH'] = '\\' + jsonname[:index] + '.' + jsonname[index:].split('_')[1]
-                    #文件服务器域名
-                    jobdict['SYS_URL'] = '10.67.28.8'
+                    
                     #文件文本内容
                     jobdict['FILE_TEXT'] = self._middict(datas, self.codepath + '\\middata\\' + curpath, jsonname)
-                    #页数
-                    jobdict['PAGE_NUM'] = page
-                    #文件ocr解析识别状态 fk sysparams
-                    jobdict['OCR_STATE'] = 'T'
-                    #备注说明
-                    jobdict['REMARK'] = ''
-                    #创建用户
-                    jobdict['ADD_USER'] = 'DevinChang'
+                    ###############
+                    temp = jobdict['FILE_TEXT']
+                    #jobdict['JOB_ID'] = self._generatemd5(jobdict['FILE_TEXT'])
+                    ###############
+                    
                     page += 1 
                     self.job.job_add(jobdict)
                     self.job.job_todb()
@@ -351,8 +366,14 @@ class ProductionCertificate(Tools):
                             del datadict['中华人民共和国']
                         if '药品许可证' in datadict:
                             del datadict['药品许可证']
-                        
+
                         print(source_img_path)
+                        ######################################增加部分###########################################
+                        datadict['ID_CODE'] = id_code
+                        datadict['REMARK'] = ''
+                        datadict['ADD_USER'] = 'shuai'
+                        datadict['JOB_ID'] = self._generatemd5(temp)
+                        ######################################增加部分###########################################
                         print(datadict)
                         if not datadict:
                             nums = self._cleandata(datadict, datas, nums)
@@ -363,8 +384,9 @@ class ProductionCertificate(Tools):
                         except Exception as e:
                             print('Error: ', e)
                             self.logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
+                            self._update_item('OCRWORKFILE','JOB_ID', jobid,'IS_TO_DB','F')
                             nums = self._cleandata(datadict, datas, nums)
-                            continue 
+                            continue
 
 
 
@@ -374,4 +396,4 @@ if __name__ == '__main__':
     codepath = os.path.dirname(__file__)
     gmptest = ProductionCertificate(codepath + '/data/')
 
-    gmptest.recognize()
+    gmptest.recognize(codepath,'1111')

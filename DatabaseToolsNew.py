@@ -185,7 +185,17 @@ class cxOracle:
             return 'PROD_ADDR_SCOPE'
         elif key == '签发人':
             return 'ISSUER'
-            
+        elif key == '企业名称_GMP':
+            return 'MFRS'
+        ##############################
+        elif key == 'JOB_ID':
+            return 'JOB_ID'
+        elif key == 'ID_CODE':
+            return 'ID_CODE'
+        elif key == 'ADD_USER':
+            return 'ADD_USER'
+        elif key == 'REMARK':
+            return 'REMARK'
 
     #根据sql语句（带参数）执行插入数据
     def insert(self,sql,pram):

@@ -142,8 +142,10 @@ class Regisration(Tools):
 
     def regisration(self, path, id_code):
         flag = 0
+        temp = ''
         for file in os.walk(path):
             page = 1
+            jobdict = {}
             for file_name in file[2]:
                 if '药品再注册批件' in file_name:
                     imgname = file_name.split('.')[0]
@@ -154,43 +156,24 @@ class Regisration(Tools):
                     if dragname.find('(') > 0:
                         dragname = dragname[:dragname.find('(')]
                     datajson = self._load_json(file[0] + '\\' + file_name)
-                    #图片过大或者一些原因，没有识别出来就会有error_code字段
-                    if 'error_code' in datajson:
-                        self.logmgr.error(file[0] + '\\' + file_name + ": img size error!")
-                        continue
                     original_path = 'G:\\IMG' + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
-                    datas = datajson['words_result']
-                    nums = datajson['words_result_num']
-                    flag = 1
-
-                    jobdict = {}
                     #服务器
                     jobdict['SER_IP'] = '10.67.28.8'
                     #job id
-                    jobdict['JOB_ID'] = self._generatemd5(file[0] + dragname)
+                    jobdict['JOB_ID'] = self._generatemd5(file[0] + imgname)
+                    jobid = jobdict['JOB_ID']
                     jobdict['SRC_FILE_NAME'] = imgname[:index - 2] + '.' + 'pdf'
                     jobdict['SRC_FILE_PATH'] = original_path
                     #原文件
                     jobdict['CUT_FILE_NAME'] = imgname[:index] + '.' + imgname[index:].split('_')[1]
                     #原路径
                     jobdict['CUT_FILE_PATH'] = 'G:\\IMG' + '\\' + curpath
-                    #中间文件
-                    jobdict['MID_FILE_NAME'] = file_name
-                    #中间文件路径
-                    jobdict['MID_FILE_PATH'] = file[0]
-                    #评分
-                    jobdict['OCR_SCORE'] = int(self._getscore(datas, nums))
                     #时间
                     jobdict['HANDLE_TIME'] = time.strftime("%Y-%m-%d %X", time.localtime())
                     #药品名
                     jobdict['DRUG_NAME'] = dragname
                     #影像件类型
                     jobdict['FILE_TYPE'] = '药品再注册批件'
-                    #影像件内容是否入库
-                    if len(datas) > 0 and nums > 0:
-                        jobdict['IS_TO_DB'] = 'T'
-                    else:
-                        jobdict['IS_TO_DB'] = 'F'
                     #同一套影像件识别码
                     jobdict['ID_CODE'] = id_code
                     #分公司
@@ -199,8 +182,6 @@ class Regisration(Tools):
                     jobdict['FILE_REL_PATH'] = '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
                     #文件服务器域名
                     jobdict['SYS_URL'] = '10.67.28.8'
-                    #文件文本内容
-                    jobdict['FILE_TEXT'] = self._middict(datas, self.codepath + '\\middata\\' + curpath, imgname)
                     #页数
                     jobdict['PAGE_NUM'] = page
                     #文件ocr解析识别状态 fk sysparams
@@ -209,6 +190,39 @@ class Regisration(Tools):
                     jobdict['REMARK'] = ''
                     #创建用户
                     jobdict['ADD_USER'] = 'DevinChang'
+                    #图片过大或者一些原因，没有识别出来就会有error_code字段
+                    if 'error_code' in datajson:
+                        jobdict['IS_TO_DB'] = 'F'
+                        self.job.job_add(jobdict)
+                        self.job.job_todb()
+                        self.job.job_del()
+                        self.logmgr.error(file[0] + '\\' + file_name + ": img size error!")
+                        continue
+                    datas = datajson['words_result']
+                    nums = datajson['words_result_num']
+                    flag = 1
+
+                    
+                    #中间文件
+                    jobdict['MID_FILE_NAME'] = file_name
+                    #中间文件路径
+                    jobdict['MID_FILE_PATH'] = file[0]
+                    #评分
+                    jobdict['OCR_SCORE'] = int(self._getscore(datas, nums))
+                    
+                    #影像件内容是否入库
+                    if len(datas) > 0 and nums > 0:
+                        jobdict['IS_TO_DB'] = 'T'
+                    else:
+                        jobdict['IS_TO_DB'] = 'F'
+                    
+                    #文件文本内容
+                    jobdict['FILE_TEXT'] = self._middict(datas, self.codepath + '\\middata\\' + curpath, imgname)
+                    ###############
+                    temp = jobdict['FILE_TEXT']
+                    #jobdict['JOB_ID'] = self._generatemd5(jobdict['FILE_TEXT'])
+                    ###############
+                    
                     page += 1 
                     self.job.job_add(jobdict)
                     self.job.job_todb()
@@ -218,16 +232,46 @@ class Regisration(Tools):
                     datadicttmp = self._recognize(datas, nums)
                     datadict = dict()
                     if '药品名称' in datadicttmp:
-                        datadict['药品名称'] = datadicttmp['药品名称']
+                        if re.match('[:：]',datadicttmp['药品名称']):
+                            datadict['药品名称'] = datadicttmp['药品名称'][1:]
+                        else:
+                            datadict['药品名称'] = datadicttmp['药品名称']
+
                     if '剂型' in datadicttmp:
-                        datadict['剂型'] = datadicttmp['剂型']
+                        if re.match('[:：]',datadicttmp['剂型']):
+                            datadict['剂型'] = datadicttmp['剂型'][1:]
+                        else:
+                            datadict['剂型'] = datadicttmp['剂型']
+
                     if '规格' in datadicttmp:
-                        datadict['规格'] = datadicttmp['规格']
+                        if re.match('[:：]',datadicttmp['规格']):
+                            datadict['规格'] = datadicttmp['规格'][1:]
+                        else:
+                            datadict['规格'] = datadicttmp['规格']
+
                     if '生产厂家' in datadicttmp:
-                        datadict['生产厂家'] = datadicttmp['生产厂家']
+                        if re.match('[:：]',datadicttmp['生产厂家']):
+                            datadict['生产厂家'] = datadicttmp['生产厂家'][1:]
+                        else:
+                            datadict['生产厂家'] = datadicttmp['生产厂家']
+
                     if '日期' in datadicttmp:
-                        datadict['日期'] = datadicttmp['日期']
+                        if re.match('[:：]',datadicttmp['日期']):
+                            datadict['日期'] = datadicttmp['日期'][1:]
+                        else:
+                            datadict['日期'] = datadicttmp['日期']
+
+
+                    ######################################增加部分###########################################
+                    datadict['ID_CODE']=id_code
+                    datadict['REMARK']=''
+                    datadict['ADD_USER']='shuai'
+                    datadict['JOB_ID'] = self._generatemd5(temp)
+                    ######################################增加部分###########################################
                     print(datadict)
+                    ###########################
+
+                    ###########################
                     if not datadict:
                         nums = self._cleandata(datadict, datas, nums)
                         continue
@@ -237,6 +281,7 @@ class Regisration(Tools):
                     except Exception as e:
                         print('Error: ', e)
                         self.logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
+                        self._update_item('OCRWORKFILE','JOB_ID', jobid,'IS_TO_DB','F')
                         nums = self._cleandata(datadict, datas, nums)
                         continue  
 

@@ -589,22 +589,60 @@ def run_introduction(path, id_code):
     #FIXME:需修改SRC_CO字段
     srcco_dir = os.listdir(datapath)
     for file in os.walk(path):
-        page = 0
+        page = 1
+        jobdict = {}
         for file_name in file[2]:
             if '说明书' in file_name:
                 imgname = file_name.split('.')[0]
                 curpath = file[0].split('data')[1]
                 index = imgname.rfind('_')
                 id = curpath[curpath.rfind('\\') + 1:]
-                #dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
-                dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+                dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
+                #dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
                 datajson = load_json(file[0] + '\\' + file_name)
-                #图片过大或者一些原因，没有识别出来就会有error_code字段
-                if 'error_code' in datajson:
-                    logmgr.error(file[0] + '\\' + file_name + ':' 'Size Error!')
-                    continue
                 source_img_path = imgpaht_root_desktop + '\\' + curpath + '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
                 original_path = path_root + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
+                #服务器
+                jobdict['SER_IP'] = '10.67.28.8'
+                #job id
+                job_id = generatemd5(file[0] + imgname)[:20]
+                jobdict['JOB_ID'] = job_id
+                jobdict['SRC_FILE_NAME'] = imgname[:index - 2] + '.' + 'pdf'
+                jobdict['SRC_FILE_PATH'] = original_path
+                #原文件
+                jobdict['CUT_FILE_NAME'] = imgname[:index] + '.' + imgname[index:].split('_')[1]
+                #原路径
+                jobdict['CUT_FILE_PATH'] = imgpaht_root_desktop + '\\' + curpath
+                #时间
+                jobdict['HANDLE_TIME'] = time.strftime("%Y-%m-%d %X", time.localtime())
+                #药品名
+                jobdict['DRUG_NAME'] = dragname
+                #影像件类型
+                jobdict['FILE_TYPE'] = '说明书全文'
+                #同一套影像件识别码
+                jobdict['ID_CODE'] = id_code
+                #分公司
+                jobdict['SRC_CO'] = curpath.split('\\')[1]
+                #源文件相对路径
+                jobdict['FILE_REL_PATH'] = '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
+                #文件服务器域名
+                jobdict['SYS_URL'] = '10.67.28.8'
+                #页数
+                jobdict['PAGE_NUM'] = page
+                #文件ocr解析识别状态 fk sysparams
+                jobdict['OCR_STATE'] = 'T'
+                #备注说明
+                jobdict['REMARK'] = ''
+                #创建用户
+                jobdict['ADD_USER'] = 'DevinChang'
+                #图片过大或者一些原因，没有识别出来就会有error_code字段
+                if 'error_code' in datajson:
+                    jobdict['IS_TO_DB'] = 'F'
+                    job.job_add(jobdict)
+                    job.job_todb()
+                    job.job_del()
+                    logmgr.error(file[0] + '\\' + file_name + ':' 'Size Error!')
+                    continue
                 #FIXME:换工作环境这里也得改！
                 try:
                     kindict = hmc.kinds(source_img_path, datajson)
@@ -624,53 +662,26 @@ def run_introduction(path, id_code):
                     datas += datatmp
                 flag = 1
                 page += 1
-                jobdict = {}
-                #服务器
-                jobdict['SER_IP'] = '10.67.28.8'
-                #job id
-                job_id = generatemd5(file[0])
-                jobdict['JOB_ID'] = job_id
-                jobdict['SRC_FILE_NAME'] = imgname[:index - 2] + '.' + 'pdf'
-                jobdict['SRC_FILE_PATH'] = original_path
-                #原文件
-                jobdict['CUT_FILE_NAME'] = imgname[:index] + '.' + imgname[index:].split('_')[1]
-                #原路径
-                jobdict['CUT_FILE_PATH'] = imgpaht_root_desktop + '\\' + curpath
+                
                 #中间文件
                 jobdict['MID_FILE_NAME'] = file_name
                 #中间文件路径
                 jobdict['MID_FILE_PATH'] = file[0]
                 #评分
                 jobdict['OCR_SCORE'] = int(getscore(datas, nums))
-                #时间
-                jobdict['HANDLE_TIME'] = time.strftime("%Y-%m-%d %X", time.localtime())
-                #药品名
-                jobdict['DRUG_NAME'] = dragname
-                #影像件类型
-                jobdict['FILE_TYPE'] = '说明书全文'
+                
                 #影像件内容是否入库
                 if len(datas) > 0 and nums > 0:
                     jobdict['IS_TO_DB'] = 'T'
                 else:
                     jobdict['IS_TO_DB'] = 'F'
-                #同一套影像件识别码
-                jobdict['ID_CODE'] = id_code
-                #分公司
-                jobdict['SRC_CO'] = curpath.split('\\')[1]
-                #源文件相对路径
-                jobdict['FILE_REL_PATH'] = '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
-                #文件服务器域名
-                jobdict['SYS_URL'] = '10.67.28.8'
+                
                 #文件文本内容
                 jobdict['FILE_TEXT'] = middict(datas, codepath + '\\middata\\' + curpath, imgname)
-                #页数
-                jobdict['PAGE_NUM'] = page
-                #文件ocr解析识别状态 fk sysparams
-                jobdict['OCR_STATE'] = 'T'
-                #备注说明
-                jobdict['REMARK'] = ''
-                #创建用户
-                jobdict['ADD_USER'] = 'DevinChang'
+                ###############
+                #jobdict['JOB_ID'] = generatemd5(jobdict['FILE_TEXT'])
+                ###############
+                
                 job.job_add(jobdict)
                 job.job_todb()
                 job.job_del()
@@ -722,5 +733,6 @@ def run_introduction(path, id_code):
                 except Exception as e:
                     print('Error: ', e)
                     logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
+                    db.update('OCRWORKFILE','JOB_ID', job_id,'IS_TO_DB','F')
                     nums = cleandata(datadict, datas, nums)
                     continue

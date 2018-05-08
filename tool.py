@@ -31,7 +31,15 @@ class Tools(object):
         addsql, param = self.db.getsavesql(table, datadict, flag)
         self.db.insert(addsql, param)
        
-
+    def _update_item(self, table, find_key, find_value, update_key, update_value):
+        '''
+        修改工作表的某个字段的值
+        @find_key       ----定位所需的关键字
+        @find_value     ----定位所需关键字的值
+        @update_key     ----需要修改的关键字
+        @update_value   ----需修改关键字的值
+        '''
+        self.db.update(table,find_key, find_value, update_key, update_value)
 
     def _generatemd5(self, strid):
         """
@@ -39,7 +47,7 @@ class Tools(object):
         """
         md5 = hashlib.md5()
         md5.update(strid.encode('utf-8'))
-        return md5.hexdigest()
+        return md5.hexdigest()[:20]
 
     def _middict(self, datas, middatapath, filename):
         """
@@ -67,9 +75,12 @@ class Tools(object):
         读取json文件
         @file       ------文件路径
         """
-        with open(file, 'r', encoding='utf-8') as f:
-            return json.loads(f.read())
-        
+        try:
+            with open(file, 'r', encoding='utf-8') as f:
+                return json.loads(f.read())
+        except:
+            with open(file,'rb')as f:
+                return json.loads(f.read())
     def _sort_index(self, strword):
         """
         针对一些短关键字(如成份等),控制每段信息的识别范围

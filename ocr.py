@@ -76,7 +76,7 @@ class MyOcr(object):
         #imgpath = self.codepath + '\IMG'+'\国控天星'
         #FIXME:电脑环境不同，路径也不一样，切换环境的话要修改路径
         #imgpath = 'F:\IMG'
-        imgpath = 'G:\IMG\国控山东'
+        imgpath = 'H:\IMG\国控盐城无厂商1'
 
         options = {}
         options["detect_direction"] = "true" 

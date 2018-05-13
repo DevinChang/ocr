@@ -49,5 +49,5 @@ def storage():
 if __name__ == '__main__':
     ocr = MyOcr(APP_ID, API_KEY, SECRET_KEY, 4)
     ##ocr.pdf2img()
-    # ocr.run()
-    storage()
+    ocr.run()
+    #storage()

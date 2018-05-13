@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 import logging, logging.handlers
+import os
 
 class LogMgr:
     def __init__(self):
 
         self.LOG = logging.getLogger('all')
-
-        loghdlr1 = logging.handlers.TimedRotatingFileHandler('log/all.log', when='D', interval=1, backupCount=3)
+        code_path = os.path.dirname(__file__)
+        loghdlr1 = logging.handlers.TimedRotatingFileHandler(code_path + '\\' + 'log/all.log', when='D', interval=1, backupCount=3)
         loghdlr1.suffix = "%Y-%m-%d_%H-%M-%S.log"
         fmt1 = logging.Formatter("%(asctime)s|%(pathname)s 调用函数:%(funcName)s 错误代码行数:%(lineno)d 错误等级:%(levelname)-8s 信息:%(message)s", "%Y-%m-%d %H:%M:%S")
         loghdlr1.setFormatter(fmt1)

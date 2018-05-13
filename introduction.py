@@ -597,7 +597,10 @@ def run_introduction(path, id_code):
                 curpath = file[0].split('data')[1]
                 index = imgname.rfind('_')
                 id = curpath[curpath.rfind('\\') + 1:]
-                dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
+                if re.search(r'[\u4e00-\u9fa5]+', id):
+                    dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+                else:
+                    dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
                 #dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
                 datajson = load_json(file[0] + '\\' + file_name)
                 source_img_path = imgpaht_root_desktop + '\\' + curpath + '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]

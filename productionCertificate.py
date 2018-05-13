@@ -253,7 +253,10 @@ class ProductionCertificate(Tools):
                     curpath = file[0].split('data')[1]
                     index = jsonname.rfind('_')
                     id = curpath[curpath.rfind('\\') + 1:]
-                    dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+                    if re.search(r'[\u4e00-\u9fa5]+', id):
+                        dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+                    else:
+                        dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
                     if dragname.find('(') > 0:
                         dragname = dragname[:dragname.find('(')]
                     jsonPath = file[0] + '\\' + file_name

@@ -58,13 +58,16 @@ class GMP(Tools):
                                 datadict['发证日期'] = word['words']
                                 keylist.append(['杂', '杂'])
                                 break
-                            if re.search(r'\d{4}|\d{2}', datadict['有效期至']):
-                                break
+                            if '有效期至' in datadict:
+                                if re.search(r'\d{4}|\d{2}', datadict['有效期至']):
+                                    break
                             else:
                                 datadict['有效期至'] = word['words']
                                 break
                     if flag:
                         if keylist[-1][0] == '地址':
+                            if i + 1 >= nums:
+                                break
                             is_scope = self._judge_keywords(datas[i + 1]['words'])
                             if is_scope != None and is_scope[0] == '认证范围':
                                 datadict['认证范围'] = word['words']
@@ -150,7 +153,11 @@ class GMP(Tools):
                     curpath = file[0].split('data')[1]
                     index = imgname.rfind('_')
                     id = curpath[curpath.rfind('\\') + 1:]
-                    dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+                    if re.search(r'[\u4e00-\u9fa5]+', id):
+                        dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+                    else:
+                        dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
+
                     if dragname.find('(') > 0:
                         dragname = dragname[:dragname.find('(')]
                     #id_code = id[name_index_e - 1:]

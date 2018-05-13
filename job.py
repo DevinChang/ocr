@@ -22,6 +22,16 @@ class JobTable(object):
     def job_del(self):
         if self.jobdict:
             self.jobdict.clear()
+
+    def update_item(self, find_key, find_value, update_key, update_value):
+        '''
+        ????????????
+        @find_key       ----????????
+        @find_value     ----?????????
+        @update_key     ----????????
+        @update_value   ----????????
+        '''
+        self.db.update('OCRWORKFILE',find_key, find_value, update_key, update_value)
     
     def job_todb(self):
         try:

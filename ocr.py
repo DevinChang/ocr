@@ -76,7 +76,7 @@ class MyOcr(object):
         #imgpath = self.codepath + '\IMG'+'\国控天星'
         #FIXME:电脑环境不同，路径也不一样，切换环境的话要修改路径
         #imgpath = 'F:\IMG'
-        imgpath = 'H:\IMG\国控盐城无厂商1'
+        imgpath = r'H:\IMG'
 
         options = {}
         options["detect_direction"] = "true" 
@@ -89,7 +89,7 @@ class MyOcr(object):
         #dirlist, root = self._list_custom(imgpath)
         for file in os.walk(imgpath):
             for file_name in file[2]:
-                if '说明书' in file_name:
+                if re.search(r'进口注册证|GMP|说明书|药品再注册批件|营业执照|生产许可证', file_name):
                     if '备案' in file_name:
                         continue
                     if os.path.isdir(file[0] + '\\' + file_name):

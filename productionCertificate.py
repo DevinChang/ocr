@@ -10,10 +10,10 @@ import hashlib
 
 
 class ProductionCertificate(Tools):
-    def __init__(self, jsonpath):
+    def __init__(self, jsonpath, imgpath):
         Tools.__init__(self)
         self.jsonpath = jsonpath
-        # self.imgpath = imgpath
+        self.imgpath = imgpath
         self.logmgr = LogMgr()
         
 
@@ -63,16 +63,16 @@ class ProductionCertificate(Tools):
                 while j >= 0:
                     if not keylist:
                         break
-                    # if ("分类码" in keylist[-1][0]):
-                    #     if re.match(r'[a-zA-z]+', word['words']):
-                    #         flag = 1
-                    #     else:
-                    #         break
-                    # elif "有效期至" in keylist[-1][0]:
-                    #     if re.match(r'[0-9]{4}年?[0-9]{2}月?[0-9]{2}日?', word['words']):
-                    #         flag = 1
-                    #     else:
-                    #         break
+                    if ("分类码" in keylist[-1][0]):
+                        if re.match(r'[a-zA-z]+', word['words']):
+                            flag = 1
+                        else:
+                            break
+                    elif "有效期至" in keylist[-1][0]:
+                        if re.match(r'[0-9]+年?[0-9]+月?[0-9]+日?', word['words']):
+                            flag = 1
+                        else:
+                            break
 
                     # # 字段追加问题
                     # if re.match(r'.?[:：]', word['words'][:10]) and not re.match(r'质*量受*权人*',word['words']):
@@ -113,7 +113,7 @@ class ProductionCertificate(Tools):
         re_licNO = re.compile(r"编号|編号|号：|号:|号")
         re_licNO2 = re.compile(r"号")
         re_cateCode = re.compile(r"分*类码")
-        re_prodAddrScope = re.compile(r"生*产地*址和生产*范*围|生*产*地址和*生*产范*围|.产.址和.产.围")
+        re_prodAddrScope = re.compile(r"生*产地*址和生产*范*围|生*产*地址和*生*产范*围|.产.址和.产.围|生产地址.生产范.")
         re_issueOrg = re.compile(r"发证机.|发证.关")
         re_issuer = re.compile(r"签发*人")
         re_issueDate = re.compile(r"发证*日*期")
@@ -248,7 +248,7 @@ class ProductionCertificate(Tools):
         jobdict = {}
         for file in os.walk(path):#这里将原来imgpath换成了 jsonpath
             for file_name in file[2]:
-                if '药品生产许可证' in file_name:
+                if '生产许可证' in file_name:
                     jsonname = file_name.split('.')[0]
                     curpath = file[0].split('data')[1]
                     index = jsonname.rfind('_')
@@ -261,8 +261,8 @@ class ProductionCertificate(Tools):
                         dragname = dragname[:dragname.find('(')]
                     jsonPath = file[0] + '\\' + file_name
                     datajson = self._load_json(file[0] + '\\' + file_name)
-                    source_img_path = 'G:\\IMG' + curpath + '\\' + jsonname[:index] + '.' + jsonname[index:].split('_')[1]
-                    original_path = 'G:\\IMG' + '\\' + curpath + '\\' + jsonname[:index - 2] + '.' + 'pdf'
+                    source_img_path = self.imgpath + curpath + '\\' + jsonname[:index] + '.' + jsonname[index:].split('_')[1]
+                    original_path = self.imgpath + '\\' + curpath + '\\' + jsonname[:index - 2] + '.' + 'pdf'
 
                     #服务器
                     jobdict['SER_IP'] = '10.67.28.8'
@@ -397,6 +397,6 @@ class ProductionCertificate(Tools):
 
 if __name__ == '__main__':
     codepath = os.path.dirname(__file__)
-    gmptest = ProductionCertificate(codepath + '/data/')
+    gmptest = ProductionCertificate('F:\DevinChang\Code\Python\ocr\data\重庆泰民\银杏叶提取物注射液A000047545', r'D:\\IMG')
 
-    gmptest.recognize(codepath,'1111')
+    gmptest.recognize('F:\DevinChang\Code\Python\ocr\data\重庆泰民\银杏叶提取物注射液A000047545','1111')

@@ -196,6 +196,12 @@ class cxOracle:
             return 'ADD_USER'
         elif key == 'REMARK':
             return 'REMARK'
+        elif key == 'ADDRESS':
+            return 'ADDRESS'
+        elif key == 'ADDRESS':
+            return 'ADDRESS'
+        elif key == 'LICENSENO':
+            return 'LICENSENO'
 
     #根据sql语句（带参数）执行插入数据
     def insert(self,sql,pram):

@@ -38,4 +38,4 @@ class JobTable(object):
             jobsql, jobparam = self.db.getsavesql(self.dbtable, self.jobdict, self.dbflag)
             self.db.insert(jobsql, jobparam)
         except Exception as e:
-            logmgr.error(str(e))
+            self.logmgr.error(str(e))

@@ -7,9 +7,9 @@ from log import LogMgr
 from tool import Tools
 from DatabaseToolsNew import cxOracle
 class Improtdrug(Tools):
-    def __init__(self,datapath):
+    def __init__(self,imgpath):
         Tools.__init__(self)
-        self.imgpath = datapath
+        self.imgpath = imgpath
         self.logmgr = LogMgr()
 
     def _ReadJsonFile( self,jsonfilepath):
@@ -35,108 +35,121 @@ class Improtdrug(Tools):
         #         if '进口药品注册证' in file and file[-4:]=='json':
         #             # jobdict['JOB_ID'] = generatemd5(file[0])
         #             fullpath = os.path.join(root,file)
-                    if os.path.isfile(fullpath):
-                        print('--------------------------'+fullpath+'-------------------------------')
-                        jsondict1 = self._ReadJsonFile(fullpath)#读取json 返回json字典
-                        jsondict = {'data':jsondict1}
-                        words_result = jsondict['data']['words_result']#获取内容字典
-                        words_result_num = jsondict['data']['words_result_num']
-                        maxwidth = words_result[0]['location']['width']
-                        leftlist = []
-                        rightlist = []
-                        rightlocation = 10000
-                        beginflag = 0
-                        endflag  = 10000
-                        ISSUE_DATE = ''
-                        #第一次遍历 获取提取范围
-                        for i in words_result:
-                            if i['location']['width'] > maxwidth:
-                                maxwidth = i['location']['width']
-                            if re.match(r'公司*名称*|公*司名*称',i['words']):
-                                beginflag = i['location']['top']
-                            elif re.match(r'备*注|备注*',i['words']):
-                                endflag = i['location']['top']
-                            elif re.match(r'规格', i['words']):
-                                if i['location']['left']< rightlocation:
-                                    rightlocation = i['location']['left']
-                            elif re.match(r'商品名', i['words']):
-                                if i['location']['left']< rightlocation:
-                                    rightlocation = i['location']['left']
-                            elif re.match(r'药品有*效期*|药*品有效*期|药品*有*效期', i['words']):
-                                if i['location']['left']< rightlocation:
-                                    rightlocation = i['location']['left']
-                            elif re.match(r'[0-9]+[年月日]+',i['words']):
-                                ISSUE_DATE = i['words']
-                            else:
-                                pass
-                        for i in words_result:
-                            if endflag-10 > i['location']['top'] >= beginflag-20 :
-                                if i['location']['left'] >  rightlocation - maxwidth/6:
-                                    rightlist.append(i)
-                                else:
-                                    leftlist.append(i)
-                        print("left----------------------------")
-                        firstkey,jianju = self._getjianju(leftlist)
-                        finaldic = {'药品名称':'','主要成份':'','剂型':'','包装规格':'','生产厂':'','国家':'','商品名':'','药品有效期':'','规格':'','日期':'','ID_CODE':'','JOB_ID':'','REMARK':'','ADDUSER':''}
-                        # print(firstkey,jianju)
-                        for i in leftlist:
-                            i_word_judge = self._judge_keywords(i['words'])
-                            if i_word_judge!=None:
-                                finaldic[i_word_judge[0]] = i_word_judge[1]
-                                for j in leftlist:
-                                    j_word_judge = self._judge_keywords(j['words'])
-                                    if j_word_judge==None and (i['location']['top']-jianju/3*2)<j['location']['top']<(i['location']['top']+jianju/3):
-                                        if i['location']['top']-jianju/3<j['location']['top']:
-                                            finaldic[i_word_judge[0]]=j['words']+finaldic[i_word_judge[0]]
-                                        else:
-                                            finaldic[i_word_judge[0]]=finaldic[i_word_judge[0]]+j['words']
-                        # print(finaldic)
-                        print("right-------------------------------------------------------------------------")
-                        for i in rightlist:
-                            i_word_judge = self._judge_keywords(i['words'])
-                            if i_word_judge!=None:
-                                finaldic[i_word_judge[0]] = i_word_judge[1]
-                                for j in rightlist:
-                                    j_word_judge = self._judge_keywords(j['words'])
-                                    if j_word_judge==None and (i['location']['top']-jianju/3*2)<j['location']['top']<(i['location']['top']+jianju/3):
-                                        if i['location']['top']-jianju/3<j['location']['top']:
-                                            finaldic[i_word_judge[0]]=j['words']+finaldic[i_word_judge[0]]
-                                        else:
-                                            finaldic[i_word_judge[0]]=finaldic[i_word_judge[0]]+j['words']
-                        print(finaldic)
-                        print("end------------------------------------------------------------------------------------")
-                        print()
-                        print()
-                        # self._savetoDB(finaldic)
-                        dbdict = {}
-                        dbdict['DRUG_NAME'] = finaldic['药品名称']
-                        dbdict['TRADE_NAME'] = finaldic['商品名']
-                        dbdict['DRUG_FORM'] = finaldic['剂型']
-                        dbdict['STRENGTH'] = finaldic['规格']
-                        dbdict['MFRS'] = finaldic['生产厂']
-                        dbdict['ISSUE_DATE'] = ISSUE_DATE
-                        dbdict['COUNTRY'] = finaldic['国家']
-                        # print('dict = ' )
-                        # print(dbdict)
-                        return dbdict
+        if os.path.isfile(fullpath):
+            print('--------------------------'+fullpath+'-------------------------------')
+            jsondict1 = self._ReadJsonFile(fullpath)#读取json 返回json字典
+            jsondict = {'data':jsondict1}
+            words_result = jsondict['data']['words_result']#获取内容字典
+            words_result_num = jsondict['data']['words_result_num']
+            maxwidth = words_result[0]['location']['width']
+            leftlist = []
+            rightlist = []
+            rightlocation = 10000
+            beginflag = 0
+            endflag  = 10000
+            ISSUE_DATE = ''
+            zhucezhenghaonum=0#注册证号遍历计数
+            LICENSENO = ''#注册证号
+            #第一次遍历 获取提取范围
+            for i in words_result:
+                zhucezhenghaonum = zhucezhenghaonum +1
+                if zhucezhenghaonum <10:#注册证号应该在前10行进行寻找
+                    if re.search(r'[A-Z]*\d{8}\Z',i['words']):
+                        LICENSENO = re.search(r'[A-Z]*\d{8}\Z',i['words']).group()#得到注册证号
+                if i['location']['width'] > maxwidth:
+                    maxwidth = i['location']['width']
+                if re.match(r'公司*名称*|公*司名*称',i['words']):
+                    beginflag = i['location']['top']
+                elif re.match(r'备*注|备注*',i['words']):
+                    endflag = i['location']['top']
+                elif re.match(r'规格', i['words']):
+                    if i['location']['left']< rightlocation:
+                        rightlocation = i['location']['left']
+                elif re.match(r'商品名', i['words']):
+                    if i['location']['left']< rightlocation:
+                        rightlocation = i['location']['left']
+                elif re.match(r'药品有*效期*|药*品有效*期|药品*有*效期', i['words']):
+                    if i['location']['left']< rightlocation:
+                        rightlocation = i['location']['left']
+                elif re.match(r'[0-9]+[年月日]+',i['words']):
+                    ISSUE_DATE = i['words']
+                else:
+                    pass
+            for i in words_result:
+                if endflag-10 > i['location']['top'] >= beginflag-20 :
+                    if i['location']['left'] >  rightlocation - maxwidth/6:
+                        rightlist.append(i)
                     else:
-                        print(fullpath+'-----文件错误')
+                        leftlist.append(i)
+            print("left----------------------------")
+            jianju = self._getjianju(leftlist)
+            finaldic = {'药品名称':'','主要成份':'','剂型':'','包装规格':'','生产厂':'','地址':'','国家':'','商品名':'','药品有效期':'','规格':'','日期':'','ID_CODE':'','JOB_ID':'','REMARK':'','ADDUSER':''}
+            # print(firstkey,jianju)
+            for i in leftlist:
+                i_word_judge = self._judge_keywords(i['words'])
+                if i_word_judge!=None:
+                    finaldic[i_word_judge[0]] = i_word_judge[1]
+                    for j in leftlist:
+                        j_word_judge = self._judge_keywords(j['words'])
+                        if j_word_judge==None and (i['location']['top']-jianju/3*2)<j['location']['top']<(i['location']['top']+jianju/3):
+                            if i['location']['top']-jianju/3<j['location']['top']:
+                                finaldic[i_word_judge[0]]=j['words']+finaldic[i_word_judge[0]]
+                            else:
+                                finaldic[i_word_judge[0]]=finaldic[i_word_judge[0]]+j['words']
+            # print(finaldic)
+            print("right-------------------------------------------------------------------------")
+            for i in rightlist:
+                i_word_judge = self._judge_keywords(i['words'])
+                if i_word_judge!=None:
+                    finaldic[i_word_judge[0]] = i_word_judge[1]
+                    for j in rightlist:
+                        j_word_judge = self._judge_keywords(j['words'])
+                        if j_word_judge==None and (i['location']['top']-jianju/3*2)<j['location']['top']<(i['location']['top']+jianju/3):
+                            if i['location']['top']-jianju/3<j['location']['top']:
+                                finaldic[i_word_judge[0]]=j['words']+finaldic[i_word_judge[0]]
+                            else:
+                                finaldic[i_word_judge[0]]=finaldic[i_word_judge[0]]+j['words']
+            print(finaldic)
+            print("end------------------------------------------------------------------------------------")
+            print()
+            print()
+            # self._savetoDB(finaldic)
+            dbdict = {}
+            # dbdict['DRUG_NAME'] = finaldic['药品名称']#这是获取的直接OCR的药品名称
+
+            dbdict['TRADE_NAME'] = finaldic['商品名']
+            dbdict['DRUG_FORM'] = finaldic['剂型']
+            dbdict['STRENGTH'] = finaldic['规格']
+            dbdict['MFRS'] = finaldic['生产厂']
+            dbdict['LICENSENO'] = LICENSENO#注册证号
+            dbdict['ADDRESS'] = finaldic['地址']
+            dbdict['ISSUE_DATE'] = ISSUE_DATE
+            dbdict['COUNTRY'] = finaldic['国家']
+            # print('dict = ' )
+            # print(dbdict)
+            return dbdict
+        else:
+            print(fullpath+'-----文件错误')
 
     def _getjianju(self,leftlist):
-        a = [ '药品名称', '主要成份', '剂型', '包装规格', '生产厂']
+        a = [ '药品名称', '主要成份', '剂型', '包装规格', '生产厂','地址']
         jianju1 = 0
         jianju2 = 0
         list =[]
-        for i in range(len(leftlist)):
-            if self._judge_keywords(leftlist[i]['words']) != None and self._judge_keywords(leftlist[i]['words'])[0] in a:
-                for j in range(i, len(leftlist), 1):
-                    if self._judge_keywords(leftlist[j]['words']) != None and self._judge_keywords(leftlist[j]['words'])[0] in a:
-                        if a.index(self._judge_keywords(leftlist[i]['words'])[0]) + 1 == a.index(
-                                self._judge_keywords(leftlist[j]['words'])[0]):
-                            jianju1 = leftlist[j]['location']['top'] - leftlist[i]['location']['top'] - \
-                                     leftlist[i]['location']['height']
-                            # print(leftlist[i]['words'],leftlist[j]['words'])
-                            return i,jianju1
+        try:
+            for i in range(len(leftlist)):
+                if self._judge_keywords(leftlist[i]['words']) != None and self._judge_keywords(leftlist[i]['words'])[0] in a:
+                    for j in range(i, len(leftlist), 1):
+                        if self._judge_keywords(leftlist[j]['words']) != None and self._judge_keywords(leftlist[j]['words'])[0] in a:
+                            if a.index(self._judge_keywords(leftlist[i]['words'])[0]) + 1 == a.index(
+                                    self._judge_keywords(leftlist[j]['words'])[0]):
+                                jianju1 = leftlist[j]['location']['top'] - leftlist[i]['location']['top'] - \
+                                         leftlist[i]['location']['height']
+                                # print(leftlist[i]['words'],leftlist[j]['words'])
+                                return jianju1
+        except Exception as e:
+            print(str(e))
+            return 47
 
 
                             # print(leftlist[i]['words'],leftlist[i]['location']['top'],leftlist[i]['location']['height'])
@@ -245,7 +258,7 @@ class Improtdrug(Tools):
                         self.logmgr.error(file[0] + '\\' + file_name + ": img size error!")
                         continue
                     #source_img_path = imgpaht_root_desktop + '\\' + curpath + '\\' + imgname[:index] + '.' + imgname[index:].split('_')[1]
-                    original_path = 'G:\\IMG' + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
+                    original_path = self.imgpath + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
                     #try:
                     #    kindict = hmc.kinds(source_img_path, datajson)
                     #except Exception as e:
@@ -324,7 +337,7 @@ class Improtdrug(Tools):
                 ##################
                 page = 1
                 ####################
-                if '进口药品注册证' in file_name and file_name[-4:]=='json':
+                if (('进口药品注册证' in file_name) or ('进口注册证' in file_name)) and file_name[-4:]=='json':
                     ##################
                     imgname = file_name.split('.')[0]
                     curpath = file[0].split('data')[1]
@@ -358,7 +371,7 @@ class Improtdrug(Tools):
                     # 服务器
                     jobdict['SER_IP'] = '10.67.28.8'
                     # job id
-                    jobdict['JOB_ID'] = self._generatemd5(file[0] + dragname)
+                    jobdict['JOB_ID'] = self._generatemd5(file[0] + imgname)
                     jobdict['SRC_FILE_NAME'] = imgname[:index - 2] + '.' + 'pdf'
                     jobdict['SRC_FILE_PATH'] = original_path
                     # 原文件
@@ -422,6 +435,7 @@ class Improtdrug(Tools):
 
                     # dbdict['JOB_ID']=self.generatemd5(os.path.join(root,file))
                     # print('1')
+                    dbdict2['DRUG_NAME'] = dragname
                     dbdict2['ID_CODE'] = ID_CODE
                     # print('2')
                     dbdict2['REMARK'] = REMARK
@@ -437,7 +451,7 @@ class Improtdrug(Tools):
                     cxoracle.insert(sql,pram)
 
 
-
-# pga = Improtdrug(r'F:\test\IMG')
+#
+# pga = Improtdrug(r'F:\data\test')
 # ID_CODE ='ss'
-# pga.start(r'F:\test\data',ID_CODE,'shuai','')
+# pga.start(r'F:\data\test',ID_CODE,'shuai','')

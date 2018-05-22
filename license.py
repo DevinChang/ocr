@@ -11,9 +11,9 @@ class License(Tools):
     """
     识别营业执照
     """
-    def __init__(self, datapath):
+    def __init__(self, imgpath):
         Tools.__init__(self)
-        self.datapath = datapath
+        self.imgpath = imgpath
         self.logmgr = LogMgr()
 
     def _recognize(self,datas, nums):
@@ -131,7 +131,7 @@ class License(Tools):
                     if dragname.find('(') > 0:
                         dragname = dragname[:dragname.find('(')]
                     datajson = self._load_json(file[0] + '\\' + file_name)
-                    original_path = 'G:\\IMG' + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
+                    original_path = self.imgpath + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
 
                     #服务器
                     jobdict['SER_IP'] = '10.67.28.8'

@@ -579,8 +579,8 @@ def run_introduction(path, id_code):
     job = JobTable() 
     imgpath_root = "F:\IMG"
     #笔记本上的是移动硬盘的路径
-    imgpaht_root_desktop = "G:\IMG"
-    path_root = "G:\源文件"
+    imgpaht_root_desktop = "D:\IMG"
+    path_root = "D:\源文件"
     datas = []
     leftdata = []
     rightdata = []

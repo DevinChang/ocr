@@ -9,9 +9,9 @@ class GMP(Tools):
     """
     GMP证书的识别
     """
-    def __init__(self, datapath):
+    def __init__(self, imgpath):
         Tools.__init__(self)
-        self.imgpath = datapath
+        self.imgpath = imgpath
         self.logmgr = LogMgr()
 
     def _recognize(self,datas, nums):
@@ -141,10 +141,10 @@ class GMP(Tools):
                 return None
 
 
-    def gmp(self, path, id_code):
+    def gmp(self, datapath, id_code):
         flag = 0
         temp = ''
-        for file in os.walk(path):
+        for file in os.walk(datapath):
             jobdict = {}
             for file_name in file[2]:
                 page = 1
@@ -162,7 +162,7 @@ class GMP(Tools):
                         dragname = dragname[:dragname.find('(')]
                     #id_code = id[name_index_e - 1:]
                     datajson = self._load_json(file[0] + '\\' + file_name)
-                    original_path = 'G:\\IMG' + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
+                    original_path = self.imgpath + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
 
                     #服务器
                     jobdict['SER_IP'] = '10.67.28.8'

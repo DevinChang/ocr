@@ -10,6 +10,7 @@ from license import License
 from productionCertificate import ProductionCertificate
 import introduction
 from Improtdrug import Improtdrug
+from log import LogMgr
 
 def randomidcode():
     letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -21,11 +22,12 @@ def randomidcode():
 
 def storage():
     datapath = os.path.dirname(__file__) + '\data'
-    gmp = GMP(datapath)
-    regisration = Regisration(datapath)
-    license = License(datapath)
-    certificate = ProductionCertificate(datapath)
-    pga = Improtdrug(datapath)
+    imgpath = r'D:\\IMG'
+    gmp = GMP(imgpath)
+    regisration = Regisration(imgpath)
+    license = License(imgpath)
+    certificate = ProductionCertificate(datapath, imgpath)
+    pga = Improtdrug(imgpath)
     for file in os.walk(datapath):
         id_code = randomidcode()
         for file_name in file[2]:
@@ -40,7 +42,13 @@ def storage():
         # elif '说明书' in file_name:
             introduction.run_introduction(file[0], id_code)
         # elif '进口药品注册证' in file_name:
-            pga.start(file[0], id_code, 'shuai', '')
+            try:
+                pga.start(file[0], id_code, 'shuai', '')
+            except Exception as e:
+                logmgr = LogMgr()
+                logmgr.error(file[0]+ ":" + str(e))
+                continue
+
 
             break
 
@@ -49,5 +57,5 @@ def storage():
 if __name__ == '__main__':
     ocr = MyOcr(APP_ID, API_KEY, SECRET_KEY, 4)
     ##ocr.pdf2img()
-    ocr.run()
-    #storage()
+    #ocr.run(r'D:\IMG')
+    storage()

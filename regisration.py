@@ -14,9 +14,9 @@ class Regisration(Tools):
     """
     识别药品再注册批件
     """
-    def __init__(self, datapath):
+    def __init__(self, imgpath):
         Tools.__init__(self)
-        self.datapath = datapath
+        self.imgpath = imgpath
         self.logmgr = LogMgr()
 
     def _recognize(self,datas, nums):
@@ -53,6 +53,9 @@ class Regisration(Tools):
                         break
                     if keylist[-1][0] == '批准文号':
                         if re.search(r'.?[a-zA-z][0-9]+', word['words']):
+                            break
+                    if keylist[-1][0] == '规格':
+                        if not re.search(r'.*m*g|.*m*l', word['words']):
                             break
                     if flag:
                         if keylist[-1][1] in datas[j]['words']:
@@ -91,7 +94,7 @@ class Regisration(Tools):
         re_regisnum_valid = re.compile(r"注册*证号有效期*|注*册证号有效*期")
         re_specification = re.compile(r'规格')
         re_jixing = re.compile(r'剂型')
-        re
+        
 
         if len(strword) >= 8: 
             index = 6
@@ -159,7 +162,7 @@ class Regisration(Tools):
                     if dragname.find('(') > 0:
                         dragname = dragname[:dragname.find('(')]
                     datajson = self._load_json(file[0] + '\\' + file_name)
-                    original_path = 'G:\\IMG' + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
+                    original_path = self.imgpath + '\\' + curpath + '\\' + imgname[:index - 2] + '.' + 'pdf'
                     #服务器
                     jobdict['SER_IP'] = '10.67.28.8'
                     #job id
@@ -293,5 +296,5 @@ class Regisration(Tools):
 
 if __name__ == '__main__':
     codepath = os.path.dirname(__file__)
-    regisration = Regisration(codepath + '\data')
-    regisration.regisration()
+    regisration = Regisration('F:\DevinChang\Code\Python\ocr\data\重庆泰民\银杏叶提取物注射液A000047545')
+    regisration.regisration('F:\DevinChang\Code\Python\ocr\data\重庆泰民\银杏叶提取物注射液A000047545','1111')

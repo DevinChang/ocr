@@ -324,6 +324,34 @@ class Improtdrug(Tools):
                     self.job.job_del()
                     page+=1
 
+    def improtdrug_deploy(self, imgs, id_code):
+        tmp = ''
+        for file in imgs:
+            file_name = imgs['imgpath'].split('\\')[-1]
+            id = imgs['imgpath'].split('\\')[-2]
+            if re.search(r'[\u4e00-\u9fa5]+', id):
+                dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+            else:
+                dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
+
+            if dragname.find('(') > 0:
+                dragname = dragname[:dragname.find('(')]
+
+            if 'error_code' in imgs['imgjson']:
+                self.logmgr.error(imgs['imgpath'] + " : Img Size Error!")
+                continue
+            
+            datas = datajson['words_result']
+            nums = datajson['words_result_num']
+            
+            #if len(datas) > 0 and nums > 0:
+            dbdict2 = self._fenlan(file['imgpath'])
+            dbdict2['DRUG_NAME'] = dragname
+            dbdict2['ID_CODE'] = ID_CODE
+            # print('2')
+            dbdict2['REMARK'] = REMARK
+            dbdict2['ADD_USER'] = ADD_USER
+            dbdict2['JOB_ID'] = self._generatemd5(temp)  
 
     def start(self,filepath,ID_CODE,ADD_USER,REMARK):
         # pfrga = ProcessForRGA()

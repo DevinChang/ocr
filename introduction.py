@@ -14,6 +14,7 @@ from log import LogMgr
 from job import JobTable
 import random
 from json2word import json2word
+from tool import Tools
 
 logmgr = LogMgr()
 
@@ -31,12 +32,186 @@ mfrs = sheet['F']
 
 
 
-class inrtroduction(object):
-    def __init__(self):
-        pass
-    
-    
+class Inrtroduction(Tools):
+    def __init__(self, imgpath):
+        Tools.__init__(self)
+        self.imgpath = imgpath
+        self.logmgr = LogMgr()
 
+    def _subfiledata(self, direction, parameter, boundary, datas):
+        leftdata = []
+        rightdata = []
+        for data in datas:
+            if direction == 1 or direction == 2:
+                if data['location'][parameter] >= boundary:
+                    #此处有bug
+                    leftdata.append(data)
+                else:
+                    rightdata.append(data)
+            else:
+                if data['location'][parameter] <= boundary:
+                    leftdata.append(data)
+                else:
+                    rightdata.append(data)
+        return leftdata + rightdata
+
+    def _extract(self, datas, nums):
+        datadict = {}
+        keylist = []
+        i = 0
+        flag = 1
+        for (word, i) in zip(datas, range(0, nums)):
+            list_result = inrtroduction_judge(word['words'])
+            #阈值
+            #if (word['probability']['average'] * 0.8 + word['probability']['min'] * 0.2) < 0.85:
+            #    continue
+            #if list_result != None and len(keylist) > 0:
+            #    #此处有bug
+            #    if list_result[0] in datadict and keylist[-1][0] != list_result[0]:
+            #        #list_result = None
+            #        datadict[list_result[0]] += list_result[1]
+            #        continue
+            if list_result != None:
+                if list_result[0] in datadict and keylist[-1][0] != list_result[0]:
+                    datadict[list_result[0]] += list_result[1]
+                    flag = 1
+                else:
+                    datadict[list_result[0]] = list_result[1]
+                    flag = 1
+                keylist.append([list_result[0],list_result[2]])
+            else:
+                j = i
+                while j > 0:
+                    if not keylist:
+                        break
+                    if ("英文名称" in keylist[-1][0]) or ("汉语拼音" in keylist[-1][0]):
+                        if re.match(r'[a-zA-z]+', word['words']):
+                            flag = 1 
+                        else:
+                            break 
+                    elif "日期" in keylist[-1][0]:
+                        if re.match(r'[0-9]{4}年?[0-9]{2}月?[0-9]{2}日?', word['words']):
+                            flag = 1 
+                        else:
+                            break 
+                    elif "号码" in keylist[-1][0]:
+                        if re.match(r'\d', word['words']):
+                            if re.match(r'.+[\u4e00-\u9fa5]', word['words']):
+                                break
+                            else:
+                                flag = 1
+                        else:
+                            break 
+                    elif "传真" in keylist[-1][0]:
+                        if re.match(r'\d', word['words']):
+                            if re.match(r'[\u4e00-\u9fa5]', word['words']):
+                                break
+                            else:
+                                flag = 1
+                    elif "邮政编码" == keylist[-1][0]:
+                        if re.match(r'\d', word['words']):
+                            flag = 1             
+                        else:
+                            break 
+                    elif "网址" == keylist[-1][0]:
+                        if re.match(r'.?[a-zA-Z]', word['words']):
+                            flag = 1
+                        else:
+                            break
+                    elif "批准文号" == keylist[-1][0]:
+                        if re.match(r'国?药准?字', word['words']):
+                            flag = 1
+                        elif re.match(r'.?[a-zA-Z][0-9]', word['words']) and (keylist[-1][1]
+                                                                        in datadict['批准文号']):
+                            flag = 1
+                        else:
+                            break
+                    elif "OTC" == keylist[-1][0]:
+                        break
+                    elif "外" == keylist[-1][0]:
+                        break
+                    #TODO:OTC，外，以及字段追加问题
+                    if re.match(r'[【\[]|.?[】\]]|.?[:：]', word['words'][:8]):
+                        flag = 0
+                        break
+                    if flag:
+                        if keylist[-1][1] in datas[j]['words']:
+                            datadict[keylist[-1][0]] += word['words']
+                            break
+                    j -= 1  
+        return datadict   
+
+    def introduction_deploy(self, imgs, id_code):
+        nums = 0
+        datas = []
+        for file in imgs:
+            #提取药品名称
+            id = file['imgpath'].split('/')[-2]
+            file_name = file['imgpath'].split('/')[-1]
+            if re.search(r'[\u4e00-\u9fa5]+', id):
+                dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+            else:
+                dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group() 
+
+            if 'error_code' in file['imgjson']:
+                logmgr.error(file['imgpath'] + ' : ' + 'Size Error!')
+            #判别是否是多栏
+            try:
+                kindict = hmc.kinds(file['imgpath'], file['imgjson'])
+            except Exception as e:
+                logmgr.error(file['imgpath'] + ' : ' + 'Size Error!')
+                continue
+            print('Current processing: {}'.format(file['imgpath']))
+            #提取关键信息
+            datatmp = file['imgjson']['words_result']
+            nums += file['imgjson']['words_result_num']
+            if kindict['kinds'] == 2:
+                datas += subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'][0], datatmp)
+            elif kindict['kinds'] == 1:
+                datas += datatmp
+        if len(datas) > 0 and nums > 0:
+            datadict = self._extract(datas, nums)
+            if not datadict:
+                return 'None'
+                nums = self.cleandata(datadict, datas, nums)
+            if "通用名称" not in datadict:
+                datadict.update({"通用名称" : dragname})
+            else:
+                datadict["通用名称"] = dragname
+
+                
+            if datadict['通用名称']:
+                if re.match(r'[\u4e00-\u9fa5]*', datadict['通用名称']):
+                    datadict['通用名称'] = re.match(r'[\u4e00-\u9fa5]*', datadict['通用名称']).group()
+                
+            datadict = maxdata(datadict)
+            datadict.update({"ID_CODE" : id_code})
+            #datadict.update({"JOB_ID": job_id})
+            #datadict.update({"ADD_USER" : 'DevinChang'})
+            if '企业名称' in datadict:
+                if ('生产厂家' not in datadict) or (len(datadict['生产厂家'])== 0):
+                    datadict.update({"生产厂家" : datadict['企业名称']})
+                    del datadict['企业名称']
+            if '生产厂家' in datadict:
+                #用正则 DONE
+                re_comfrs =re.compile(r'企*业名称[:：]*|企业*名称[:：]*')
+                if re_comfrs.match(datadict['生产厂家']):
+                    comfrs_index = re_comfrs.match(datadict['生产厂家']).span()[1]
+                    datadict['生产厂家'] = datadict['生产厂家'][comfrs_index:]
+
+            #if ("膏" or "贴") in datadict['通用名称'][-1]:
+            #    if "外" not in datadict:
+            #        datadict.update({"外" : "是"})
+            if '批准文号' in datadict:
+                re_guoyao = re.compile(r'国药准?字?|国?药准?字|国药?准字')
+                if re_guoyao.match(datadict['批准文号']):
+                    re.sub(re_guoyao, '国药准字', datadict['批准文号'])
+
+            return datadict 
+            nums = self.cleandata(datadict, datas, nums)
+                    
+
+        
 def load_excel(excel):
     wb = xw.Book(excel)
     sheet = wb.sheets[0]

@@ -142,6 +142,63 @@ class Regisration(Tools):
             else:
                 return None
 
+    def regisration_deploy(self, imgs, id_code):
+        flag = 0
+        tmp = ''
+        for file in imgs:
+            file_name = file['imgpath'].split('/')[-1]
+            id = file['imgpath'].split('/')[-2]
+            if re.search(r'[\u4e00-\u9fa5]+', id):
+                dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+            else:
+                dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
+
+            if dragname.find('(') > 0:
+                dragname = dragname[:dragname.find('(')]
+
+            if 'error_code' in file['imgjson']:
+                self.logmgr.error(file['imgpath'] + " : Img Size Error!")
+                continue
+            
+            datas = file['imgjson']['words_result']
+            nums = file['imgjson']['words_result_num']
+
+        if len(datas) > 0 and nums > 0:
+            datadicttmp = self._recognize(datas, nums)
+            datadict = dict()
+            if '药品名称' in datadicttmp:
+                if re.match('[:：]',datadicttmp['药品名称']):
+                    datadict['药品名称'] = datadicttmp['药品名称'][1:]
+                else:
+                    datadict['药品名称'] = datadicttmp['药品名称']
+
+            if '剂型' in datadicttmp:
+                if re.match('[:：]',datadicttmp['剂型']):
+                    datadict['剂型'] = datadicttmp['剂型'][1:]
+                else:
+                    datadict['剂型'] = datadicttmp['剂型']
+
+            if '规格' in datadicttmp:
+                if re.match('[:：]',datadicttmp['规格']):
+                    datadict['规格'] = datadicttmp['规格'][1:]
+                else:
+                    datadict['规格'] = datadicttmp['规格']
+
+            if '生产厂家' in datadicttmp:
+                if re.match('[:：]',datadicttmp['生产厂家']):
+                    datadict['生产厂家'] = datadicttmp['生产厂家'][1:]
+                else:
+                    datadict['生产厂家'] = datadicttmp['生产厂家']
+
+            if '日期' in datadicttmp:
+                if re.match('[:：]',datadicttmp['日期']):
+                    datadict['日期'] = datadicttmp['日期'][1:]
+                else:
+                    datadict['日期'] = datadicttmp['日期']
+            if not datadict:
+                return 'None'
+
+            return datadict
 
     def regisration(self, path, id_code):
         flag = 0

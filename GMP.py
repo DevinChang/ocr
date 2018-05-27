@@ -140,6 +140,92 @@ class GMP(Tools):
             else:
                 return None
 
+    def gmp_delploy(self, imgs, idcode):
+        flag = 0
+        tmp = ''
+        #datas = []
+        for file in imgs:
+            file_name = file['imgpath'].split('/')[-1]
+            id = file['imgpath'].split('/')[-2]
+            if re.search(r'[\u4e00-\u9fa5]+', id):
+                dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+            else:
+                dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
+
+            if dragname.find('(') > 0:
+                dragname = dragname[:dragname.find('(')]
+
+            if 'error_code' in file['imgjson']:
+                self.logmgr.error(file['imgpath'] + " : Img Size Error!")
+                continue
+            
+            datas = file['imgjson']['words_result']
+            nums = file['imgjson']['words_result_num']
+            
+        if len(datas) > 0 and nums > 0:
+            datadicttmp = self._recognize(datas, nums)
+            datadict = dict()
+            if '企业名称_GMP' in datadicttmp:
+                if re.match('[:：]',datadicttmp['企业名称_GMP']):
+                    datadict['企业名称_GMP'] = datadicttmp['企业名称_GMP'][1:]
+                else:
+                    datadict['企业名称_GMP'] = datadicttmp['企业名称_GMP']
+            if '证书编号' in datadicttmp:
+                if re.match('[:：]',datadicttmp['证书编号']):
+                    datadict['证书编号'] = datadicttmp['证书编号'][1:]
+                else:
+                    datadict['证书编号'] = datadicttmp['证书编号']
+            if '地址' in datadicttmp:
+                if re.match('[:：]',datadicttmp['地址']):
+                    datadict['地址'] = datadicttmp['地址'][1:]
+                else:
+                    datadict['地址'] = datadicttmp['地址']
+            if '认证范围' in datadicttmp:
+                if re.match('[:：]',datadicttmp['认证范围']):
+                    datadict['认证范围'] = datadicttmp['认证范围'][1:]
+                else:
+                    datadict['认证范围'] = datadicttmp['认证范围']
+
+            if '有效期至' in datadicttmp:
+                if re.match('[:：]',datadicttmp['有效期至']):
+                    datadict['有效期至'] = datadicttmp['有效期至'][1:]
+                else:
+                    datadict['有效期至'] = datadicttmp['有效期至']
+
+
+            if '发证机关' in datadicttmp:
+                if re.match('[:：]',datadicttmp['发证机关']):
+                    datadict['发证机关'] = datadicttmp['发证机关'][1:]
+                else:
+                    datadict['发证机关'] = datadicttmp['发证机关']
+
+            if '发证日期' in datadicttmp:
+                if re.match('[:：]',datadicttmp['发证日期']):
+                    datadict['发证日期'] = datadicttmp['发证日期'][1:]
+                else:
+                    datadict['发证日期'] = datadicttmp['发证日期']
+            if '地址' not in datadict:
+                datadict['地址'] = ''
+            if '企业名称_GMP' not in datadict:
+                datadict['企业名称_GMP'] = ''
+            if re.search(r'.+公司.+',datadict['企业名称_GMP']):
+                datadict['地址'] = datadict['地址']+datadict['企业名称_GMP'].split('公司')[1]
+                datadict['企业名称_GMP'] = datadict['企业名称_GMP'].split('公司')[0]+'公司'
+
+            if not datadict:
+                nums = self._cleandata(datadict, datas, nums)
+                return datadict
+            return datadict
+                #try:
+                #    #self._data_to_db('GMPCERT', datadict)
+                #    nums = self._cleandata(datadict, datas, nums)
+                #except Exception as e:
+                #    print('Error: ', e)
+                #    #self._update_item('OCRWORKFILE','JOB_ID', jobid,'IS_TO_DB','F')
+                #    self.logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
+                #    nums = self._cleandata(datadict, datas, nums)
+                #    return 'None'
+
 
     def gmp(self, datapath, id_code):
         flag = 0

@@ -111,6 +111,50 @@ class License(Tools):
         else:
             return None
 
+    def license_deploy(self, imgs, id_code):
+        flag = 0
+        tmp = ''
+        for file in imgs:
+            file_name = file['imgpath'].split('/')[-1]
+            id = file['imgpath'].split('/')[-2]
+            if re.search(r'[\u4e00-\u9fa5]+', id):
+                dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+            else:
+                dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group()
+
+            if dragname.find('(') > 0:
+                dragname = dragname[:dragname.find('(')]
+
+            if 'error_code' in file['imgjson']:
+                self.logmgr.error(file['imgpath'] + " : Img Size Error!")
+                continue
+            
+            datas = file['imgjson']['words_result']
+            nums = file['imgjson']['words_result_num']
+
+        if len(datas) > 0 and nums > 0:
+            datadict = self._recognize(datas, nums)
+            ######################################增加部分###########################################
+            datadict['ID_CODE']=id_code
+            datadict['REMARK']=''
+            datadict['ADD_USER']='shuai'
+            datadict['JOB_ID'] = self._generatemd5(file['imgpath'])
+            ######################################增加部分###########################################
+            if not datadict:
+                nums = self._cleandata(datadict, datas, nums)
+                return datadict
+            if '登记机关' in datadict:
+                del datadict['登记机关']
+        return datadict
+            #try:
+            #    #self._data_to_db('BUSINESSLICENCE', datadict)
+            #    nums = self._cleandata(datadict, datas, nums)
+            #except Exception as e:
+            #    print('Error: ', e)
+            #    self.logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
+            #    self._update_item('OCRWORKFILE','JOB_ID', jobid,'IS_TO_DB','F')
+            #    nums = self._cleandata(datadict, datas, nums)
+
 
     def license(self, path, id_code):
         flag = 0

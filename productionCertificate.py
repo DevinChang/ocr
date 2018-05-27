@@ -241,6 +241,70 @@ class ProductionCertificate(Tools):
             else:
                 return None
 
+    def recognize_deploy(self, imgs, id_code):
+        nums = 0
+        flag = 0
+        temp = ''
+        datas = []
+        for file in imgs:
+            #提取药品名称
+            id = file['imgpath'].split('/')[-2]
+            file_name = file['imgpath'].split('/')[-1]
+            if re.search(r'[\u4e00-\u9fa5]+', id):
+                dragname = re.search(r'[\u4e00-\u9fa5]+', id).group()
+            else:
+                dragname = re.search(r'[\u4e00-\u9fa5]+', file_name).group() 
+
+            if 'error_code' in file['imgjson']:
+                self.logmgr.error(file['imgpath'] + ' : ' + 'Size Error!')
+            #判别是否是多栏
+            try:
+                kindict = hmc.kinds(file['imgpath'], file['imgjson'])
+            except Exception as e:
+                self.logmgr.error(file['imgpath'] + ' : ' + 'Size Error!')
+                continue
+            print('Current processing: {}'.format(file['imgpath']))
+            #提取关键信息
+            datatmp = file['imgjson']['words_result']
+            nums += file['imgjson']['words_result_num']
+            if kindict['kinds'] == 2:
+                datas += subfiledata(kindict['direction'], kindict['parameter'], kindict['boundary'][0], datatmp)
+            elif kindict['kinds'] == 1:
+                datas += datatmp
+        if len(datas) > 0 and nums > 0:
+            datadict = self._productionCertificate(datas, nums)
+            if '企业类型' in datadict:
+                del datadict['企业类型']
+            if '此复印件仅限于' in datadict:
+                del datadict['次复印件仅限于']
+            if 'NO' in datadict:
+                del datadict['NO']
+            if '国家食品药品监督管理局制' in datadict:
+                del datadict['国家食品药品监督管理局制']
+            if '中华人民共和国' in datadict:
+                del datadict['中华人民共和国']
+            if '药品许可证' in datadict:
+                del datadict['药品许可证']
+
+            ######################################增加部分###########################################
+            datadict['ID_CODE'] = id_code
+            datadict['REMARK'] = ''
+            datadict['ADD_USER'] = 'shuai'
+            datadict['JOB_ID'] = self._generatemd5(temp)
+            ######################################增加部分###########################################
+            if not datadict:
+                nums = self._cleandata(datadict, datas, nums)
+                return datadict
+            return datadict
+            #try:
+            #    #self._data_to_db('DRUGMFRSCERT', datadict)
+            #    nums = self._cleandata(datadict, datas, nums)
+            #except Exception as e:
+            #    #self.logmgr.error(file[0] + '\\' + file_name + "insert error!! : " + str(e))
+            #    #self._update_item('OCRWORKFILE','JOB_ID', jobid,'IS_TO_DB','F')
+            #    nums = self._cleandata(datadict, datas, nums)
+            #    continue
+
     def recognize(self, path, id_code):
         flag = 0
         page = 0

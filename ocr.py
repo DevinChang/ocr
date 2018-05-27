@@ -7,10 +7,11 @@ import csv
 import os
 #from wand.image import Image
 #from introduction import format_introduction
-import introduction
+#import introduction
 #from baiduai import *
 import re
 from log import LogMgr
+import base64
 """
 __version__: 1.0
 __application__: ocr识别说明书，药品许可证等证件
@@ -44,7 +45,7 @@ class MyOcr(object):
             3--高精度的文字识别
             4--含位置信息的高精度文字识别
     """
-    def __init__(self, app_id, api_key, secret_key, typeid):
+    def __init__(self, typeid, app_id = APP_ID, api_key = API_KEY, secret_key = SECRET_KEY):
         self.client = AipOcr(app_id, api_key, secret_key)
         #self.client = AipOcr(appid[1], apikey[1], secretkey[1])
         self.typeid = typeid
@@ -67,6 +68,29 @@ class MyOcr(object):
     def _list_custom(self, path):
         root = os.listdir(path)
         return os.listdir(path + '\\' + root[0]), path + '\\' + root[0]
+
+    def ocr_deploy(self, rec_dict):
+        files = rec_dict['files']
+        #ocr所需的参数
+        options = {}
+        options["detect_direction"] = "true" 
+        options["detect_language"] = "true"
+        options["probability"] = "true"
+        
+        #dirlist = os.listdir(imgpath)
+        #dirlist, root = self._list_custom(imgpath)
+        for file in files:
+            if re.search(r'进口注册证|GMP|说明书|药品再注册批件|营业执照|生产许可证|进口药品许可证|进口药品注册证', file['type']):
+                for img in file['imgs']:
+                    print('Current img: {}'.format(img['imgpath']))
+                    try:
+                        data = self.client.accurate(base64.b64decode(bytes(img['base64'], encoding='utf-8')), options)
+                    except Exception as e:
+                        print('Error: ', e)
+                        self.log.error(img['imgpath'] + "Error! : " + str(e))
+                        continue
+                    img.update({"imgjson" : data})
+        return rec_dict
 
     def _ocr(self, imgpath):
         """
@@ -112,19 +136,25 @@ class MyOcr(object):
                     if os.path.isfile((datafilepath +'\{}.json').format(prefix + '_' + suffix)):
                         continue
                     print('Current img: {}'.format(file[0] + '\\' + file_name))
+                    #FIXME:
+                    testdict = dict()
+                    testdict['base64'] = str(base64.b64encode(img), 'utf-8')
+                   #img_test = str.encode(testdict['base64'])
+                    #self._write_json_file('F:\\IMG\\11A0015\\test.json', str(img))
                     try: 
                         if self.typeid == 1:
                             data = self.client.basicGeneral(img, options)
                         elif self.typeid == 2:
                             data = self.client.general(img, options)
                         elif self.typeid == 3:
-                            data = self.client.basicAccurate(img, options)
+                            data = self.client.basicAccurate(base64.b64decode(bytes(testdict['base64'], encoding='utf-8')), options)
                         elif self.typeid == 4:
                             data = self.client.accurate(img, options)
                     except Exception as e:
                         print('Error: ', e)
                         self.log.error(file[0] + '\\' + file_name + " Error!! : " + str(e))
                         continue
+                    
                     self._write_json_file((datafilepath +'\{}.json').format(prefix + '_' + suffix), data)       
 
 
@@ -160,3 +190,12 @@ class MyOcr(object):
         #print('=================Format Data================')
         #self._write_dict()
         #print('======================End===================')
+
+
+if __name__ == '__main__':
+    ocr = MyOcr(3)
+    ocr.run('F:\\IMG\\11A0015')    
+    with open(r'F:\IMG\11A0015\testnet.json', 'rb') as f:
+        json_data = json.loads(f.read())
+    
+    ocr.ocr_deploy(json_data)
